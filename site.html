@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Testing websockets</title>
+</head>
+<body>
+	<div>
+		<input type="text" id="messageinput" />
+		<input type="submit" value="Start" onclick="start()" />
+	</div>
+	<div id="messages"></div>
+	<script type="text/javascript">
+		var webSocket = new WebSocket(
+				//'ws://192.168.52.1:8080/Bombercat/websocket');
+				'ws://localhost:8080/CatServer/websocket');
+
+		webSocket.onerror = function(event) {
+			onError(event)
+		};
+
+		webSocket.onopen = function(event) {
+			onOpen(event)
+		};
+
+		webSocket.onmessage = function(event) {
+			onMessage(event)
+		};
+
+		function onMessage(event) {
+			document.getElementById('messages').innerHTML += '<br />'
+					+ event.data;
+		}
+
+		function onOpen(event) {
+			document.getElementById('messages').innerHTML = 'Connection established';
+		}
+
+		function onError(event) {
+			alert(event.data);
+		}
+
+		function start() {
+			var text = document.getElementById("messageinput").value;
+			webSocket.send(text);
+			return false;
+		}
+	</script>
+</body>
+</html>

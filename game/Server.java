@@ -2,6 +2,9 @@ package server;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,6 +21,7 @@ import javax.websocket.server.ServerEndpoint;
 @WebServlet("/Server")
 public class Server extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final Set<Session> sessions = Collections.synchronizedSet(new HashSet<Session>());
 
 	public Server() {
 		super();
@@ -40,19 +44,39 @@ public class Server extends HttpServlet {
 		doGet(request, response);
 	}
 
+	private void sendMessageToAll(String message) {
+		for (Session s : sessions) {
+			try {
+				s.getBasicRemote().sendText(message);
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
+
 	@OnMessage
 	public void onMessage(String message, Session session) throws IOException, InterruptedException {
-		System.out.println("Received: " + message);
-		session.getBasicRemote().sendText("You have send me this: " + message);
+		System.out.println(session.getId() + " send: " + message);
+		// session.getBasicRemote().sendText("You have send me this: " +
+		// message);
+		if (message.toLowerCase().startsWith("leo")) {
+			sendMessageToAll(
+					"<img src='http://files.brightside.me/files/news/part_5/50055/preview-650x390-650-1448018399.jpg' alt='leonardo'></img>");
+		}
+		sendMessageToAll(session.getId() + ": " + message);
 	}
 
 	@OnOpen
-	public void onOpen() {
-		System.out.println("Client connected");
+	public void onOpen(Session session) {
+		System.out.println("Client '" + session.getId() + "' connected");
+		sendMessageToAll("User " + session.getId() + " has connected");
+		sessions.add(session);
 	}
 
 	@OnClose
-	public void onClose() {
-		System.out.println("Connection closed");
+	public void onClose(Session session) {
+		sessions.remove(session);
+		System.out.println("Client '" + session.getId() + "' closed");
+		sendMessageToAll("User " + session.getId() + " has disconnected");
 	}
 }

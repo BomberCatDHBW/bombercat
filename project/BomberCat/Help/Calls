@@ -1,0 +1,8 @@
+Calls:
+	menu:
+		menu createLobby lobbyName
+		menu joinLobby lobbyName
+		menu setName name
+		menu getLobbies null
+	lobby:
+		lobby leaveLobby null

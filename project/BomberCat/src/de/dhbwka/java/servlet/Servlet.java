@@ -19,7 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.dhbwka.java.bombercat.Client;
-import de.dhbwka.java.bombercat.servercalls.Call;
+import de.dhbwka.java.bombercat.servercalls.Server;
 
 @ServerEndpoint("/echo")
 @WebServlet("/Servlet")
@@ -27,7 +27,7 @@ public class Servlet extends HttpServlet {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(Servlet.class);
 	private static final long serialVersionUID = 1L;
-	private static Call call = new Call();
+	private static Server server = new Server();
 	private static Map<String, Client> clients = new HashMap<>();
 
 	public Servlet() {
@@ -60,13 +60,13 @@ public class Servlet extends HttpServlet {
 	@OnMessage
 	public void onMessage(String message, Session session) {
 		Client client = clients.get(session.getId());
-		call.call(message, client);
+		server.call(message, client);
 	}
 
 	@OnClose
 	public void onClose(Session session) {
 		LOGGER.info("Session " + session.getId() + " has ended");
-		call.removeClient(clients.get(session.getId()));
+		server.removeClient(clients.get(session.getId()));
 		clients.remove(session);
 	}
 }

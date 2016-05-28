@@ -1,22 +1,18 @@
 function Sprite() {
 	this.loaded = false;
 	this.image = new Image();
-	this.context;
-	this.x = 0;
-	this.y = 0;
 
-	this.load = function(ctx, imgSrc) {
-		loaded = true;
+	this.load = function(imgSrc) {
+		this.loaded = true;
 		this.image.src = imgSrc;
-		context = ctx;
 	}
 
 	this.draw = function(x, y) {
 		this.image.onload = function() {
-			loaded = true;
+			this.loaded = true;
 		};
 		
-		if (loaded) {
+		if (this.loaded) {
 			context.drawImage(this.image, x, y);
 		}
 	}

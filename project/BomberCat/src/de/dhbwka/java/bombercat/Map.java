@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,6 +27,7 @@ public class Map {
 	private int height;
 	private List<Point> spawns;
 	private HashMap<Integer, FieldType> fieldTypes;
+	private HashMap<Integer, String> fieldRefs;
 	private int[][] field;
 
 	public Map(File file) throws FileNotFoundException, IOException {
@@ -34,6 +36,61 @@ public class Map {
 		} catch (ParseException e) {
 			LOGGER.info(e.getLocalizedMessage());
 		}
+	}
+
+	public void saveMap() throws IOException {
+		File f = new File("D://Dokumente//Bombercat//BomberCat//TestData//TestMap.map");
+		name = "TestMap";
+		field = new int[32][32];
+		for (int i = 0; i < field.length; i++) {
+			for (int j = 0; j < field[i].length; j++) {
+				field[i][j] = 0;
+			}
+		}
+		width = 32;
+		height = 32;
+		spawns = new ArrayList();
+		spawns.add(new Point(0, 0));
+		spawns.add(new Point(0, 31));
+		spawns.add(new Point(31, 0));
+		spawns.add(new Point(31, 31));
+		fieldRefs = new HashMap<Integer, String>();
+		fieldRefs.put(0, "www.img.de/1");
+		fieldRefs.put(1, "www.img.de/2");
+		fieldRefs.put(2, "www.img.de/3");
+		fieldTypes = new HashMap<Integer, FieldType>();
+		fieldTypes.put(0, FieldType.Empty);
+		fieldTypes.put(1, FieldType.Destructible);
+		fieldTypes.put(2, FieldType.Indestructible);
+		JSONObject obj = new JSONObject();
+		obj.put("name", name);
+		obj.put("width", width);
+		obj.put("height", height);
+		JSONObject points = new JSONObject();
+		int p = 0;
+		for (Point point : spawns) {
+			JSONObject spawnPoints = new JSONObject();
+			spawnPoints.put("x", point.getX());
+			spawnPoints.put("y", point.getY());
+			points.put(p, spawnPoints);
+			p++;
+		}
+		obj.put("spawns", points);
+		JSONObject fieldJson = new JSONObject();
+		for (int i = 0; i < field.length; i++) {
+			JSONArray line = new JSONArray();
+			for (int j = 0; j < field[i].length; j++) {
+				line.add(field[i][j]);
+			}
+			fieldJson.put(i, line);
+		}
+		obj.put("field", fieldJson);
+		obj.put("fieldTypes", new JSONObject(fieldTypes));
+		obj.put("fieldRefs", new JSONObject(fieldRefs));
+
+		FileWriter fr = new FileWriter(f);
+		obj.writeJSONString(fr);
+		fr.close();
 	}
 
 	@Override
@@ -88,5 +145,69 @@ public class Map {
 			}
 		}
 
+	}
+
+	public File getMapFile() {
+		return mapFile;
+	}
+
+	public void setMapFile(File mapFile) {
+		this.mapFile = mapFile;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	public List<Point> getSpawns() {
+		return spawns;
+	}
+
+	public void setSpawns(List<Point> spawns) {
+		this.spawns = spawns;
+	}
+
+	public HashMap<Integer, FieldType> getFieldTypes() {
+		return fieldTypes;
+	}
+
+	public void setFieldTypes(HashMap<Integer, FieldType> fieldTypes) {
+		this.fieldTypes = fieldTypes;
+	}
+
+	public void setField(int[][] field) {
+		this.field = field;
+	}
+
+	public int[][] getField() {
+		return field;
+	}
+
+	public HashMap<Integer, String> getFieldRefs() {
+		return fieldRefs;
+	}
+
+	public void setFieldRefs(HashMap<Integer, String> fieldRefs) {
+		this.fieldRefs = fieldRefs;
 	}
 }

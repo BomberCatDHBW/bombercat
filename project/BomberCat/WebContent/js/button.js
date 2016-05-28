@@ -6,13 +6,11 @@ function Button() {
 	this.r = 0;
 	this.g = 0;
 	this.b = 0;
-	this.context;
 	this.text;
 	this.fontSize = 20;
 	this.selected = false;
 
-	this.create = function(ctx, r, g, b) {
-		this.context = ctx;
+	this.create = function(r, g, b) {
 		this.r = r;
 		this.g = g;
 		this.b = b;
@@ -38,7 +36,7 @@ function Button() {
 		context.fillRect(x, y, w, h);
 		if (this.text != null) {
 			context.font=this.fontSize+"px Arial";
-			ctx.fillStyle = "white";
+			context.fillStyle = "white";
 			context.fillText(this.text,x+5,y+this.fontSize+5);
 		}
 	}

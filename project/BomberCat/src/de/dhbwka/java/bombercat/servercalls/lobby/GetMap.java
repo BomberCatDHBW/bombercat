@@ -10,7 +10,9 @@ import de.dhbwka.java.bombercat.Map;
 public class GetMap implements LobbyCall {
 	@Override
 	public void run(String[] parameter, java.util.Map<String, Lobby> lobbies, Client client) {
-		File mapFile = new File("BomberCat//Maps//" + parameter[0]);
+		String path = "BomberCat\\Maps\\" + parameter[0];
+		File mapFile = new File(path);
+		System.out.println(mapFile.getAbsolutePath());
 		try {
 			Map map = new Map(mapFile);
 			client.sendMessage(map.toString());

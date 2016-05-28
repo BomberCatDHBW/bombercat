@@ -12,7 +12,7 @@ public class Lobby {
 	private Client lobbyLeader;
 	private Set<Client> clients = new HashSet<Client>(8);
 	private String lobbyName;
-	private Map map;
+	private BomberCatMap map;
 
 	public Lobby(Client leader, String name) {
 		setLobbyLeader(leader);
@@ -77,11 +77,11 @@ public class Lobby {
 
 	}
 
-	public Map getMap() {
+	public BomberCatMap getMap() {
 		return map;
 	}
 
-	public void setMap(Map map) {
+	public void setMap(BomberCatMap map) {
 		this.map = map;
 	}
 }

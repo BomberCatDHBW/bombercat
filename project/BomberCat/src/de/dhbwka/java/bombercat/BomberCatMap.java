@@ -18,9 +18,9 @@ import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Map {
+public class BomberCatMap {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(Map.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(BomberCatMap.class);
 	private File mapFile;
 	private String name;
 	private int width;
@@ -30,12 +30,8 @@ public class Map {
 	private HashMap<Integer, String> fieldRefs;
 	private int[][] field;
 
-	public Map(File file) throws FileNotFoundException, IOException {
-		try {
-			readMap(file);
-		} catch (ParseException e) {
-			LOGGER.info(e.getLocalizedMessage());
-		}
+	public BomberCatMap(File file) throws FileNotFoundException, IOException {
+		mapFile = file;
 	}
 
 	public void saveMap() throws IOException {

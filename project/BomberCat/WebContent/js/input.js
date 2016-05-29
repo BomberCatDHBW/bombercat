@@ -1,7 +1,20 @@
+function preventBackspaceHandler(evt) {
+    evt = evt || window.event;
+    if (evt.keyCode == 8) {
+    	keyboard.curLetter = "delete";
+        return false;
+    }
+}
+document.onkeydown = preventBackspaceHandler;
+
 function mouse() {
 	this.x = 0;
 	this.y = 0;
 	this.clicked = false;
+}
+
+function keyboard() {
+	this.curLetter = "";
 }
 
 canvas.addEventListener("click", onClick, false);
@@ -44,4 +57,10 @@ function check(e) {
 		 //Down key
 		player.goDown();
 	}
+}
+
+window.addEventListener('keypress', this.keyPress, false);
+
+function keyPress(e) {
+	keyboard.curLetter = String.fromCharCode(e.keyCode);
 }

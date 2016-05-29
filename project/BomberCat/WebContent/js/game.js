@@ -11,18 +11,35 @@ var gameState = "mainMenuState";
 var player = new Player();
 var otherPlayer = new Player();
 var playButton = new Button();
+var nameField = new TextField();
 setup();
 
 function setup() {
 	playButton.create(100, 200, 150);
 	playButton.setText("Play Game!", 50);
+
+	nameField.create(100, 200, 150);
+	nameField.setLabelText("Name: ", 30);
+}
+
+function drawStroked(text, fontSize, x, y) {
+	context.font = fontSize + "px Sans-serif"
+	context.strokeStyle = 'black';
+	context.lineWidth = 3;
+	context.strokeText(text, x, y);
+	context.fillStyle = 'white';
+	context.fillText(text, x, y);
 }
 
 function mainMenuState() {
 	background.draw(0, 0);
-	playButton.draw(50, 200, canvas.width - 100, 80);
 
-	if (playButton.isClicked()) {
+	drawStroked("BOMBERCAT", 60, 60, 90);
+
+	playButton.draw(50, 200, canvas.width - 100, 80);
+	nameField.draw(50, 140, canvas.width - 100, 50);
+
+	if (playButton.isClicked() && nameField.text.length >= 3) {
 		gameState = "lobbyListState";
 	}
 }

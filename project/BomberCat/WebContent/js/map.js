@@ -28,30 +28,29 @@ function Map() {
 		console.log(object.fieldRefs[0]);
 
 		console.log("Loading ParentBlocks!");
-		var parentBlock = new Block();
-		parentBlock.load(object.fieldRefs[0]);
+		for (var i = 0; i < object.fieldRefs.length; i++) {			
+			var parentBlock = new Block();
+			parentBlock.load(object.fieldRefs[i]);
+			this.parentBlocks.push(parentBlock);
+		}
 		//parentBlock.load("http://vignette3.wikia.nocookie.net/nitromepixellove/images/a/a7/Red_Block.png/revision/latest?cb=20120618214011");
 		console.log("Loading Blocks!");
 
 		for (var x = 0; x < this.height; x++) {
 			for (var y = 0; y < this.width; y++) {
 				//console.log(object.field[y][x]);
-				if (object.field[y][x] == 1)
-				{
-					var block = new Block();					
-					block.x = x*32;
-					block.y = y*32;
-					this.blocks.push(block);
-				}
+				var block = new Block();					
+				block.x = x*32;
+				block.y = y*32;
+				block.type = object.field[y][x];
+				this.blocks.push(block);
 			}
 		}
-		this.parentBlocks.push(parentBlock);
-
 	}
 
 	this.draw = function() {
 		for (var i = 0; i < this.blocks.length; i++) {
-			this.parentBlocks[0].draw(this.blocks[i].x, this.blocks[i].y);
+			this.parentBlocks[this.blocks[i].type].draw(this.blocks[i].x, this.blocks[i].y);
 		}
 	}
 }

@@ -1,6 +1,7 @@
 function Block() {
 	this.x = 0;
 	this.y = 0;
+	this.type = 0;
 	this.sprite = new Sprite();
 
 	this.load = function(imgSrc) {

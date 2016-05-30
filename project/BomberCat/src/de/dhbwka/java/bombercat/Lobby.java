@@ -74,7 +74,11 @@ public class Lobby {
 	}
 
 	public void startGame() {
-
+		if (map != null && clients.size() > 1) {
+			// TODO
+		} else {
+			lobbyLeader.sendMessage("Can't start game");
+		}
 	}
 
 	public BomberCatMap getMap() {

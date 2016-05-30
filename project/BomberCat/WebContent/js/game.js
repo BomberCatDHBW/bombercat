@@ -4,6 +4,8 @@ var context = canvas.getContext("2d");
 var background = new Sprite();
 var hero = new Sprite();
 
+var soundtrack = new Audio('https://raw.githubusercontent.com/BomberCatDHBW/bombercat/master/Soundtrack/BomberCatSoundtrackPrototype001.mp3');
+
 hero.load("img/player.png");
 background.load("img/background.png");
 
@@ -42,6 +44,7 @@ function mainMenuState() {
 	if (playButton.isClicked() && nameField.text.length >= 3) {
 		gameState = "lobbyListState";
 		sendMsg("menu setName Jonas");
+		soundtrack.play();
 	}
 }
 
@@ -86,9 +89,11 @@ function loadPlayState() {
 	if (!gotResponse) {
 		map.getMap();
 	} else {
-		console.log(map.jsonMap);
+		//console.log(map.jsonMap);
 		gotResponse = false;
 		isPlayStateLoaded = true;
+		var jsonMap = JSON.parse(map.jsonMap);
+		console.log(jsonMap.name);
 	}
 }
 

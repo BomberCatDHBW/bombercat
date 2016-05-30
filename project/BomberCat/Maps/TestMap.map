@@ -1,7 +1,7 @@
 {
 	"fieldRefs":{
 		"0":"https://raw.githubusercontent.com/BomberCatDHBW/bombercat/master/project/BomberCat/MapBlocks/Empty.jpg",
-		"1":"https://raw.githubusercontent.com/BomberCatDHBW/bombercat/master/project/BomberCat/MapBlocks/crate.jpg",
+		"1":"https://raw.githubusercontent.com/BomberCatDHBW/bombercat/master/project/BomberCat/MapBlocks/Destructible.jpg",
 		"2":"https://raw.githubusercontent.com/BomberCatDHBW/bombercat/master/project/BomberCat/MapBlocks/Indestructible.jpg"
 	},
 	"spawns":{
@@ -35,7 +35,7 @@
 		 "9":[2,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,2],
 		"10":[2,1,2,1,2,1,2,1,2,1,2,0,2,0,2,1,2,1,2,1,2,1,2,1,2],
 		"11":[2,1,1,1,1,1,1,1,1,1,0,0,2,0,0,1,1,1,1,1,1,1,1,1,2],
-		"12":[1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,2],
+		"12":[2,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,2],
 		"13":[2,1,1,1,1,1,1,1,1,1,0,0,2,0,0,1,1,1,1,1,1,1,1,1,2],
 		"14":[2,1,2,1,2,1,2,1,2,1,2,0,2,0,2,1,2,1,2,1,2,1,2,1,2],
 		"15":[2,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,2],

@@ -54,7 +54,7 @@ function sendAndGetMessages(msg, endResponse) {
 	}
 	if (!gotResponse) {
 		if (messages[messages.length-1] == endResponse) {
-			console.log("gotEndResponse!");
+			//console.log("gotEndResponse!");
 			gotResponse = true;
 			hasSent = false;
 		}
@@ -69,7 +69,7 @@ function sendAndGetResponse(msg) {
 	}
 	if (!gotResponse) {
 		if (curMsg != "") {
-			console.log("gotResponse!");
+			//console.log("gotResponse!");
 			gotResponse = true;
 			hasSent = false;
 		}

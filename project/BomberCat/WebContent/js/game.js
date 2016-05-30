@@ -9,7 +9,7 @@ var soundtrack = new Audio('https://raw.githubusercontent.com/BomberCatDHBW/bomb
 hero.load("img/player.png");
 background.load("img/background.png");
 
-var gameState = "mainMenuState";
+var gameState = "playState";//"mainMenuState";
 var player = new Player();
 var otherPlayer = new Player();
 var playButton = new Button();
@@ -89,11 +89,9 @@ function loadPlayState() {
 	if (!gotResponse) {
 		map.getMap();
 	} else {
-		//console.log(map.jsonMap);
 		gotResponse = false;
 		isPlayStateLoaded = true;
-		var jsonMap = JSON.parse(map.jsonMap);
-		console.log(jsonMap.name);
+		map.parse();
 	}
 }
 
@@ -101,8 +99,11 @@ function playState() {
 	if (!isPlayStateLoaded) {
 		loadPlayState();
 	}
-	background.draw(0, 0);
-	hero.draw(player.x, player.y);
+	else {		
+		background.draw(0, 0);
+		map.draw();
+		hero.draw(player.x, player.y);
+	}
 
 	if (mouse.clicked) {
 		player.x = mouse.x;
@@ -119,7 +120,7 @@ function playState() {
 			// otherPlayer.y = jsObject.y;
 		}
 	}
-	hero.draw(otherPlayer.x, otherPlayer.y);
+	//hero.draw(otherPlayer.x, otherPlayer.y);
 }
 
 function draw() {

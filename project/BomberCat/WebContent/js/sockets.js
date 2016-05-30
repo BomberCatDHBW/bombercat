@@ -21,7 +21,7 @@ function openSocket() {
 	};
 
 	webSocket.onmessage = function(event) {
-		console.log(event.data);
+		//console.log(event.data);
 		messages.push(event.data);
 		curMsg = event.data;
 		if (curMsg == "Connection Established") {			

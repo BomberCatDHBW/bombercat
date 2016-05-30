@@ -10,7 +10,7 @@ import de.dhbwka.java.bombercat.Lobby;
 public class GetMap implements LobbyCall {
 	@Override
 	public void run(String[] parameter, java.util.Map<String, Lobby> lobbies, Client client) {
-		String path = "BomberCat" + File.pathSeparator + "Maps" + File.pathSeparator + parameter[0];
+		String path = "BomberCat/Maps/" + parameter[0];
 		File mapFile = new File(path);
 		System.out.println(mapFile.getAbsolutePath());
 		try {

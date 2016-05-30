@@ -35,7 +35,6 @@ public class BomberCatMap {
 	}
 
 	public void saveMap() throws IOException {
-		File f = new File("D://Dokumente//Bombercat//BomberCat//TestData//TestMap.map");
 		name = "TestMap";
 		field = new int[32][32];
 		for (int i = 0; i < field.length; i++) {
@@ -84,7 +83,7 @@ public class BomberCatMap {
 		obj.put("fieldTypes", new JSONObject(fieldTypes));
 		obj.put("fieldRefs", new JSONObject(fieldRefs));
 
-		FileWriter fr = new FileWriter(f);
+		FileWriter fr = new FileWriter(mapFile);
 		obj.writeJSONString(fr);
 		fr.close();
 	}

@@ -36,7 +36,7 @@ function Map() {
 		for (var x = 0; x < this.height; x++) {
 			for (var y = 0; y < this.width; y++) {
 				console.log(object.field[y][x]);
-				if (object.field[y][x] == 0)
+				if (object.field[y][x] == 1)
 				{
 					var block = new Block();					
 					block.x = y*32;

@@ -1,15 +1,13 @@
 package de.dhbwka.java.bombercat;
 
 import java.awt.Point;
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -21,7 +19,6 @@ import org.slf4j.LoggerFactory;
 public class BomberCatMap {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(BomberCatMap.class);
-	private File mapFile;
 	private String name;
 	private int width;
 	private int height;
@@ -30,124 +27,69 @@ public class BomberCatMap {
 	private HashMap<Integer, String> fieldRefs;
 	private int[][] field;
 
-	public BomberCatMap(File file) throws FileNotFoundException, IOException {
-		mapFile = file;
+	private BomberCatMap() {
+
 	}
 
-	public void saveMap() throws IOException {
-		name = "TestMap";
-		field = new int[32][32];
-		for (int i = 0; i < field.length; i++) {
-			for (int j = 0; j < field[i].length; j++) {
-				field[i][j] = 0;
-			}
+	public static String getJSON(String mapName) throws IOException {
+		BomberCatMap map = new BomberCatMap();
+		URL url = new URL(
+				"https://raw.githubusercontent.com/BomberCatDHBW/bombercat/master/project/BomberCat/Maps/" + mapName);
+		Scanner scanner = new Scanner(url.openStream());
+		String jsonString = "";
+		while (scanner.hasNextLine()) {
+			jsonString += scanner.nextLine();
 		}
-		width = 32;
-		height = 32;
-		spawns = new ArrayList();
-		spawns.add(new Point(0, 0));
-		spawns.add(new Point(0, 31));
-		spawns.add(new Point(31, 0));
-		spawns.add(new Point(31, 31));
-		fieldRefs = new HashMap<Integer, String>();
-		fieldRefs.put(0, "www.img.de/1");
-		fieldRefs.put(1, "www.img.de/2");
-		fieldRefs.put(2, "www.img.de/3");
-		fieldTypes = new HashMap<Integer, FieldType>();
-		fieldTypes.put(0, FieldType.Empty);
-		fieldTypes.put(1, FieldType.Destructible);
-		fieldTypes.put(2, FieldType.Indestructible);
-		JSONObject obj = new JSONObject();
-		obj.put("name", name);
-		obj.put("width", width);
-		obj.put("height", height);
-		JSONObject points = new JSONObject();
-		int p = 0;
-		for (Point point : spawns) {
-			JSONObject spawnPoints = new JSONObject();
-			spawnPoints.put("x", point.getX());
-			spawnPoints.put("y", point.getY());
-			points.put(p, spawnPoints);
-			p++;
-		}
-		obj.put("spawns", points);
-		JSONObject fieldJson = new JSONObject();
-		for (int i = 0; i < field.length; i++) {
-			JSONArray line = new JSONArray();
-			for (int j = 0; j < field[i].length; j++) {
-				line.add(field[i][j]);
-			}
-			fieldJson.put(i, line);
-		}
-		obj.put("field", fieldJson);
-		obj.put("fieldTypes", new JSONObject(fieldTypes));
-		obj.put("fieldRefs", new JSONObject(fieldRefs));
-
-		FileWriter fr = new FileWriter(mapFile);
-		obj.writeJSONString(fr);
-		fr.close();
+		return jsonString;
 	}
 
-	@Override
-	public String toString() {
-		String result = "";
-		try {
-			FileReader fr = new FileReader(mapFile);
-			BufferedReader br = new BufferedReader(fr);
-			while (br.ready()) {
-				result += br.readLine();
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
+	public static BomberCatMap readMap(String mapName) throws FileNotFoundException, IOException, ParseException {
+		BomberCatMap map = new BomberCatMap();
+		URL url = new URL(
+				"https://raw.githubusercontent.com/BomberCatDHBW/bombercat/master/project/BomberCat/Maps/" + mapName);
+		Scanner scanner = new Scanner(url.openStream());
+		String jsonString = "";
+		while (scanner.hasNextLine()) {
+			jsonString += scanner.nextLine();
 		}
-		return result;
-	}
-
-	public void readMap(File file) throws FileNotFoundException, IOException, ParseException {
-		mapFile = file;
 		JSONParser parser = new JSONParser();
-		JSONObject mapJSONObj = (JSONObject) parser.parse(new FileReader(file));
-		name = (String) mapJSONObj.get("name");
-		width = ((Long) mapJSONObj.get("width")).intValue();
-		height = ((Long) mapJSONObj.get("height")).intValue();
+		JSONObject mapJSONObj = (JSONObject) parser.parse(jsonString);
+		map.setName((String) mapJSONObj.get("name"));
+		map.setWidth(((Long) mapJSONObj.get("width")).intValue());
+		map.setHeight(((Long) mapJSONObj.get("height")).intValue());
 		JSONObject fieldObj = (JSONObject) mapJSONObj.get("field");
-		field = new int[width][height];
-		for (int x = 0; x < width; x++) {
+		int[][] fieldTmp = new int[map.getWidth()][map.getHeight()];
+		for (int x = 0; x < map.getWidth(); x++) {
 			JSONArray array = (JSONArray) fieldObj.get("" + x);
-			for (int y = 0; y < height; y++) {
-				field[x][y] = ((Long) array.get(y)).intValue();
+			for (int y = 0; y < map.getHeight(); y++) {
+				fieldTmp[x][y] = ((Long) array.get(y)).intValue();
 			}
 		}
+		map.setField(fieldTmp);
 		JSONObject spawnsObj = (JSONObject) mapJSONObj.get("spawns");
-		spawns = new ArrayList<Point>();
+		ArrayList spawnsTmp = new ArrayList<Point>();
 		for (int i = 0; i < spawnsObj.size(); i++) {
 			JSONObject spawn = (JSONObject) spawnsObj.get("" + i);
-			spawns.add(new Point(((Long) spawn.get("x")).intValue(), ((Long) spawn.get("y")).intValue()));
+			spawnsTmp.add(new Point(((Long) spawn.get("x")).intValue(), ((Long) spawn.get("y")).intValue()));
 		}
 		JSONObject fieldTypesObj = (JSONObject) mapJSONObj.get("fieldTypes");
-		fieldTypes = new HashMap<>();
+		map.setSpawns(spawnsTmp);
+		HashMap fieldTypesTmp = new HashMap<>();
 		for (int i = 0; i < fieldTypesObj.size(); i++) {
 			switch ((String) fieldTypesObj.get("" + i)) {
 			case "Empty":
-				fieldTypes.put(i, FieldType.Empty);
+				fieldTypesTmp.put(i, FieldType.Empty);
 				break;
 			case "Destructible":
-				fieldTypes.put(i, FieldType.Destructible);
+				fieldTypesTmp.put(i, FieldType.Destructible);
 				break;
 			case "Indestructible":
-				fieldTypes.put(i, FieldType.Indestructible);
+				fieldTypesTmp.put(i, FieldType.Indestructible);
 				break;
 			}
 		}
-
-	}
-
-	public File getMapFile() {
-		return mapFile;
-	}
-
-	public void setMapFile(File mapFile) {
-		this.mapFile = mapFile;
+		map.setFieldTypes(fieldTypesTmp);
+		return map;
 	}
 
 	public String getName() {

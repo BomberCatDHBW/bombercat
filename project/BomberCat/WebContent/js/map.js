@@ -29,18 +29,18 @@ function Map() {
 
 		console.log("Loading ParentBlocks!");
 		var parentBlock = new Block();
-		//block.load("http://" + object.fieldRefs[0]);
-		parentBlock.load("http://vignette3.wikia.nocookie.net/nitromepixellove/images/a/a7/Red_Block.png/revision/latest?cb=20120618214011");
+		parentBlock.load(object.fieldRefs[0]);
+		//parentBlock.load("http://vignette3.wikia.nocookie.net/nitromepixellove/images/a/a7/Red_Block.png/revision/latest?cb=20120618214011");
 		console.log("Loading Blocks!");
 
 		for (var x = 0; x < this.height; x++) {
 			for (var y = 0; y < this.width; y++) {
-				console.log(object.field[y][x]);
+				//console.log(object.field[y][x]);
 				if (object.field[y][x] == 1)
 				{
 					var block = new Block();					
-					block.x = y*32;
-					block.y = x*32;
+					block.x = x*32;
+					block.y = y*32;
 					this.blocks.push(block);
 				}
 			}

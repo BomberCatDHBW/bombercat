@@ -43,7 +43,7 @@ public class BomberCatMap {
 		return jsonString;
 	}
 
-	public static BomberCatMap readMap(String mapName) throws FileNotFoundException, IOException, ParseException {
+	public static BomberCatMap getMap(String mapName) throws FileNotFoundException, IOException, ParseException {
 		BomberCatMap map = new BomberCatMap();
 		URL url = new URL(
 				"https://raw.githubusercontent.com/BomberCatDHBW/bombercat/master/project/BomberCat/Maps/" + mapName);

@@ -41,6 +41,7 @@ function mainMenuState() {
 
 	if (playButton.isClicked() && nameField.text.length >= 3) {
 		gameState = "lobbyListState";
+		sendMsg("menu setName Jonas");
 	}
 }
 
@@ -52,7 +53,6 @@ function loadLobbyListState() {
 		sendAndGetMessages("menu getLobbies", "lobbylist end");
 	} else {
 		for (var i = 0; i < messages.length; i++) {
-			console.log(messages[i]);
 			if (messages[i] != "lobbylist begin"
 					&& messages[i] != "lobbylist end") {
 				var lobbyInfo = JSON.parse(messages[i]);

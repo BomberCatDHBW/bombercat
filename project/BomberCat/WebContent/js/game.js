@@ -34,7 +34,7 @@ function drawStroked(text, fontSize, x, y) {
 }
 
 function mainMenuState() {
-	background.draw(0, 0);
+	//background.draw(0, 0);
 
 	drawStroked("BOMBERCAT", 60, 60, 90);
 
@@ -74,7 +74,7 @@ function lobbyListState() {
 	if (!isLobbyListStateLoaded) {
 		loadLobbyListState()
 	}
-	background.draw(0, 0);
+	//background.draw(0, 0);
 	for (var i = 0; i < lobbyButtons.length; i++) {
 		lobbyButtons[i].draw(50, 50 + i * 35, canvas.width - 100, 30);
 		if (lobbyButtons[i].isClicked()) {
@@ -99,8 +99,7 @@ function playState() {
 	if (!isPlayStateLoaded) {
 		loadPlayState();
 	}
-	else {		
-		background.draw(0, 0);
+	else {
 		map.draw();
 		hero.draw(player.x, player.y);
 	}

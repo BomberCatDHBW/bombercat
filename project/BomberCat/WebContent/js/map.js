@@ -28,7 +28,8 @@ function Map() {
 		console.log(object.fieldRefs[0]);
 
 		console.log("Loading ParentBlocks!");
-		for (var i = 0; i < object.fieldRefs.length; i++) {			
+		console.log(object.fieldRefs.length);
+		for (var i = 0; i < 3; i++) {			
 			var parentBlock = new Block();
 			parentBlock.load(object.fieldRefs[i]);
 			this.parentBlocks.push(parentBlock);

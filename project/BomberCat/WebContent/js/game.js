@@ -12,7 +12,7 @@ background.load("img/background.png");
 
 bombs = new Bombs();
 
-var gameState = "mainMenuState";// mainMenuState, playState
+var gameState = "playState";// mainMenuState, playState
 var player = new Player();
 var otherPlayer = new Player();
 var playButton = new Button();
@@ -165,7 +165,8 @@ function playState() {
 	if (!isPlayStateLoaded) {
 		loadPlayState();
 	} else {
-		map.draw();
+		map.drawMini(100,100);
+		//map.draw();
 		hero.draw(player.x, player.y);
 		bombs.draw();
 	}

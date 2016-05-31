@@ -3,8 +3,9 @@ function Bomb() {
 	this.y = 0;
 	this.timer = 100;
 
-	this.load = function(imgSrc) {
-		this.sprite.load(imgSrc);
+	this.set = function(x, y) {
+		this.x = x;
+		this.y = y;
 	}
 }
 
@@ -16,16 +17,19 @@ function Bombs() {
 	this.load = function(imgSrc) {
 		this.sprite.load(imgSrc);
 	}
-	
-	this.add = function() {
-		
+
+	this.add = function(x, y) {
+		console.log("added bomb");
+		var bomb = new Bomb();
+		bomb.set(x, y);
+		this.bombs.push(bomb);
 	}
 
 	this.draw = function() {
-		for (var i = 0; i < bombs.length; i++) {
-			if (bombs[i].timer > 0) {
-				bombs[i].timer -= 1;
-				this.sprite.draw(x, y);
+		for (var i = 0; i < this.bombs.length; i++) {
+			if (this.bombs[i].timer > 0) {
+				this.bombs[i].timer -= 1;
+				this.sprite.draw(this.bombs[i].x, this.bombs[i].y);
 			}
 		}
 	}

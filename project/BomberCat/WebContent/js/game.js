@@ -59,9 +59,14 @@ function mainMenuState() {
 	nameField.draw(50, 140, canvas.width - 100, 50);
 
 	if (playButton.isClicked() && nameField.text.length >= 3) {
-		gameState = "preLobbyState";
-		sendMsg("menu setName " + nameField.text);
-		//soundtrack.play();
+		if (connected) {
+			gameState = "preLobbyState";
+			sendMsg("menu setName " + nameField.text);
+			//soundtrack.play();
+		}
+		else {
+			playButton.setText("No Connection to Server", 50)
+		}
 	}
 }
 

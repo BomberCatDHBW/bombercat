@@ -4,6 +4,7 @@ var webSocket;
 var messages = document.getElementById("messages");
 var curMsg;
 var messages = [];
+var connected = false;
 
 function openSocket() {
 	if (webSocket !== undefined && webSocket.readyState !== WebSocket.CLOSED) {
@@ -21,10 +22,11 @@ function openSocket() {
 	};
 
 	webSocket.onmessage = function(event) {
-		//console.log(event.data);
+		console.log(event.data);
 		messages.push(event.data);
 		curMsg = event.data;
-		if (curMsg == "Connection Established") {			
+		if (curMsg == "Connection Established") {
+			connected = true;
 			document.getElementById("info").innerHTML = event.data;
 		}
 	};

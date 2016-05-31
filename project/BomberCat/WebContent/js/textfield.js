@@ -10,6 +10,7 @@ function TextField() {
 	this.text = "";
 	this.fontSize = 20;
 	this.selected = false;
+	this.blink = 0;
 
 	this.create = function(r, g, b) {
 		this.r = r;
@@ -38,10 +39,20 @@ function TextField() {
 		this.w = w;
 		this.h = h;
 		context.fillRect(x, y, w, h);
+		var blinkchar = "";
 		if (this.text != null) {
+			if (this.blink < 20) {
+				this.blink++;
+				blinkchar = "_";
+			} else if (this.blink < 40) {
+				this.blink++;
+				blinkchar = "";
+			} else {
+				this.blink = 0;
+			}
 			context.font=this.fontSize+"px Arial";
 			context.fillStyle = "white";
-			context.fillText(this.label + this.text,x+5,y+this.fontSize+5);
+			context.fillText(this.label + this.text + blinkchar,x+5,y+this.fontSize+5);
 		}
 	}
 

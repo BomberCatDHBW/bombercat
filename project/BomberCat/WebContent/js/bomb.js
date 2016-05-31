@@ -16,6 +16,10 @@ function Bombs() {
 	this.load = function(imgSrc) {
 		this.sprite.load(imgSrc);
 	}
+	
+	this.add = function() {
+		
+	}
 
 	this.draw = function() {
 		for (var i = 0; i < bombs.length; i++) {

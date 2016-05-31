@@ -6,7 +6,7 @@ var hero = new Sprite();
 
 var soundtrack = new Audio('https://raw.githubusercontent.com/BomberCatDHBW/bombercat/master/Soundtrack/BomberCatSoundtrackPrototype001.mp3');
 
-hero.load("img/player.png");
+hero.load("img/hero.png");
 background.load("img/background.png");
 
 var gameState = "playState";//mainMenuState, playState

@@ -44,7 +44,7 @@ function mainMenuState() {
 	if (playButton.isClicked() && nameField.text.length >= 3) {
 		gameState = "lobbyListState";
 		sendMsg("menu setName Jonas");
-		soundtrack.play();
+		//soundtrack.play();
 	}
 }
 

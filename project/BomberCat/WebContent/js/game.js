@@ -60,7 +60,7 @@ function mainMenuState() {
 
 	if (playButton.isClicked() && nameField.text.length >= 3) {
 		gameState = "preLobbyState";
-		sendMsg("menu setName Jonas");
+		sendMsg("menu setName " + nameField.text);
 		//soundtrack.play();
 	}
 }

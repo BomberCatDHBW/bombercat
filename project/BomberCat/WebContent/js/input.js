@@ -1,12 +1,3 @@
-function preventBackspaceHandler(evt) {
-    evt = evt || window.event;
-    if (evt.keyCode == 8) {
-    	keyboard.curLetter = "delete";
-        return false;
-    }
-}
-document.onkeydown = preventBackspaceHandler;
-
 function mouse() {
 	this.x = 0;
 	this.y = 0;
@@ -37,24 +28,20 @@ window.addEventListener('keydown', this.check, false);
 
 function check(e) {
 	var code = e.keyCode;
-	if (code == 37 || code == 65)
-	{
-		 //Left key
+	if (code == 37 || code == 65) {
+		// Left key
 		player.goLeft();
 	}
-	if (code == 38 || code == 87)
-	{
-		 //Up key
+	if (code == 38 || code == 87) {
+		// Up key
 		player.goUp();
 	}
-	if (code == 39 || code == 68)
-	{
-		//Right key
+	if (code == 39 || code == 68) {
+		// Right key
 		player.goRight();
 	}
-	if (code == 40 || code == 83)
-	{
-		 //Down key
+	if (code == 40 || code == 83) {
+		// Down key
 		player.goDown();
 	}
 }
@@ -64,3 +51,36 @@ window.addEventListener('keypress', this.keyPress, false);
 function keyPress(e) {
 	keyboard.curLetter = String.fromCharCode(e.keyCode);
 }
+
+//Prevent page-back if backspace and send backspace to keyboard.curLetter
+function onBackspace(e, callback) {
+	var key;
+	if (typeof e.keyIdentifier !== "undefined") {
+		key = e.keyIdentifier;
+
+	} else if (typeof e.keyCode !== "undefined") {
+		key = e.keyCode;
+	}
+	if (key === 'U+0008' || key === 'Backspace' || key === 8) {
+		if (typeof callback === "function") {
+			callback();
+			keyboard.curLetter = "delete";
+		}
+		return true;
+	}
+	return false;
+}
+
+window.addEventListener('keydown', function(e) {
+	switch (e.target.tagName.toLowerCase()) {
+	case "input":
+	case "textarea":
+		break;
+	case "body":
+		onBackspace(e, function() {
+			e.preventDefault();
+		});
+
+		break;
+	}
+}, true);

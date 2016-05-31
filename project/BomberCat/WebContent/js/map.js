@@ -42,6 +42,12 @@ function Map() {
 		player.x = this.spawns[0].x*32;
 		player.y = this.spawns[0].y*32;
 	}
+	
+	this.drawMini = function(x, y) {
+		for (var i = 0; i < this.blocks.length; i++) {
+			this.parentBlocks[this.blocks[i].type].draw(x+this.blocks[i].x*0.5, y+this.blocks[i].y*0.5);
+		}
+	}
 
 	this.draw = function() {
 		for (var i = 0; i < this.blocks.length; i++) {

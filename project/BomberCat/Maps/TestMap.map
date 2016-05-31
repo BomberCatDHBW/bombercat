@@ -2,7 +2,7 @@
 	"fieldRefs":{
 		"0":"https://raw.githubusercontent.com/BomberCatDHBW/bombercat/master/project/BomberCat/MapBlocks/Empty.jpg",
 		"1":"https://raw.githubusercontent.com/BomberCatDHBW/bombercat/master/project/BomberCat/MapBlocks/crate.jpg",
-		"2":"https://raw.githubusercontent.com/BomberCatDHBW/bombercat/master/project/BomberCat/MapBlocks/stone.jpg"
+		"2":"https://raw.githubusercontent.com/BomberCatDHBW/bombercat/master/project/BomberCat/MapBlocks/Stone.jpg"
 	},
 	"spawns":{
 		"0":{

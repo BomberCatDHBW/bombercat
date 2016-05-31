@@ -23,6 +23,7 @@ function Map() {
 		this.width = object.width;
 		this.height = object.height;
 		this.fieldRefs = object.fieldRefs;
+		this.spawns = object.spawns;
 		for (var i = 0; i < 3; i++) {			
 			var parentBlock = new Block();
 			parentBlock.load(object.fieldRefs[i]);
@@ -38,6 +39,8 @@ function Map() {
 				this.blocks.push(block);
 			}
 		}
+		player.x = this.spawns[0].x*32;
+		player.y = this.spawns[0].y*32;
 	}
 
 	this.draw = function() {

@@ -11,6 +11,15 @@ public class Lobby {
 	private static final Logger LOGGER = LoggerFactory.getLogger(Lobby.class);
 	private Client lobbyLeader;
 	private Set<Client> clients = new HashSet<Client>(8);
+
+	public Set<Client> getClients() {
+		return clients;
+	}
+
+	public void setClients(Set<Client> clients) {
+		this.clients = clients;
+	}
+
 	private String lobbyName;
 	private BomberCatMap map;
 

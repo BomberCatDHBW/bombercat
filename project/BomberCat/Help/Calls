@@ -9,4 +9,5 @@ Calls:
 		lobby getMap mapName
 		lobby getMapNames null
 		lobby startGame null
-		
+		lobby getLobbyPlayers null
+		lobby getLobbyMap null

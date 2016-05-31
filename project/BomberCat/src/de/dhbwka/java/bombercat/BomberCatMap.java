@@ -31,6 +31,10 @@ public class BomberCatMap {
 
 	}
 
+	public String getJSON() throws IOException {
+		return getJSON(name);
+	}
+
 	public static String getJSON(String mapName) throws IOException {
 		BomberCatMap map = new BomberCatMap();
 		URL url = new URL(

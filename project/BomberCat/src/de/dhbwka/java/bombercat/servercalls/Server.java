@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 
 import de.dhbwka.java.bombercat.Client;
 import de.dhbwka.java.bombercat.Lobby;
+import de.dhbwka.java.bombercat.servercalls.lobby.GetLobbyMap;
+import de.dhbwka.java.bombercat.servercalls.lobby.GetLobbyPlayers;
 import de.dhbwka.java.bombercat.servercalls.lobby.GetMap;
 import de.dhbwka.java.bombercat.servercalls.lobby.GetMapNames;
 import de.dhbwka.java.bombercat.servercalls.lobby.LeaveLobby;
@@ -40,6 +42,8 @@ public class Server {
 		lobbyCalls.put("getMap", new GetMap());
 		lobbyCalls.put("getMapNames", new GetMapNames());
 		lobbyCalls.put("startGame", new StartGame());
+		lobbyCalls.put("getLobbyMap", new GetLobbyMap());
+		lobbyCalls.put("getLobbyPlayers", new GetLobbyPlayers());
 	}
 
 	public void addClient(Session session) {

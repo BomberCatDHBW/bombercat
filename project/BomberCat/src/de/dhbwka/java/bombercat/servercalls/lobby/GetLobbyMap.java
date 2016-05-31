@@ -10,7 +10,15 @@ public class GetLobbyMap implements LobbyCall {
 	@Override
 	public void run(String[] parameter, Map<String, Lobby> lobbies, Client client) {
 		try {
-			client.sendMessage(client.getLobby().getMap().getJSON());
+			if (client.getLobby() != null) {
+				if (client.getLobby().getMap() != null) {
+					client.sendMessage(client.getLobby().getMap().getJSON());
+				} else {
+					client.sendError("No map set");
+				}
+			} else {
+				client.sendError("Client not in a lobby");
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

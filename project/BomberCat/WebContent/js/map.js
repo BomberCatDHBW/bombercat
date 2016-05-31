@@ -24,7 +24,7 @@ function Map() {
 		this.height = object.height;
 		this.fieldRefs = object.fieldRefs;
 		this.spawns = object.spawns;
-		for (var i = 0; i < 3; i++) {			
+		for (var i = 0; i < Object.keys(object.fieldRefs).length; i++) {			
 			var parentBlock = new Block();
 			parentBlock.load(object.fieldRefs[i]);
 			this.parentBlocks.push(parentBlock);

@@ -11,12 +11,16 @@ import de.dhbwka.java.bombercat.Lobby;
 public class GetLobbyPlayers implements LobbyCall {
 	@Override
 	public void run(String[] parameter, Map<String, Lobby> lobbies, Client client) {
-		JSONObject obj = new JSONObject();
-		JSONArray array = new JSONArray();
-		for (Client player : client.getLobby().getClients()) {
-			array.add(player.getUsername());
+		if (client.getLobby() != null) {
+			JSONObject obj = new JSONObject();
+			JSONArray array = new JSONArray();
+			for (Client player : client.getLobby().getClients()) {
+				array.add(player.getUsername());
+			}
+			obj.put("players", array);
+			client.sendMessage(obj.toJSONString());
+		} else {
+			client.sendError("Client is not in a lobby");
 		}
-		obj.put("players", array);
-		client.sendMessage(obj.toJSONString());
 	}
 }

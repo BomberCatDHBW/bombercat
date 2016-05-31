@@ -9,7 +9,7 @@ var soundtrack = new Audio('https://raw.githubusercontent.com/BomberCatDHBW/bomb
 hero.load("img/player.png");
 background.load("img/background.png");
 
-var gameState = "mainMenuState";//mainMenuState, playState
+var gameState = "playState";//mainMenuState, playState
 var player = new Player();
 var otherPlayer = new Player();
 var playButton = new Button();

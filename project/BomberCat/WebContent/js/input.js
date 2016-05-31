@@ -44,12 +44,17 @@ function check(e) {
 		// Down key
 		player.goDown();
 	}
+	if (code ==  32) {
+		// Spacebar
+		player.dropBomb();
+	}
 }
 
 window.addEventListener('keypress', this.keyPress, false);
 
 function keyPress(e) {
-	keyboard.curLetter = String.fromCharCode(e.keyCode);
+	var code = e.keyCode;
+	keyboard.curLetter = String.fromCharCode(code);
 }
 
 //Prevent page-back if backspace and send backspace to keyboard.curLetter

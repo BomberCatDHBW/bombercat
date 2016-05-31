@@ -10,6 +10,8 @@ var soundtrack = new Audio(
 hero.load("img/hero.png");
 background.load("img/background.png");
 
+bombs = new Bombs();
+
 var gameState = "mainMenuState";// mainMenuState, playState
 var player = new Player();
 var otherPlayer = new Player();
@@ -23,6 +25,8 @@ var lobbyNameField = new TextField();
 setup();
 
 function setup() {
+	bombs.load("img/bomb.png");
+	
 	playButton.create(100, 200, 150);
 	playButton.setText("Play Game!", 50);
 
@@ -163,6 +167,7 @@ function playState() {
 	} else {
 		map.draw();
 		hero.draw(player.x, player.y);
+		bombs.draw();
 	}
 
 	if (mouse.clicked) {

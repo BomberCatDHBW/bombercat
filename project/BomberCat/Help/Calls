@@ -6,3 +6,7 @@ Calls:
 		menu getLobbies null
 	lobby:
 		lobby leaveLobby null
+		lobby getMap mapName
+		lobby getMapNames null
+		lobby startGame null
+		

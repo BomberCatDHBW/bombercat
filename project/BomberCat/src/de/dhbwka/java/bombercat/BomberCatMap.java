@@ -32,7 +32,7 @@ public class BomberCatMap {
 	}
 
 	public String getJSON() throws IOException {
-		return getJSON(name);
+		return getJSON(name + ".map");
 	}
 
 	public static String getJSON(String mapName) throws IOException {

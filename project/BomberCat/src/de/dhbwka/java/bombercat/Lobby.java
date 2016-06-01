@@ -78,7 +78,9 @@ public class Lobby {
 	private void deleteLobby() {
 		for (Client client : clients) {
 			client.setLobby(null);
-			client.sendMessage("Lobby closed");
+			if (client != null && client.getSession().isOpen()) {
+				client.sendMessage("Lobby closed");
+			}
 		}
 	}
 

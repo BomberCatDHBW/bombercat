@@ -12,7 +12,8 @@ background.load("img/background.png");
 
 bombs = new Bombs();
 
-var gameState = "createLobbyState";// mainMenuState, playState, createLobbyState
+var gameState = "mainMenuState";// mainMenuState, playState,
+// createLobbyState
 var player = new Player();
 var otherPlayer = new Player();
 var playButton = new Button();
@@ -28,7 +29,7 @@ setup();
 
 function setup() {
 	bombs.load("img/bomb.png");
-	
+
 	playButton.create(100, 200, 150);
 	playButton.setText("Play Game!", 50);
 
@@ -49,10 +50,10 @@ function setup() {
 
 	lobbyNameField.create(100, 200, 150);
 	lobbyNameField.setLabelText("Lobby Name: ", 30);
-	
+
 	nextButton.create(100, 200, 150);
 	nextButton.setText(">", 30);
-	
+
 	previousButton.create(100, 200, 150);
 	previousButton.setText("<", 30);
 }
@@ -160,49 +161,54 @@ var displayMapLoaded = false;
 function createLobbyState() {
 	if (!createLobbyLoaded) {
 		loadCreateLobby();
-	}
-	else {
-		if (!displayMapLoaded) {			
-			if (!gotResponse) {
+	} else {
+		if (!gotResponse) {
+			if (!map.loaded) {
+				console.log("getMap " + mapsObject.maps[curMap]);
 				map.getMap(mapsObject.maps[curMap]);
-			} else {
-				gotResponse = false;
-				map.parse();
-				displayMapLoaded = true;
 			}
+		} else {
+			console.log("map parsed");
+			gotResponse = false;
+			map.parse();
+			displayMapLoaded = true;
 		}
 		if (map.loaded) {
 			map.drawMini(200, 200, 0.5);
 		}
+		if (curMap != 0) {
+			previousButton.draw(50, 400, 50, 50);
+			if (previousButton.isClicked()) {
+				curMap--;
+				displayMapLoaded = false;
+				map.loaded = false;
+				console.log(curMap);
+			}
+		}
+		if (displayMapLoaded = true) {
+			if (curMap < Object.keys(mapsObject.maps).length - 1) {
+				nextButton.draw(660, 400, 50, 50);
+				if (nextButton.isClicked()) {
+					curMap++;
+					displayMapLoaded = false;
+					map.loaded = false;
+					console.log(curMap);
+				}
+			}
+		}
 	}
 	backButton.draw(50, 700, 100, 60);
 	lobbyNameField.draw(50, 140, canvas.width - 100, 50);
-	
-	if (curMap != 0) {
-		previousButton.draw(50, 400, 50, 50);		
-	}
-	nextButton.draw(660, 400, 50, 50);
-	
-	if (nextButton.isClicked()) {
-		curMap++;
-		displayMapLoaded = false;
-	}
-	if (previousButton.isClicked()) {
-		curMap--;
-		displayMapLoaded = false;
-	}
 
 	if (createButton.isClicked() && lobbyNameField.text.length >= 3) {
-		sendMsg("menu createLobby "+ lobbyNameField.text);
+		sendMsg("menu createLobby " + lobbyNameField.text);
+		sendMsg("lobby setLobbyMap " + mapsObject.maps[curMap]);
 	}
 
 	if (backButton.isClicked()) {
 		gameState = "preLobbyState";
 	}
 	createButton.draw(canvas.width - 200, 700, 150, 60);
-	if (backButton.isClicked()) {
-		gameState = "preLobbyState";
-	}
 }
 
 var isPlayStateLoaded = false;
@@ -221,7 +227,7 @@ function playState() {
 	if (!isPlayStateLoaded) {
 		loadPlayState();
 	} else {
-		//map.drawMini(100,100, 0.5);
+		// map.drawMini(100,100, 0.5);
 		map.draw();
 		hero.draw(player.x, player.y);
 		bombs.draw();

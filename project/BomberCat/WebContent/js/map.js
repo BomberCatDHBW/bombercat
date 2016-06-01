@@ -12,6 +12,7 @@ function Map() {
 	this.loaded = false;
 
 	this.getMap = function(name) {
+		this.loaded = false;
 		sendAndGetResponse("lobby getMap " + name);
 		if (curMsg != "") {
 			this.jsonMap = curMsg;

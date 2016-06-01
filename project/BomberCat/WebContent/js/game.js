@@ -132,7 +132,20 @@ function lobbyListState() {
 	}
 }
 
+var createLobbyLoaded = false;
+function loadCreateLobby() {
+	if (!gotResponse) {
+		sendAndGetResponse("lobby getMapNames");
+	} else {
+		gotResponse = false;
+		createLobbyLoaded = true;
+	}
+}
+
 function createLobbyState() {
+	if (!createLobbyLoaded) {
+		loadCreateLobby();
+	}
 	backButton.draw(50, 700, 100, 60);
 	lobbyNameField.draw(50, 140, canvas.width - 100, 50);
 
@@ -165,7 +178,7 @@ function playState() {
 	if (!isPlayStateLoaded) {
 		loadPlayState();
 	} else {
-		map.drawMini(100,100);
+		map.drawMini(100,100, 0.5);
 		//map.draw();
 		hero.draw(player.x, player.y);
 		bombs.draw();

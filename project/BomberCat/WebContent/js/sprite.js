@@ -16,4 +16,14 @@ function Sprite() {
 			context.drawImage(this.image, x, y);
 		}
 	}
+	
+	this.drawMini = function(x, y, size) {
+		this.image.onload = function() {
+			this.loaded = true;
+		};
+		
+		if (this.loaded) {
+			context.drawImage(this.image, x, y, size, size);
+		}
+	}
 }

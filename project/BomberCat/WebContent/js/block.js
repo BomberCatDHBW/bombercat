@@ -11,4 +11,8 @@ function Block() {
 	this.draw = function(x, y) {
 		this.sprite.draw(x, y);
 	}
+	
+	this.drawMini = function(x, y, size) {
+		this.sprite.drawMini(x, y, size);
+	}
 }

@@ -18,7 +18,7 @@ public class GetMapNames implements LobbyCall {
 	@Override
 	public void run(String[] parameter, Map<String, Lobby> lobbies, Client client) {
 		try (Scanner scanner = new Scanner(
-				new URL("https://github.com/BomberCatDHBW/bombercat/tree/master/project/BomberCat/Maps/")
+				new URL("https://github.com/BomberCatDHBW/bombercat/tree/master/project/BomberCat/Maps/Mappool")
 						.openStream())) {
 			ArrayList<String> maps = new ArrayList<String>();
 			while (scanner.hasNextLine()) {

@@ -275,27 +275,23 @@ function preGameLobbyState() {
 			checkPlayersTimer++;
 		} else {
 			if (displayMapLoaded) {				
-				checkPlayersTimer = -100;
-				console.log("getPlayers");
+				checkPlayersTimer = -5;
 				sendMsg("lobby getLobbyPlayers");
-				if (curMsg[0] == '{') {
-					//console.log(curMsg);
+				console.log("getPlayers");
+				if (curMsg.indexOf('{"players":') > -1) {
 					lobby.players.length = 0;
 					var playersObject = JSON.parse(curMsg);
-					console.log(Object.keys(playersObject.players).length);
 					for (var i = 0; i <  Object.keys(playersObject.players).length; i++) {
-						//console.log(i);
-						//console.log(playersObject.players[i]);
 						lobby.players.push(playersObject.players[i]);
 					}
+					checkPlayersTimer = -50;
 				}
 			}
 		}
+		drawStroked("Players: ", 26, 700, 50 + 35);
 		if (lobby.players.length > 0) {
 			for (var i = 0; i < lobby.players.length; i++) {
-				context.font="20px Arial";
-				context.fillStyle = "black";
-				context.fillText("- "+lobby.players[i], 700, 50 + i * 35);
+				drawStroked("- "+lobby.players[i], 22, 700, 50 + (i+2) * 35);
 			}
 		}
 	}

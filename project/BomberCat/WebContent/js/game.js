@@ -288,7 +288,7 @@ function preGameLobbyState() {
 				}
 			}
 		}
-		drawStroked("Players: ", 26, 700, 50 + 35);
+		drawStroked(lobby.players.length + "/8" + "Players: ", 26, 700, 50 + 35);
 		if (lobby.players.length > 0) {
 			for (var i = 0; i < lobby.players.length; i++) {
 				drawStroked("- "+lobby.players[i], 22, 700, 50 + (i+2) * 35);

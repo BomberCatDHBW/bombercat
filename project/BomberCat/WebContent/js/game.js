@@ -12,7 +12,7 @@ background.load("img/background.png");
 
 bombs = new Bombs();
 
-var gameState = "playState";// mainMenuState, playState
+var gameState = "mainMenuState";// mainMenuState, playState
 var player = new Player();
 var otherPlayer = new Player();
 var playButton = new Button();
@@ -137,6 +137,10 @@ function loadCreateLobby() {
 	if (!gotResponse) {
 		sendAndGetResponse("lobby getMapNames");
 	} else {
+		var object = JSON.parse(curMsg);
+		for (var i = 0; i < Object.keys(object.maps).length; i++) {
+			console.log(object.maps[i]);
+		}
 		gotResponse = false;
 		createLobbyLoaded = true;
 	}

@@ -18,6 +18,14 @@ function Map() {
 			this.jsonMap = curMsg;
 		}
 	}
+	
+	this.getLobbyMap = function() {
+		this.loaded = false;
+		sendAndGetResponse("lobby getLobbyMap");
+		if (curMsg != "") {
+			this.jsonMap = curMsg;
+		}
+	}
 
 	this.parse = function() {
 		map.parentBlocks.length = 0;

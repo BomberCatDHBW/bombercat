@@ -215,7 +215,7 @@ var isPlayStateLoaded = false;
 var map = new Map();
 function loadPlayState() {
 	if (!gotResponse) {
-		map.getMap("TestMap.map");
+		map.getLobbyMap();
 	} else {
 		gotResponse = false;
 		isPlayStateLoaded = true;

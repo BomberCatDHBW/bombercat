@@ -29,32 +29,14 @@ setup();
 
 function setup() {
 	bombs.load("img/bomb.png");
-
-	playButton.create(100, 200, 150);
 	playButton.setText("Play Game!", 50);
-
-	nameField.create(100, 200, 150);
 	nameField.setLabelText("Name: ", 30);
-
-	backButton.create(100, 200, 150);
 	backButton.setText("Back", 40);
-
-	joinLobbyButton.create(100, 200, 150);
 	joinLobbyButton.setText("Join Lobby", 40);
-
-	createLobbyButton.create(100, 200, 150);
 	createLobbyButton.setText("Create Lobby", 45);
-
-	createButton.create(100, 200, 150);
 	createButton.setText("Create", 45);
-
-	lobbyNameField.create(100, 200, 150);
 	lobbyNameField.setLabelText("Lobby Name: ", 30);
-
-	nextButton.create(100, 200, 150);
 	nextButton.setText(">", 30);
-
-	previousButton.create(100, 200, 150);
 	previousButton.setText("<", 30);
 }
 
@@ -112,7 +94,6 @@ function loadLobbyListState() {
 					&& messages[i] != "lobbylist end") {
 				var lobbyInfo = JSON.parse(messages[i]);
 				var tmpButton = new Button();
-				tmpButton.create(100, 200, 150);
 				tmpButton.setText(lobbyInfo.name, 16);
 				lobbyButtons.push(tmpButton);
 			}

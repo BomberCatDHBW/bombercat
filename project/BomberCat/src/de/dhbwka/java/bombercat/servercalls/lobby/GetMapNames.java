@@ -3,7 +3,6 @@ package de.dhbwka.java.bombercat.servercalls.lobby;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -18,18 +17,17 @@ public class GetMapNames implements LobbyCall {
 	@Override
 	public void run(String[] parameter, Map<String, Lobby> lobbies, Client client) {
 		try (Scanner scanner = new Scanner(
-				new URL("https://github.com/BomberCatDHBW/bombercat/tree/master/project/BomberCat/Maps/Mappool")
+				new URL("https://raw.githubusercontent.com/BomberCatDHBW/bombercat/master/project/BomberCat/Maps/Mappool")
 						.openStream())) {
-			ArrayList<String> maps = new ArrayList<String>();
+			JSONArray array = new JSONArray();
 			while (scanner.hasNextLine()) {
-				maps.add(scanner.nextLine());
+				array.add(scanner.nextLine());
 			}
 			scanner.close();
 			JSONObject obj = new JSONObject();
-			JSONArray array = new JSONArray();
-			array.add(maps.toArray());
 			obj.put("maps", array);
 			client.sendMessage(obj.toJSONString());
+			System.out.println(obj.toJSONString());
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

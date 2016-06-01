@@ -41,7 +41,7 @@ function setup() {
 }
 
 function drawStroked(text, fontSize, x, y) {
-	context.font = fontSize + "px Sans-serif"
+	context.font = fontSize + "px Sans-serif";
 	context.strokeStyle = 'black';
 	context.lineWidth = 3;
 	context.strokeText(text, x, y);
@@ -81,6 +81,7 @@ function preLobbyState() {
 	}
 }
 
+var lobby = new Lobby();
 var lobbyButtons = new Array();
 
 var isLobbyListStateLoaded = false;
@@ -111,6 +112,7 @@ function lobbyListState() {
 	for (var i = 0; i < lobbyButtons.length; i++) {
 		lobbyButtons[i].draw(50, 50 + i * 35, canvas.width - 100, 30);
 		if (lobbyButtons[i].isClicked()) {
+			lobby.name = lobbyButtons[i].text;
 			sendMsg("menu joinLobby " + lobbyButtons[i].text);
 			gameState = "preGameLobbyState";
 		}
@@ -232,7 +234,6 @@ function playState() {
 	// hero.draw(otherPlayer.x, otherPlayer.y);
 }
 
-
 var createLobbyLoaded = false;
 var mapsObject;
 var curMap = 0;
@@ -250,6 +251,7 @@ function loadPreGameLobbyState() {
 }
 
 var displayMapLoaded = false;
+var checkPlayersTimer = 0;
 function preGameLobbyState() {
 	if (!createLobbyLoaded) {
 		loadPreGameLobbyState();
@@ -268,7 +270,36 @@ function preGameLobbyState() {
 		if (map.loaded) {
 			map.drawMini(50, 200, 0.5);
 		}
+		if (checkPlayersTimer < 0) {
+			checkPlayersTimer++;
+		} else {
+			if (displayMapLoaded) {				
+				checkPlayersTimer = -100;
+				console.log("getPlayers");
+				sendMsg("lobby getLobbyPlayers");
+				if (curMsg[0] == '{') {
+					console.log(curMsg);
+					lobby.players[i] = 0;
+					var playersObject = JSON.parse(curMsg);
+					console.log(Object.keys(playersObject.players).length);
+					for (var i = 0; i <  Object.keys(playersObject.players).length; i++) {
+						console.log(i);
+						console.log(playersObject.players[i]);
+						lobby.players.push(playersObject.players[i]);
+					}
+				}
+			}
+		}
+		if (lobby.players.length > 0) {
+			for (var i = 0; i < lobby.players.length; i++) {
+				context.font="20px Arial";
+				context.fillStyle = "white";
+				context.fillText(lobby.players[i], 700, 50 + i * 35);
+			}
+		}
 	}
+	drawStroked("LOBBY: " + lobby.name, 60, 60, 60);
+	drawStroked("waiting for host to start the game", 30, 60, 90);
 	backButton.draw(50, 700, 100, 60);
 
 	if (backButton.isClicked()) {

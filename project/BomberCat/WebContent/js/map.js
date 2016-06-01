@@ -5,7 +5,7 @@ function Map() {
 	this.name;
 	this.width;
 	this.height;
-	this.spawns = new Array();;
+	this.spawns = new Array();
 	this.fieldRefs;
 	this.parentBlocks = new Array();
 	this.blocks = new Array();
@@ -28,9 +28,8 @@ function Map() {
 	}
 
 	this.parse = function() {
-		map.parentBlocks.length = 0;
-		map.blocks.length = 0;
-		map.spawns.length = 0;
+		this.parentBlocks.length = 0;
+		this.blocks.length = 0;
 		var object = JSON.parse(this.jsonMap);
 		this.name = object.name;
 		this.width = object.width;

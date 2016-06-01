@@ -113,6 +113,7 @@ function lobbyListState() {
 		lobbyButtons[i].draw(50, 50 + i * 35, canvas.width - 100, 30);
 		if (lobbyButtons[i].isClicked()) {
 			lobby.name = lobbyButtons[i].text;
+			lobby.players.length = 0;
 			sendMsg("menu joinLobby " + lobbyButtons[i].text);
 			gameState = "preGameLobbyState";
 		}
@@ -251,7 +252,7 @@ function loadPreGameLobbyState() {
 }
 
 var displayMapLoaded = false;
-var checkPlayersTimer = 0;
+var checkPlayersTimer = -20;
 function preGameLobbyState() {
 	if (!createLobbyLoaded) {
 		loadPreGameLobbyState();
@@ -278,13 +279,13 @@ function preGameLobbyState() {
 				console.log("getPlayers");
 				sendMsg("lobby getLobbyPlayers");
 				if (curMsg[0] == '{') {
-					console.log(curMsg);
-					lobby.players[i] = 0;
+					//console.log(curMsg);
+					lobby.players.length = 0;
 					var playersObject = JSON.parse(curMsg);
 					console.log(Object.keys(playersObject.players).length);
 					for (var i = 0; i <  Object.keys(playersObject.players).length; i++) {
-						console.log(i);
-						console.log(playersObject.players[i]);
+						//console.log(i);
+						//console.log(playersObject.players[i]);
 						lobby.players.push(playersObject.players[i]);
 					}
 				}
@@ -293,8 +294,8 @@ function preGameLobbyState() {
 		if (lobby.players.length > 0) {
 			for (var i = 0; i < lobby.players.length; i++) {
 				context.font="20px Arial";
-				context.fillStyle = "white";
-				context.fillText(lobby.players[i], 700, 50 + i * 35);
+				context.fillStyle = "black";
+				context.fillText("- "+lobby.players[i], 700, 50 + i * 35);
 			}
 		}
 	}

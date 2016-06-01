@@ -21,7 +21,7 @@ public class SetLobbyMap implements LobbyCall {
 			if (client.equals(client.getLobby().getLobbyLeader())) {
 				try {
 					client.getLobby().setMap(BomberCatMap.getMap(parameter[0]));
-					LOGGER.info("{} set lobby to {}", client.getLobby().getLobbyName(),
+					LOGGER.info("Lobby '{}' set lobbymap to '{}'", client.getLobby().getLobbyName(),
 							client.getLobby().getMap().getName());
 				} catch (IOException | ParseException e) {
 					e.printStackTrace();

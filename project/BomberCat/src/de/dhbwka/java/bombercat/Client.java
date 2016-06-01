@@ -43,7 +43,11 @@ public class Client {
 
 	public void sendMessage(String message) {
 		try {
-			session.getBasicRemote().sendText(message);
+			if (session.isOpen()) {
+				session.getBasicRemote().sendText(message);
+			} else {
+				LOGGER.info("Cant send message. Session closed");
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

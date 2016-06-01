@@ -65,8 +65,8 @@ public class Servlet extends HttpServlet {
 
 	@OnClose
 	public void onClose(Session session) {
-		LOGGER.info("Session " + session.getId() + " has ended");
-		server.removeClient(clients.get(session.getId()));
+		LOGGER.info("Session {} has ended", session.getId());
 		clients.remove(session);
+		server.removeClient(clients.get(session.getId()));
 	}
 }

@@ -12,7 +12,7 @@ background.load("img/background.png");
 
 bombs = new Bombs();
 
-var gameState = "mainMenuState";// mainMenuState, playState,
+var gameState = "mainMenuState";// mainMenuState, playState, preGameLobbyState
 // createLobbyState
 var player = new Player();
 var otherPlayer = new Player();
@@ -112,7 +112,7 @@ function lobbyListState() {
 		lobbyButtons[i].draw(50, 50 + i * 35, canvas.width - 100, 30);
 		if (lobbyButtons[i].isClicked()) {
 			sendMsg("menu joinLobby " + lobbyButtons[i].text);
-			gameState = "playState";
+			gameState = "preGameLobbyState";
 		}
 	}
 	backButton.draw(50, 700, 100, 60);
@@ -232,6 +232,50 @@ function playState() {
 	// hero.draw(otherPlayer.x, otherPlayer.y);
 }
 
+
+var createLobbyLoaded = false;
+var mapsObject;
+var curMap = 0;
+function loadPreGameLobbyState() {
+	if (!gotResponse) {
+		sendAndGetResponse("lobby getMapNames");
+	} else {
+		mapsObject = JSON.parse(curMsg);
+		for (var i = 0; i < Object.keys(mapsObject.maps).length; i++) {
+			console.log(mapsObject.maps[i]);
+		}
+		gotResponse = false;
+		createLobbyLoaded = true;
+	}
+}
+
+var displayMapLoaded = false;
+function preGameLobbyState() {
+	if (!createLobbyLoaded) {
+		loadPreGameLobbyState();
+	} else {
+		if (!gotResponse) {
+			if (!map.loaded) {
+				console.log("getMap " + mapsObject.maps[curMap]);
+				map.getMap(mapsObject.maps[curMap]);
+			}
+		} else {
+			console.log("map parsed");
+			gotResponse = false;
+			map.parse();
+			displayMapLoaded = true;
+		}
+		if (map.loaded) {
+			map.drawMini(50, 200, 0.5);
+		}
+	}
+	backButton.draw(50, 700, 100, 60);
+
+	if (backButton.isClicked()) {
+		gameState = "preLobbyState";
+	}
+}
+
 function draw() {
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	if (gameState == "mainMenuState") {
@@ -242,6 +286,8 @@ function draw() {
 		createLobbyState();
 	} else if (gameState == "lobbyListState") {
 		lobbyListState();
+	} else if (gameState == "preGameLobbyState") {
+		preGameLobbyState();
 	} else {
 		playState();
 	}

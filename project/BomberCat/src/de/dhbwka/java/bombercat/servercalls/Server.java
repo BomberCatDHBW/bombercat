@@ -68,7 +68,6 @@ public class Server {
 			} catch (ArrayIndexOutOfBoundsException ex) {
 				parameter = "";
 			}
-			System.out.println(typeCall);
 			switch (typeCall) {
 			case "menu":
 				menuCalls.get(command).run(parameter.split(";"), lobbies, client,

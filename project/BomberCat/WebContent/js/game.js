@@ -12,7 +12,7 @@ background.load("img/background.png");
 
 bombs = new Bombs();
 
-var gameState = "mainMenuState";// mainMenuState, playState
+var gameState = "createLobbyState";// mainMenuState, playState, createLobbyState
 var player = new Player();
 var otherPlayer = new Player();
 var playButton = new Button();
@@ -22,6 +22,8 @@ var joinLobbyButton = new Button();
 var createLobbyButton = new Button();
 var createButton = new Button();
 var lobbyNameField = new TextField();
+var nextButton = new Button();
+var previousButton = new Button();
 setup();
 
 function setup() {
@@ -47,6 +49,12 @@ function setup() {
 
 	lobbyNameField.create(100, 200, 150);
 	lobbyNameField.setLabelText("Lobby Name: ", 30);
+	
+	nextButton.create(100, 200, 150);
+	nextButton.setText(">", 30);
+	
+	previousButton.create(100, 200, 150);
+	previousButton.setText("<", 30);
 }
 
 function drawStroked(text, fontSize, x, y) {
@@ -133,25 +141,56 @@ function lobbyListState() {
 }
 
 var createLobbyLoaded = false;
+var mapsObject;
+var curMap = 0;
 function loadCreateLobby() {
 	if (!gotResponse) {
 		sendAndGetResponse("lobby getMapNames");
 	} else {
-		var object = JSON.parse(curMsg);
-		for (var i = 0; i < Object.keys(object.maps).length; i++) {
-			console.log(object.maps[i]);
+		mapsObject = JSON.parse(curMsg);
+		for (var i = 0; i < Object.keys(mapsObject.maps).length; i++) {
+			console.log(mapsObject.maps[i]);
 		}
 		gotResponse = false;
 		createLobbyLoaded = true;
 	}
 }
 
+var displayMapLoaded = false;
 function createLobbyState() {
 	if (!createLobbyLoaded) {
 		loadCreateLobby();
 	}
+	else {
+		if (!displayMapLoaded) {			
+			if (!gotResponse) {
+				map.getMap(mapsObject.maps[curMap]);
+			} else {
+				gotResponse = false;
+				map.parse();
+				displayMapLoaded = true;
+			}
+		}
+		if (map.loaded) {
+			map.drawMini(200, 200, 0.5);
+		}
+	}
 	backButton.draw(50, 700, 100, 60);
 	lobbyNameField.draw(50, 140, canvas.width - 100, 50);
+	
+	if (curMap != 0) {
+		previousButton.draw(50, 400, 50, 50);		
+	}
+	nextButton.draw(660, 400, 50, 50);
+	
+	if (nextButton.isClicked()) {
+		curMap++;
+		displayMapLoaded = false;
+	}
+	if (previousButton.isClicked()) {
+		curMap--;
+		displayMapLoaded = false;
+	}
 
 	if (createButton.isClicked() && lobbyNameField.text.length >= 3) {
 		sendMsg("menu createLobby "+ lobbyNameField.text);
@@ -170,7 +209,7 @@ var isPlayStateLoaded = false;
 var map = new Map();
 function loadPlayState() {
 	if (!gotResponse) {
-		map.getMap();
+		map.getMap("TestMap.map");
 	} else {
 		gotResponse = false;
 		isPlayStateLoaded = true;
@@ -182,8 +221,8 @@ function playState() {
 	if (!isPlayStateLoaded) {
 		loadPlayState();
 	} else {
-		map.drawMini(100,100, 0.5);
-		//map.draw();
+		//map.drawMini(100,100, 0.5);
+		map.draw();
 		hero.draw(player.x, player.y);
 		bombs.draw();
 	}

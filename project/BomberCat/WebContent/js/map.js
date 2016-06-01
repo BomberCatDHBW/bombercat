@@ -5,19 +5,23 @@ function Map() {
 	this.name;
 	this.width;
 	this.height;
-	this.spawns;
+	this.spawns = new Array();;
 	this.fieldRefs;
 	this.parentBlocks = new Array();
 	this.blocks = new Array();
+	this.loaded = false;
 
-	this.getMap = function() {
-		sendAndGetResponse("lobby getMap TestMap.map");
+	this.getMap = function(name) {
+		sendAndGetResponse("lobby getMap " + name);
 		if (curMsg != "") {
 			this.jsonMap = curMsg;
 		}
 	}
 
 	this.parse = function() {
+		map.parentBlocks.length = 0;
+		map.blocks.length = 0;
+		map.spawns.length = 0;
 		var object = JSON.parse(this.jsonMap);
 		this.name = object.name;
 		this.width = object.width;
@@ -41,6 +45,7 @@ function Map() {
 		}
 		player.x = this.spawns[0].x * 32;
 		player.y = this.spawns[0].y * 32;
+		this.loaded = true;
 	}
 
 	this.drawMini = function(x, y, scale) {

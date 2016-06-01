@@ -28,7 +28,13 @@ public class Client {
 	}
 
 	public Lobby getLobby() {
-		return lobby;
+		if (lobby != null) {
+			return lobby;
+		} else {
+			LOGGER.info("Client not in a lobby");
+			sendError("Client not in a lobby");
+			return null;
+		}
 	}
 
 	public void setLobby(Lobby lobby) {

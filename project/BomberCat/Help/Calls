@@ -11,3 +11,4 @@ Calls:
 		lobby startGame null
 		lobby getLobbyPlayers null
 		lobby getLobbyMap null
+		lobby setLobbyMap mapName

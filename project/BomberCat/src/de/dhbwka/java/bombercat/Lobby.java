@@ -91,7 +91,12 @@ public class Lobby {
 	}
 
 	public BomberCatMap getMap() {
-		return map;
+		if (map != null) {
+			return map;
+		} else {
+			LOGGER.info("Map not set");
+			return null;
+		}
 	}
 
 	public void setMap(BomberCatMap map) {

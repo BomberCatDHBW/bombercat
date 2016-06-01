@@ -17,6 +17,7 @@ import de.dhbwka.java.bombercat.servercalls.lobby.GetMap;
 import de.dhbwka.java.bombercat.servercalls.lobby.GetMapNames;
 import de.dhbwka.java.bombercat.servercalls.lobby.LeaveLobby;
 import de.dhbwka.java.bombercat.servercalls.lobby.LobbyCall;
+import de.dhbwka.java.bombercat.servercalls.lobby.SetLobbyMap;
 import de.dhbwka.java.bombercat.servercalls.lobby.StartGame;
 import de.dhbwka.java.bombercat.servercalls.menu.CreateLobby;
 import de.dhbwka.java.bombercat.servercalls.menu.GetLobbies;
@@ -44,6 +45,8 @@ public class Server {
 		lobbyCalls.put("startGame", new StartGame());
 		lobbyCalls.put("getLobbyMap", new GetLobbyMap());
 		lobbyCalls.put("getLobbyPlayers", new GetLobbyPlayers());
+		lobbyCalls.put("setLobbyMap", new SetLobbyMap());
+
 	}
 
 	public void addClient(Session session) {

@@ -13,11 +13,7 @@ public class GetLobbyMap implements LobbyCall {
 			if (client.getLobby() != null) {
 				if (client.getLobby().getMap() != null) {
 					client.sendMessage(client.getLobby().getMap().getJSON());
-				} else {
-					client.sendError("No map set");
 				}
-			} else {
-				client.sendError("Client not in a lobby");
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

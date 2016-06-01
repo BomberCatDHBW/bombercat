@@ -19,8 +19,6 @@ public class GetLobbyPlayers implements LobbyCall {
 			}
 			obj.put("players", array);
 			client.sendMessage(obj.toJSONString());
-		} else {
-			client.sendError("Client is not in a lobby");
 		}
 	}
 }

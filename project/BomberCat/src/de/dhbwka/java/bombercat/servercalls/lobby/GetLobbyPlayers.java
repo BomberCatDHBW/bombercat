@@ -18,6 +18,7 @@ public class GetLobbyPlayers implements LobbyCall {
 				array.add(player.getUsername());
 			}
 			obj.put("players", array);
+			obj.put("leader", client.getLobby().getLobbyLeader().getUsername());
 			client.sendMessage(obj.toJSONString());
 		}
 	}

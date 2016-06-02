@@ -1,10 +1,13 @@
 package de.dhbwka.java.bombercat;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import de.dhbwka.java.bombercat.servercalls.lobby.GetLobbyPlayers;
 
 public class Lobby {
 
@@ -41,7 +44,7 @@ public class Lobby {
 		return result;
 	}
 
-	public boolean removeClient(Client client, java.util.Map<String, Lobby> lobbies) {
+	public boolean removeClient(Client client, Map<String, Lobby> lobbies) {
 		boolean result = false;
 		if (lobbyLeader.equals(client)) {
 			deleteLobby();
@@ -51,6 +54,10 @@ public class Lobby {
 			result = clients.remove(client);
 			client.setLobby(null);
 			result = true;
+		}
+		if (result) {
+			GetLobbyPlayers sendPlayers = new GetLobbyPlayers();
+			sendPlayers.run(null, lobbies, client);
 		}
 		return result;
 	}

@@ -52,8 +52,6 @@ function drawStroked(text, fontSize, x, y) {
 function mainMenuState() {
 	// background.draw(0, 0);
 
-	drawStroked("BOMBERCAT", 60, 60, 90);
-
 	playButton.draw(50, 200, canvas.width - 100, 80);
 	nameField.draw(50, 140, canvas.width - 100, 50);
 
@@ -187,6 +185,8 @@ function createLobbyState() {
 	if (createButton.isClicked() && lobbyNameField.text.length >= 3) {
 		sendMsg("menu createLobby " + lobbyNameField.text);
 		sendMsg("lobby setLobbyMap " + mapsObject.maps[curMap]);
+		gameState = "preGameLobbyState";
+		lobby.players.length = 0;
 	}
 
 	if (backButton.isClicked()) {
@@ -252,7 +252,6 @@ function loadPreGameLobbyState() {
 }
 
 var displayMapLoaded = false;
-var checkPlayersTimer = -20;
 function preGameLobbyState() {
 	if (!createLobbyLoaded) {
 		loadPreGameLobbyState();
@@ -267,31 +266,31 @@ function preGameLobbyState() {
 			gotResponse = false;
 			map.parse();
 			displayMapLoaded = true;
+			curMsg = "";
+			sendMsg("lobby getLobbyPlayers");
 		}
 		if (map.loaded) {
 			map.drawMini(50, 200, 0.5);
 		}
-		if (checkPlayersTimer < 0) {
-			checkPlayersTimer++;
-		} else {
-			if (displayMapLoaded) {				
-				checkPlayersTimer = -5;
-				sendMsg("lobby getLobbyPlayers");
-				console.log("getPlayers");
-				if (curMsg.indexOf('{"players":') > -1) {
-					lobby.players.length = 0;
-					var playersObject = JSON.parse(curMsg);
-					for (var i = 0; i <  Object.keys(playersObject.players).length; i++) {
-						lobby.players.push(playersObject.players[i]);
-					}
-					checkPlayersTimer = -50;
+		if (displayMapLoaded) {
+			if (curMsg.indexOf('{"leader":') > -1) {
+				lobby.players.length = 0;
+				var playersObject = JSON.parse(curMsg);
+				lobby.leader = playersObject.leader;
+				for (var i = 0; i < Object.keys(playersObject.players).length; i++) {
+					lobby.players.push(playersObject.players[i]);
 				}
+				curMsg = "";
 			}
 		}
-		drawStroked(lobby.players.length + "/8" + "Players: ", 26, 600, 50 + 35);
+		drawStroked((lobby.players.length + 1) + "/8" + " Players: ", 26, 600,
+				50 + 35);
+		if (lobby.leader != null && lobby.leader != "") {
+			drawStroked("* [" + lobby.leader + "]", 24, 630, 50 + (2) * 35);
+		}
 		if (lobby.players.length > 0) {
 			for (var i = 0; i < lobby.players.length; i++) {
-				drawStroked("- "+lobby.players[i], 22, 630, 50 + (i+2) * 35);
+				drawStroked("- " + lobby.players[i], 22, 630, 55 + (i + 3) * 35);
 			}
 		}
 	}
@@ -299,8 +298,15 @@ function preGameLobbyState() {
 	drawStroked("waiting for host to start the game", 30, 60, 90);
 	backButton.draw(50, 700, 100, 60);
 
-	if (backButton.isClicked()) {
+	if (curMsg == "Lobby closed") {
 		gameState = "preLobbyState";
+		isLobbyListStateLoaded = false;
+	}
+
+	if (backButton.isClicked()) {
+		isLobbyListStateLoaded = false;
+		gameState = "preLobbyState";
+		sendMsg("lobby leaveLobby");
 	}
 }
 

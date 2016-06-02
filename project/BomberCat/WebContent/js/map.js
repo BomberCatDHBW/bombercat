@@ -32,8 +32,8 @@ function Map() {
 		this.blocks.length = 0;
 		var object = JSON.parse(this.jsonMap);
 		this.name = object.name;
-		this.width = object.width;
-		this.height = object.height;
+		this.width = Object.keys(object.field[0]).length;
+		this.height = Object.keys(object.field).length;
 		this.fieldRefs = object.fieldRefs;
 		this.spawns = object.spawns;
 		for (var i = 0; i < Object.keys(object.fieldRefs).length; i++) {

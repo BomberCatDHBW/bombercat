@@ -15,7 +15,9 @@ public class GetLobbyPlayers implements LobbyCall {
 			JSONObject obj = new JSONObject();
 			JSONArray array = new JSONArray();
 			for (Client player : client.getLobby().getClients()) {
-				array.add(player.getUsername());
+				if (!player.getLobby().getLobbyLeader().equals(player)) {
+					array.add(player.getUsername());
+				}
 			}
 			obj.put("players", array);
 			obj.put("leader", client.getLobby().getLobbyLeader().getUsername());

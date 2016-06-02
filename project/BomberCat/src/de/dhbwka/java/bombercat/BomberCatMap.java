@@ -27,7 +27,7 @@ public class BomberCatMap {
 	private HashMap<Integer, String> fieldRefs;
 	private int[][] field;
 
-	private BomberCatMap() {
+	protected BomberCatMap() {
 
 	}
 
@@ -74,7 +74,9 @@ public class BomberCatMap {
 		ArrayList spawnsTmp = new ArrayList<Point>();
 		for (int i = 0; i < spawnsObj.size(); i++) {
 			JSONObject spawn = (JSONObject) spawnsObj.get("" + i);
-			spawnsTmp.add(new Point(((Long) spawn.get("x")).intValue(), ((Long) spawn.get("y")).intValue()));
+			int x = (int) spawn.get("x");
+			int y = (int) spawn.get("y");
+			spawnsTmp.add(new Point(x, y));
 		}
 		JSONObject fieldTypesObj = (JSONObject) mapJSONObj.get("fieldTypes");
 		map.setSpawns(spawnsTmp);

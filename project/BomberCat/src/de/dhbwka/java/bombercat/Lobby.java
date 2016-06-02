@@ -47,8 +47,7 @@ public class Lobby {
 	public boolean removeClient(Client client, Map<String, Lobby> lobbies) {
 		boolean result = false;
 		if (lobbyLeader.equals(client)) {
-			deleteLobby();
-			lobbies.remove(getLobbyName());
+			deleteLobby(lobbies);
 			result = true;
 		} else {
 			result = clients.remove(client);
@@ -81,18 +80,19 @@ public class Lobby {
 		this.lobbyLeader = lobbyLeader;
 	}
 
-	private void deleteLobby() {
+	private void deleteLobby(Map<String, Lobby> lobbies) {
 		for (Client client : clients) {
 			client.setLobby(null);
 			if (client != null && client.getSession().isOpen()) {
 				client.sendMessage("Lobby closed");
 			}
 		}
+		lobbies.remove(getLobbyName());
 	}
 
 	public void startGame() {
 		if (map != null && clients.size() > 1) {
-			// TODO
+
 		} else {
 			lobbyLeader.sendMessage("Can't start game");
 		}
@@ -122,6 +122,12 @@ public class Lobby {
 		obj.put("players", array);
 		obj.put("leader", getLobbyLeader().getUsername());
 		return obj.toJSONString();
+	}
+
+	public void sendMessageToAll(String message) {
+		for (Client client : clients) {
+			client.sendMessage(message);
+		}
 	}
 
 	public void broadcastPlayers() {

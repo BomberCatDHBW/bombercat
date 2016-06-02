@@ -1,6 +1,5 @@
 package de.dhbwka.java.bombercat;
 
-import java.io.IOException;
 import java.util.Set;
 
 import javax.websocket.Session;
@@ -46,10 +45,11 @@ public class Client {
 			if (session.isOpen()) {
 				session.getBasicRemote().sendText(message);
 			} else {
-				LOGGER.info("Cant send message. Session closed");
+				LOGGER.info("Session is not open");
+				throw new Exception();
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			LOGGER.info("Could not send message: {}", message);
 		}
 	}
 

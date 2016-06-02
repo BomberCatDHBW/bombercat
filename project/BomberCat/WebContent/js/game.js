@@ -183,6 +183,7 @@ function createLobbyState() {
 	lobbyNameField.draw(50, 140, canvas.width - 100, 50);
 
 	if (createButton.isClicked() && lobbyNameField.text.length >= 3) {
+		lobby.name = lobbyNameField.text
 		sendMsg("menu createLobby " + lobbyNameField.text);
 		sendMsg("lobby setLobbyMap " + mapsObject.maps[curMap]);
 		gameState = "preGameLobbyState";
@@ -235,53 +236,36 @@ function playState() {
 	// hero.draw(otherPlayer.x, otherPlayer.y);
 }
 
-var createLobbyLoaded = false;
-var mapsObject;
-var curMap = 0;
 function loadPreGameLobbyState() {
 	if (!gotResponse) {
-		sendAndGetResponse("lobby getMapNames");
+		lobby.players.length = 0;
+		lobby.leader = 0;
+		map.getLobbyMap();
 	} else {
-		mapsObject = JSON.parse(curMsg);
-		for (var i = 0; i < Object.keys(mapsObject.maps).length; i++) {
-			console.log(mapsObject.maps[i]);
-		}
 		gotResponse = false;
-		createLobbyLoaded = true;
+		preGameLobbyLoaded = true;
+		map.parse();
+		curMsg = "";
+		sendMsg("lobby getLobbyPlayers");
 	}
 }
 
-var displayMapLoaded = false;
+var preGameLobbyLoaded = false;
 function preGameLobbyState() {
-	if (!createLobbyLoaded) {
+	if (!preGameLobbyLoaded) {
 		loadPreGameLobbyState();
 	} else {
-		if (!gotResponse) {
-			if (!map.loaded) {
-				console.log("getMap " + mapsObject.maps[curMap]);
-				map.getMap(mapsObject.maps[curMap]);
-			}
-		} else {
-			console.log("map parsed");
-			gotResponse = false;
-			map.parse();
-			displayMapLoaded = true;
-			curMsg = "";
-			sendMsg("lobby getLobbyPlayers");
-		}
 		if (map.loaded) {
 			map.drawMini(50, 200, 0.5);
 		}
-		if (displayMapLoaded) {
-			if (curMsg.indexOf('{"leader":') > -1) {
-				lobby.players.length = 0;
-				var playersObject = JSON.parse(curMsg);
-				lobby.leader = playersObject.leader;
-				for (var i = 0; i < Object.keys(playersObject.players).length; i++) {
-					lobby.players.push(playersObject.players[i]);
-				}
-				curMsg = "";
+		if (curMsg.indexOf('{"leader":') > -1) {
+			lobby.players.length = 0;
+			var playersObject = JSON.parse(curMsg);
+			lobby.leader = playersObject.leader;
+			for (var i = 0; i < Object.keys(playersObject.players).length; i++) {
+				lobby.players.push(playersObject.players[i]);
 			}
+			curMsg = "";
 		}
 		drawStroked((lobby.players.length + 1) + "/8" + " Players: ", 26, 600,
 				50 + 35);
@@ -301,12 +285,16 @@ function preGameLobbyState() {
 	if (curMsg == "Lobby closed") {
 		gameState = "preLobbyState";
 		isLobbyListStateLoaded = false;
+		map.loaded = false;
+		preGameLobbyLoaded = false;
 	}
 
 	if (backButton.isClicked()) {
 		isLobbyListStateLoaded = false;
 		gameState = "preLobbyState";
 		sendMsg("lobby leaveLobby");
+		map.loaded = false;
+		preGameLobbyLoaded = false;
 	}
 }
 

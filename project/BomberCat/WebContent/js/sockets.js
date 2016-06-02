@@ -16,7 +16,7 @@ function openSocket() {
 	// webSocket = new WebSocket("ws://172.16.53.248:8080/BomberCat/echo");
 
 	webSocket.onopen = function(event) {
-		if (event.data === undefined){			
+		if (event.data === undefined) {
 			return;
 		}
 	};
@@ -27,12 +27,12 @@ function openSocket() {
 		curMsg = event.data;
 		if (curMsg == "Connection Established") {
 			connected = true;
-			document.getElementById("info").innerHTML = event.data;
+			//document.getElementById("info").innerHTML = event.data;
 		}
 	};
 
 	webSocket.onclose = function(event) {
-		document.getElementById("info").innerHTML = "Connection closed!";
+		//document.getElementById("info").innerHTML = "Connection closed!";
 	};
 }
 
@@ -55,8 +55,8 @@ function sendAndGetMessages(msg, endResponse) {
 		hasSent = true;
 	}
 	if (!gotResponse) {
-		if (messages[messages.length-1] == endResponse) {
-			//console.log("gotEndResponse!");
+		if (messages[messages.length - 1] == endResponse) {
+			// console.log("gotEndResponse!");
 			gotResponse = true;
 			hasSent = false;
 		}
@@ -71,7 +71,7 @@ function sendAndGetResponse(msg) {
 	}
 	if (!gotResponse) {
 		if (curMsg != "") {
-			//console.log("gotResponse!");
+			// console.log("gotResponse!");
 			gotResponse = true;
 			hasSent = false;
 		}

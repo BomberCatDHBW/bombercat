@@ -104,7 +104,14 @@ aside {
 	
 }
 
-
+.frame{
+	
+	overflow: hidden;
+	background: 	 silver;
+	
+	
+	
+}
 .header-game
 {
 	

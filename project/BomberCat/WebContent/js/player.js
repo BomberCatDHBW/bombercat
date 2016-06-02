@@ -2,6 +2,7 @@ function Player() {
 	this.x = 0;
 	this.y = 0;
 	this.speed = 32;
+	this.name = "";
 
 	this.goLeft = function() {
 		this.x -= this.speed;

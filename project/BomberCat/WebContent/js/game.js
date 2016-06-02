@@ -25,6 +25,7 @@ var createButton = new Button();
 var lobbyNameField = new TextField();
 var nextButton = new Button();
 var previousButton = new Button();
+var startGameButton = new Button();
 setup();
 
 function setup() {
@@ -38,6 +39,7 @@ function setup() {
 	lobbyNameField.setLabelText("Lobby Name: ", 30);
 	nextButton.setText(">", 30);
 	previousButton.setText("<", 30);
+	startGameButton.setText("Start Game", 40);
 }
 
 function drawStroked(text, fontSize, x, y) {
@@ -59,6 +61,7 @@ function mainMenuState() {
 		if (connected) {
 			gameState = "preLobbyState";
 			sendMsg("menu setName " + nameField.text);
+			player.name = nameField.text;
 			// soundtrack.play();
 		} else {
 			playButton.setText("No Connection to Server", 50)
@@ -295,6 +298,13 @@ function preGameLobbyState() {
 		sendMsg("lobby leaveLobby");
 		map.loaded = false;
 		preGameLobbyLoaded = false;
+	}
+	
+	if (lobby.leader == player.name) {
+		startGameButton.draw(500, canvas.height - 80, 100, 60);
+		if (startGameButton.isClicked()) {
+			gameState = "playState";
+		}
 	}
 }
 

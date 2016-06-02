@@ -27,12 +27,12 @@ function openSocket() {
 		curMsg = event.data;
 		if (curMsg == "Connection Established") {
 			connected = true;
-			document.getElementById("info").innerHTML = event.data;
+			//document.getElementById("info").innerHTML = event.data;
 		}
 	};
 
 	webSocket.onclose = function(event) {
-		document.getElementById("info").innerHTML = "Connection closed!";
+		//document.getElementById("info").innerHTML = "Connection closed!";
 	};
 }
 

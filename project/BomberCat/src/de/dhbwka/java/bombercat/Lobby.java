@@ -4,16 +4,18 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import de.dhbwka.java.bombercat.servercalls.lobby.GetLobbyPlayers;
 
 public class Lobby {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(Lobby.class);
 	private Client lobbyLeader;
 	private Set<Client> clients = new HashSet<Client>(8);
+	private String lobbyName;
+	private BomberCatMap map;
 
 	public Set<Client> getClients() {
 		return clients;
@@ -22,9 +24,6 @@ public class Lobby {
 	public void setClients(Set<Client> clients) {
 		this.clients = clients;
 	}
-
-	private String lobbyName;
-	private BomberCatMap map;
 
 	public Lobby(Client leader, String name) {
 		setLobbyLeader(leader);
@@ -38,6 +37,7 @@ public class Lobby {
 			clients.add(client);
 			client.setLobby(this);
 			result = true;
+			broadcastPlayers();
 		} else {
 			LOGGER.info("Lobby {}", lobbyName);
 		}
@@ -56,8 +56,7 @@ public class Lobby {
 			result = true;
 		}
 		if (result) {
-			GetLobbyPlayers sendPlayers = new GetLobbyPlayers();
-			sendPlayers.run(null, lobbies, client);
+			broadcastPlayers();
 		}
 		return result;
 	}
@@ -110,5 +109,24 @@ public class Lobby {
 
 	public void setMap(BomberCatMap map) {
 		this.map = map;
+	}
+
+	public String playersToString() {
+		JSONObject obj = new JSONObject();
+		JSONArray array = new JSONArray();
+		for (Client player : getClients()) {
+			if (!player.getLobby().getLobbyLeader().equals(player)) {
+				array.add(player.getUsername());
+			}
+		}
+		obj.put("players", array);
+		obj.put("leader", getLobbyLeader().getUsername());
+		return obj.toJSONString();
+	}
+
+	public void broadcastPlayers() {
+		for (Client client : clients) {
+			client.sendMessage(playersToString());
+		}
 	}
 }

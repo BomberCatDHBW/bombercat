@@ -301,9 +301,10 @@ function preGameLobbyState() {
 	}
 	
 	if (lobby.leader == player.name) {
-		startGameButton.draw(500, canvas.height - 80, 100, 60);
+		startGameButton.draw(300, 700, 240, 60);
 		if (startGameButton.isClicked()) {
 			gameState = "playState";
+			sendMsg("lobby startGame");
 		}
 	}
 }

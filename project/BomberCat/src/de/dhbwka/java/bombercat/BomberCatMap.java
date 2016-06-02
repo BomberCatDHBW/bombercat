@@ -74,9 +74,15 @@ public class BomberCatMap {
 		ArrayList spawnsTmp = new ArrayList<Point>();
 		for (int i = 0; i < spawnsObj.size(); i++) {
 			JSONObject spawn = (JSONObject) spawnsObj.get("" + i);
-			int x = (int) spawn.get("x");
-			int y = (int) spawn.get("y");
-			spawnsTmp.add(new Point(x, y));
+			if (spawn.get("x") instanceof Long && spawn.get("y") instanceof Long) {
+				Double x = ((Long) spawn.get("x")).doubleValue();
+				int iX = x.intValue();
+				Double y = ((Long) spawn.get("y")).doubleValue();
+				int iY = y.intValue();
+				spawnsTmp.add(new Point(iX, iY));
+			} else {
+				LOGGER.error("No instance of long. Instance of {}", spawn.get("x").getClass());
+			}
 		}
 		JSONObject fieldTypesObj = (JSONObject) mapJSONObj.get("fieldTypes");
 		map.setSpawns(spawnsTmp);

@@ -20,10 +20,12 @@ public class GetLobbies implements MenuCall {
 
 		JSONObject obj = new JSONObject();
 		JSONArray array = new JSONArray();
+		System.out.println(lobbies.values().size());
 		for (Lobby lobby : lobbies.values()) {
-			obj.put("name", lobby.getLobbyName());
-			obj.put("user", lobby.getClientNumber());
-			array.add(obj);
+			JSONObject tmp = new JSONObject();
+			tmp.put("name", lobby.getLobbyName());
+			tmp.put("user", lobby.getClientNumber());
+			array.add(tmp);
 		}
 		obj.put("lobbies", array);
 		client.sendInfo("lobbies", obj.toJSONString());

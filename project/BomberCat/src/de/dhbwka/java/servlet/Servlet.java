@@ -69,10 +69,5 @@ public class Servlet extends HttpServlet {
 				clients.get(session.getId()).getUsername());
 		server.removeClient(clients.get(session.getId()));
 		clients.remove(session.getId());
-		try {
-			session.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 }

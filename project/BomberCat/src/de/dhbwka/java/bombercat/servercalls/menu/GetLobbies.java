@@ -3,6 +3,7 @@ package de.dhbwka.java.bombercat.servercalls.menu;
 import java.util.Map;
 import java.util.Set;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,14 +17,16 @@ public class GetLobbies implements MenuCall {
 
 	@Override
 	public void run(String[] parameter, Map<String, Lobby> lobbies, Client client, Set<Client> clients) {
-		client.sendMessage("lobbylist begin");
+
+		JSONObject obj = new JSONObject();
+		JSONArray array = new JSONArray();
 		for (Lobby lobby : lobbies.values()) {
-			JSONObject obj = new JSONObject();
 			obj.put("name", lobby.getLobbyName());
 			obj.put("user", lobby.getClientNumber());
-			client.sendMessage(obj.toJSONString());
-			LOGGER.info(obj.toJSONString());
+			array.add(obj);
 		}
-		client.sendMessage("lobbylist end");
+		obj.put("lobbies", array);
+		client.sendInfo("lobbies", obj.toJSONString());
+		LOGGER.info(obj.toJSONString());
 	}
 }

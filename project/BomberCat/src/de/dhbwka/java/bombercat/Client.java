@@ -31,7 +31,7 @@ public class Client {
 			return lobby;
 		} else {
 			LOGGER.info("Client not in a lobby");
-			sendError("Client not in a lobby");
+			sendError("0", "Client not in a lobby");
 			return null;
 		}
 	}
@@ -40,10 +40,10 @@ public class Client {
 		this.lobby = lobby;
 	}
 
-	public void sendMessage(String message) {
+	private void sendMessage(String type, String prefix, String message) {
 		try {
 			if (session.isOpen()) {
-				session.getBasicRemote().sendText(message);
+				session.getBasicRemote().sendText(type + " " + prefix + " " + message);
 			} else {
 				LOGGER.info("Session is not open");
 				throw new Exception();
@@ -53,8 +53,12 @@ public class Client {
 		}
 	}
 
-	public void sendError(String errorMessage) {
-		sendMessage("Error: " + errorMessage);
+	public void sendError(String prefix, String errorMessage) {
+		sendMessage("error", prefix, errorMessage);
+	}
+
+	public void sendInfo(String prefix, String infoMessage) {
+		sendMessage("info", prefix, infoMessage);
 	}
 
 	public String getUsername() {

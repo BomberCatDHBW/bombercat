@@ -18,10 +18,10 @@ public class JoinLobby implements MenuCall {
 		String lobbyName = para[0];
 		if (lobbies.containsKey(lobbyName)) {
 			if (lobbies.get(lobbyName).addClient(client)) {
-				client.sendMessage(String.format("Joined lobby %s", lobbyName));
+				client.sendInfo("joinedLobby", String.format("Joined lobby %s", lobbyName));
 				LOGGER.info(String.format("Joined lobby %s", lobbyName));
 			} else {
-				client.sendError("Lobby is full");
+				client.sendError("5", "Lobby is full");
 				LOGGER.error("Client with id {} could not leave the lobby", client.getSession().getId());
 			}
 		}

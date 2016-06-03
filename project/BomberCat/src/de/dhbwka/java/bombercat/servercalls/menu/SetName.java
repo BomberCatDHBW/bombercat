@@ -17,7 +17,7 @@ public class SetName implements MenuCall {
 	public void run(String[] parameter, Map<String, Lobby> lobbies, Client client, Set<Client> clients) {
 		String username = parameter[0];
 		client.setUsername(username, clients);
-		client.sendMessage("Set username to " + client.getUsername());
+		client.sendInfo("usernameSet", "Set username to " + client.getUsername());
 		LOGGER.info("{} changed his username to {}", client.getSession().getId(), client.getUsername());
 	}
 }

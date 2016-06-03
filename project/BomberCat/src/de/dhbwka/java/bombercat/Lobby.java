@@ -84,7 +84,7 @@ public class Lobby {
 		for (Client client : clients) {
 			client.setLobby(null);
 			if (client != null && client.getSession().isOpen()) {
-				client.sendMessage("Lobby closed");
+				client.sendInfo("lobby", "Lobby closed");
 			}
 		}
 		lobbies.remove(getLobbyName());
@@ -94,7 +94,7 @@ public class Lobby {
 		if (map != null && clients.size() > 1) {
 
 		} else {
-			lobbyLeader.sendMessage("Can't start game");
+			lobbyLeader.sendError("2", "Can't start game");
 		}
 	}
 
@@ -124,15 +124,15 @@ public class Lobby {
 		return obj.toJSONString();
 	}
 
-	public void sendMessageToAll(String message) {
+	public void sendMessageToAll(String prefix, String message) {
 		for (Client client : clients) {
-			client.sendMessage(message);
+			client.sendInfo(prefix, message);
 		}
 	}
 
 	public void broadcastPlayers() {
 		for (Client client : clients) {
-			client.sendMessage(playersToString());
+			client.sendInfo("players", playersToString());
 		}
 	}
 }

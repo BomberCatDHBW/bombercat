@@ -9,7 +9,7 @@ public class GetLobbyPlayers implements LobbyCall {
 	@Override
 	public void run(String[] parameter, Map<String, Lobby> lobbies, Client client) {
 		if (client.getLobby() != null) {
-			client.sendMessage(client.getLobby().playersToString());
+			client.sendInfo("players", client.getLobby().playersToString());
 		}
 	}
 }

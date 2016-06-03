@@ -42,10 +42,10 @@ public class Server {
 		lobbyCalls.put("leaveLobby", new LeaveLobby());
 		lobbyCalls.put("getMap", new GetMap());
 		lobbyCalls.put("getMapNames", new GetMapNames());
-		lobbyCalls.put("startGame", new StartGame());
 		lobbyCalls.put("getLobbyMap", new GetLobbyMap());
 		lobbyCalls.put("getLobbyPlayers", new GetLobbyPlayers());
 		lobbyCalls.put("setLobbyMap", new SetLobbyMap());
+		lobbyCalls.put("startGame", new StartGame());
 
 	}
 
@@ -76,15 +76,8 @@ public class Server {
 			case "lobby":
 				lobbyCalls.get(command).run(parameter.split(";"), lobbies, client);
 				break;
-			case "debug":
-				System.out.println("debug:");
-				for (Client pclient : clients.values()) {
-					client.sendMessage(pclient.getSession().getId() + " : " + pclient.getUsername() + " : "
-							+ pclient.getLobby().getLobbyName());
-				}
-				break;
 			default:
-				client.sendError("No such call");
+				client.sendError("3", "No such command");
 				break;
 			}
 		}

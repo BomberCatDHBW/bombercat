@@ -1,0 +1,6 @@
+0 -> duplicate lobbyname
+1 -> client not in a lobby
+2 -> can't start game
+3 -> no such command
+4 -> could not leave lobby
+5 -> lobby is full

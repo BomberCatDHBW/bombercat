@@ -10,7 +10,7 @@ public class GetMap implements LobbyCall {
 	@Override
 	public void run(String[] parameter, java.util.Map<String, Lobby> lobbies, Client client) {
 		try {
-			client.sendMessage(BomberCatMap.getJSON(parameter[0]));
+			client.sendInfo("map", BomberCatMap.getJSON(parameter[0]));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

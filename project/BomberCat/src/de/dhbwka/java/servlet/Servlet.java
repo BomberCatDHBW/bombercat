@@ -48,7 +48,7 @@ public class Servlet extends HttpServlet {
 	public void onOpen(Session session) {
 		LOGGER.info(session.getId() + " has opened a connection");
 		try {
-			session.getBasicRemote().sendText("Connection Established");
+			session.getBasicRemote().sendText("info connection Connection Established");
 			LOGGER.info("Socket opened!");
 			Client client = new Client(session);
 			clients.put(session.getId(), client);

@@ -12,7 +12,7 @@ public class GetLobbyMap implements LobbyCall {
 		try {
 			if (client.getLobby() != null) {
 				if (client.getLobby().getMap() != null) {
-					client.sendMessage(client.getLobby().getMap().getJSON());
+					client.sendInfo("map", client.getLobby().getMap().getJSON());
 				}
 			}
 		} catch (IOException e) {

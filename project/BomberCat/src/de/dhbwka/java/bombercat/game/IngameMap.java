@@ -3,10 +3,10 @@ package de.dhbwka.java.bombercat.game;
 import de.dhbwka.java.bombercat.BomberCatMap;
 import de.dhbwka.java.bombercat.FieldType;
 
-public class Map {
+public class IngameMap {
 	private FieldType[][] map;
 
-	public Map(BomberCatMap bomberCatMap) {
+	public IngameMap(BomberCatMap bomberCatMap) {
 		map = new FieldType[25][25];
 		for (int x = 0; x < map.length; x++) {
 			for (int y = 0; y < map.length; y++) {

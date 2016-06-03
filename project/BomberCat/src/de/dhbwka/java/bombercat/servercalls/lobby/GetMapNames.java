@@ -26,8 +26,7 @@ public class GetMapNames implements LobbyCall {
 			scanner.close();
 			JSONObject obj = new JSONObject();
 			obj.put("maps", array);
-			client.sendMessage(obj.toJSONString());
-			System.out.println(obj.toJSONString());
+			client.sendInfo("mapNames", obj.toJSONString());
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

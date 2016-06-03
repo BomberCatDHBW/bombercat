@@ -22,16 +22,15 @@ function openSocket() {
 	};
 
 	webSocket.onmessage = function(event) {
-		//console.log(event.data);
+		if (logServerMessages) {
+			console.log(event.data);
+		}
 		messages.push(event.data);
 		curMsg = event.data;
-		if (curMsg == "Connection Established") {
-			//document.getElementById("info").innerHTML = event.data;
-		}
-		msg = new Message();
+		var msg = new Message();
 		if (msg.get("info", "connection")){
 			connected = true;
-			console.log(msg.content);
+			//console.log(msg.content);
 		}
 		//processMessage(event.data)
 	};
@@ -85,18 +84,4 @@ function sendAndGetResponse(msg) {
 
 function closeSocket() {
 	webSocket.close();
-}
-
-function processMessage(message) {
-	var type = ""; //info, error
-	var prefix = ""; //connection, 
-	var content = "";
-	var n = message.indexOf(" ");
-	type = message.slice(0,n);
-	n = message.indexOf(" ", n+1);
-	prefix = message.slice(type.length+1, n);
-	content = message.slice(n+1, message.length);
-	console.log(type);
-	console.log(prefix);
-	console.log(content);
 }

@@ -84,25 +84,31 @@ function preLobbyState() {
 
 var lobby = new Lobby();
 var lobbyButtons = new Array();
+var getLobbyMsg = new Message();
 
 var isLobbyListStateLoaded = false;
 function loadLobbyListState() {
-	if (!gotResponse) {
-		lobbyButtons.length = 0;
-		sendAndGetMessages("menu getLobbies", "lobbylist end");
-	} else {
-		for (var i = 0; i < messages.length; i++) {
-			if (messages[i] != "lobbylist begin"
-					&& messages[i] != "lobbylist end") {
-				var lobbyInfo = JSON.parse(messages[i]);
-				var tmpButton = new Button();
-				tmpButton.setText(lobbyInfo.name, 16);
-				lobbyButtons.push(tmpButton);
-			}
-		}
-		gotResponse = false;
+	getLobbyMsg.send("menu getLobbies");
+	if (getLobbyMsg.get("info", "lobbies")){
 		isLobbyListStateLoaded = true;
+		console.log(getLobbyMsg.content);
 	}
+//	if (!gotResponse) {
+//		lobbyButtons.length = 0;
+//		sendAndGetMessages("menu getLobbies", "lobbylist end");
+//	} else {
+//		for (var i = 0; i < messages.length; i++) {
+//			if (messages[i] != "lobbylist begin"
+//					&& messages[i] != "lobbylist end") {
+//				var lobbyInfo = JSON.parse(messages[i]);
+//				var tmpButton = new Button();
+//				tmpButton.setText(lobbyInfo.name, 16);
+//				lobbyButtons.push(tmpButton);
+//			}
+//		}
+//		gotResponse = false;
+//		isLobbyListStateLoaded = true;
+//	}
 }
 
 function lobbyListState() {
@@ -129,55 +135,45 @@ function lobbyListState() {
 var createLobbyLoaded = false;
 var mapsObject;
 var curMap = 0;
+var getMapNamesMsg = new Message();
 function loadCreateLobby() {
-	if (!gotResponse) {
-		sendAndGetResponse("lobby getMapNames");
-	} else {
-		mapsObject = JSON.parse(curMsg);
-		for (var i = 0; i < Object.keys(mapsObject.maps).length; i++) {
-			console.log(mapsObject.maps[i]);
-		}
-		gotResponse = false;
+	getMapNamesMsg.send("lobby getMapNames");
+	if (getMapNamesMsg.get("info", "mapNames")){
+		mapsObject = JSON.parse(getMapNamesMsg.content);
+//		for (var i = 0; i < Object.keys(mapsObject.maps).length; i++) {
+//			console.log(mapsObject.maps[i]);
+//		}
 		createLobbyLoaded = true;
 	}
 }
 
-var displayMapLoaded = false;
+var getMapMsg = new Message();
 function createLobbyState() {
 	if (!createLobbyLoaded) {
 		loadCreateLobby();
 	} else {
-		if (!gotResponse) {
-			if (!map.loaded) {
-				console.log("getMap " + mapsObject.maps[curMap]);
-				map.getMap(mapsObject.maps[curMap]);
+		if (!map.loaded) {
+			getMapMsg.send("lobby getMap " + mapsObject.maps[curMap]);
+			if (getMapMsg.get("info", "map")){
+				map.jsonMap = getMapMsg.content;
+				map.parse();
 			}
 		} else {
-			console.log("map parsed");
-			gotResponse = false;
-			map.parse();
-			displayMapLoaded = true;
-		}
-		if (map.loaded) {
 			map.drawMini(200, 200, 0.5);
 		}
 		if (curMap != 0) {
 			previousButton.draw(50, 400, 50, 50);
 			if (previousButton.isClicked()) {
 				curMap--;
-				displayMapLoaded = false;
 				map.loaded = false;
-				console.log(curMap);
 			}
 		}
-		if (displayMapLoaded = true) {
+		if (map.loaded) {
 			if (curMap < Object.keys(mapsObject.maps).length - 1) {
 				nextButton.draw(660, 400, 50, 50);
 				if (nextButton.isClicked()) {
 					curMap++;
-					displayMapLoaded = false;
 					map.loaded = false;
-					console.log(curMap);
 				}
 			}
 		}
@@ -239,17 +235,13 @@ function playState() {
 	// hero.draw(otherPlayer.x, otherPlayer.y);
 }
 
+var getPlayersMsg = new Message();
 function loadPreGameLobbyState() {
-	if (!gotResponse) {
-		lobby.players.length = 0;
-		lobby.leader = 0;
-		map.getLobbyMap();
-	} else {
-		gotResponse = false;
+	lobby.players.length = 0;
+	lobby.leader = 0;
+	getPlayersMsg.send("lobby getLobbyPlayers");
+	if (getPlayersMsg.get("info", "players")) {
 		preGameLobbyLoaded = true;
-		map.parse();
-		curMsg = "";
-		sendMsg("lobby getLobbyPlayers");
 	}
 }
 
@@ -263,7 +255,7 @@ function preGameLobbyState() {
 		}
 		if (curMsg.indexOf('{"leader":') > -1) {
 			lobby.players.length = 0;
-			var playersObject = JSON.parse(curMsg);
+			var playersObject = JSON.parse(getPlayersMsg.content);
 			lobby.leader = playersObject.leader;
 			for (var i = 0; i < Object.keys(playersObject.players).length; i++) {
 				lobby.players.push(playersObject.players[i]);

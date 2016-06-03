@@ -3,9 +3,9 @@ function TextField() {
 	this.y = 0;
 	this.w = 0;
 	this.h = 0;
-	this.r = 204;
-	this.g = 0;
-	this.b = 255;
+	this.r = mainColorR;
+	this.g = mainColorG;
+	this.b = mainColorB;
 	this.label = "";
 	this.text = "";
 	this.fontSize = 20;

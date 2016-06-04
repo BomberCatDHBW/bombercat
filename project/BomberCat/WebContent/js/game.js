@@ -4,10 +4,9 @@ var context = canvas.getContext("2d");
 var background = new Sprite();
 var hero = new Sprite();
 
-var soundtrack = new Audio(
-		'https://raw.githubusercontent.com/BomberCatDHBW/bombercat/master/Soundtrack/BomberCatSoundtrackPrototype001.mp3');
+//var soundtrack = new Audio('https://raw.githubusercontent.com/BomberCatDHBW/bombercat/master/Soundtrack/BomberCatSoundtrackPrototype001.mp3');
 
-hero.load("img/hero.png");
+hero.load("img/player   .png");
 background.load("img/background.png");
 
 bombs = new Bombs();
@@ -52,8 +51,6 @@ function drawStroked(text, fontSize, x, y) {
 }
 
 function mainMenuState() {
-	// background.draw(0, 0);
-
 	playButton.draw(50, 200, canvas.width - 100, 80);
 	nameField.draw(50, 140, canvas.width - 100, 50);
 
@@ -88,27 +85,19 @@ var getLobbyMsg = new Message();
 
 var isLobbyListStateLoaded = false;
 function loadLobbyListState() {
+	lobbyButtons.length = 0;
 	getLobbyMsg.send("menu getLobbies");
 	if (getLobbyMsg.get("info", "lobbies")){
 		isLobbyListStateLoaded = true;
-		console.log(getLobbyMsg.content);
+		//console.log(getLobbyMsg.content);
+		var jsonLobbies = JSON.parse(getLobbyMsg.content);
+		for (var i = 0; i < Object.keys(jsonLobbies.lobbies).length; i++) {
+			var lobbyInfo = jsonLobbies.lobbies[i].name;
+			var tmpButton = new Button();
+			tmpButton.setText(lobbyInfo, 16);
+			lobbyButtons.push(tmpButton);
+		}
 	}
-//	if (!gotResponse) {
-//		lobbyButtons.length = 0;
-//		sendAndGetMessages("menu getLobbies", "lobbylist end");
-//	} else {
-//		for (var i = 0; i < messages.length; i++) {
-//			if (messages[i] != "lobbylist begin"
-//					&& messages[i] != "lobbylist end") {
-//				var lobbyInfo = JSON.parse(messages[i]);
-//				var tmpButton = new Button();
-//				tmpButton.setText(lobbyInfo.name, 16);
-//				lobbyButtons.push(tmpButton);
-//			}
-//		}
-//		gotResponse = false;
-//		isLobbyListStateLoaded = true;
-//	}
 }
 
 function lobbyListState() {
@@ -224,14 +213,14 @@ function playState() {
 		// sendMsg(jsonString);
 	}
 
-	if (curMsg) {
-		if (curMsg[0] == '{') {
-			// var jsObject = JSON.parse(curMsg);
-			// var jsonString = JSON.stringify(player);
-			// otherPlayer.x = jsObject.x;
-			// otherPlayer.y = jsObject.y;
-		}
-	}
+//	if (curMsg) {
+//		if (curMsg[0] == '{') {
+//			 var jsObject = JSON.parse(curMsg);
+//			 var jsonString = JSON.stringify(player);
+//			 otherPlayer.x = jsObject.x;
+//			 otherPlayer.y = jsObject.y;
+//		}
+//	}
 	// hero.draw(otherPlayer.x, otherPlayer.y);
 }
 
@@ -245,6 +234,7 @@ function loadPreGameLobbyState() {
 	}
 }
 
+var lobbyClosedMsg = new Message();
 var preGameLobbyLoaded = false;
 function preGameLobbyState() {
 	if (!preGameLobbyLoaded) {
@@ -252,15 +242,20 @@ function preGameLobbyState() {
 	} else {
 		if (map.loaded) {
 			map.drawMini(50, 200, 0.5);
+		} else {
+			getMapMsg.send("lobby getLobbyMap");
+			if (getMapMsg.get("info", "map")){
+				map.jsonMap = getMapMsg.content;
+				map.parse();
+			}
 		}
-		if (curMsg.indexOf('{"leader":') > -1) {
+		if (getPlayersMsg.get("info", "players")) {
 			lobby.players.length = 0;
 			var playersObject = JSON.parse(getPlayersMsg.content);
 			lobby.leader = playersObject.leader;
 			for (var i = 0; i < Object.keys(playersObject.players).length; i++) {
 				lobby.players.push(playersObject.players[i]);
 			}
-			curMsg = "";
 		}
 		drawStroked((lobby.players.length + 1) + "/8" + " Players: ", 26, 600,
 				50 + 35);
@@ -277,7 +272,7 @@ function preGameLobbyState() {
 	drawStroked("waiting for host to start the game", 30, 60, 90);
 	backButton.draw(50, 700, 100, 60);
 
-	if (curMsg == "Lobby closed") {
+	if (lobbyClosedMsg.get("info", "lobby")) {
 		gameState = "preLobbyState";
 		isLobbyListStateLoaded = false;
 		map.loaded = false;

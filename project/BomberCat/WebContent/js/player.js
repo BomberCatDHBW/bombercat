@@ -11,22 +11,22 @@ function Player() {
 	}
 	
 	this.goLeft = function() {
-		this.x -= this.speed;
+		this.x = parseInt(this.x)- parseInt(this.speed);
 		this.sendPosition();
 	}
 
 	this.goRight = function() {
-		this.x += this.speed;
+		this.x = parseInt(this.x) + parseInt(this.speed);
 		this.sendPosition();
 	}
 
 	this.goUp = function() {
-		this.y -= this.speed;
+		this.y = parseInt(this.y)- parseInt(this.speed);
 		this.sendPosition();
 	}
 
 	this.goDown = function() {
-		this.y += this.speed;
+		this.y = parseInt(this.y) + parseInt(this.speed);
 		this.sendPosition();
 	}
 	
@@ -40,7 +40,7 @@ function Player() {
 			console.log("pos: " + this.sendPosMsg.content);
 			var position = this.sendPosMsg.content.split(" ");
 			var username = position[0];
-			if (username != name) {				
+			if (username != name) {
 				this.x = position[1];
 				this.y = position[2];
 			}

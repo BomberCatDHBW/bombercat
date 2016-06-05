@@ -1,13 +1,11 @@
 var canvas = document.getElementById("myCanvas");
 var context = canvas.getContext("2d");
 
-var background = new Sprite();
 var hero = new Sprite();
 
 //var soundtrack = new Audio('https://raw.githubusercontent.com/BomberCatDHBW/bombercat/master/Soundtrack/BomberCatSoundtrackPrototype001.mp3');
 
-hero.load("img/player   .png");
-background.load("img/background.png");
+hero.load("img/player.png");
 
 bombs = new Bombs();
 
@@ -25,6 +23,7 @@ var lobbyNameField = new TextField();
 var nextButton = new Button();
 var previousButton = new Button();
 var startGameButton = new Button();
+var map = new Map();
 setup();
 
 function setup() {
@@ -104,7 +103,6 @@ function lobbyListState() {
 	if (!isLobbyListStateLoaded) {
 		loadLobbyListState()
 	}
-	// background.draw(0, 0);
 	for (var i = 0; i < lobbyButtons.length; i++) {
 		lobbyButtons[i].draw(50, 50 + i * 35, canvas.width - 100, 30);
 		if (lobbyButtons[i].isClicked()) {
@@ -185,15 +183,8 @@ function createLobbyState() {
 }
 
 var isPlayStateLoaded = false;
-var map = new Map();
 function loadPlayState() {
-	if (!gotResponse) {
-		map.getLobbyMap();
-	} else {
-		gotResponse = false;
-		isPlayStateLoaded = true;
-		map.parse();
-	}
+	isPlayStateLoaded = true;
 }
 
 function playState() {
@@ -234,6 +225,7 @@ function loadPreGameLobbyState() {
 	}
 }
 
+var gameStartedMsg = new Message();
 var lobbyClosedMsg = new Message();
 var preGameLobbyLoaded = false;
 function preGameLobbyState() {
@@ -256,6 +248,9 @@ function preGameLobbyState() {
 			for (var i = 0; i < Object.keys(playersObject.players).length; i++) {
 				lobby.players.push(playersObject.players[i]);
 			}
+		}
+		if (gameStartedMsg.get("info", "gameStarted")) {
+			gameState = "playState";
 		}
 		drawStroked((lobby.players.length + 1) + "/8" + " Players: ", 26, 600,
 				50 + 35);

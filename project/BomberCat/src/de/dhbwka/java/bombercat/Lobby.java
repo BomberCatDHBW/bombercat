@@ -92,7 +92,9 @@ public class Lobby {
 
 	public void startGame() {
 		if (map != null && clients.size() > 1) {
-
+			for (Client client : clients) {
+				client.sendInfo("gameStarted", "Game started");
+			}
 		} else {
 			lobbyLeader.sendError("2", "Can't start game");
 		}

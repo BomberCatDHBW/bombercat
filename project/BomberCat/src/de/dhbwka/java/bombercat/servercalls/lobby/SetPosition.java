@@ -10,8 +10,11 @@ public class SetPosition implements LobbyCall {
 	@Override
 	public void run(String[] parameter, Map<String, Lobby> lobbies, Client client) {
 		Lobby lobby = client.getLobby();
-		String x = parameter[0];
-		String y = parameter[1];
+		String[] para = parameter[0].split(",");
+		String x = para[0];
+		String y = para[1];
+		client.getLobby().sendMessageToAll("setPosition", client.getUsername() + " " + x + " " + y);
+		//client.sendInfo("setPosition", x + " " + y);
 		//TODO: unfinished, because tired
 	}
 

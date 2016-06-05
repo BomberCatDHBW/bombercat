@@ -1,18 +1,13 @@
 var canvas = document.getElementById("myCanvas");
 var context = canvas.getContext("2d");
 
-var hero = new Sprite();
-
-//var soundtrack = new Audio('https://raw.githubusercontent.com/BomberCatDHBW/bombercat/master/Soundtrack/BomberCatSoundtrackPrototype001.mp3');
-
-hero.load("img/player.png");
+// var soundtrack = new
+// Audio('https://raw.githubusercontent.com/BomberCatDHBW/bombercat/master/Soundtrack/BomberCatSoundtrackPrototype001.mp3');
 
 bombs = new Bombs();
 
 var gameState = "mainMenuState";// mainMenuState, playState, preGameLobbyState
 // createLobbyState
-var player = new Player();
-var otherPlayer = new Player();
 var playButton = new Button();
 var backButton = new Button();
 var nameField = new TextField();
@@ -24,9 +19,11 @@ var nextButton = new Button();
 var previousButton = new Button();
 var startGameButton = new Button();
 var map = new Map();
+var player = new Player();
 setup();
 
 function setup() {
+	player.load("img/player.png");
 	bombs.load("img/bomb.png");
 	playButton.setText("Play Game!", 50);
 	nameField.setLabelText("Name: ", 30);
@@ -86,9 +83,9 @@ var isLobbyListStateLoaded = false;
 function loadLobbyListState() {
 	lobbyButtons.length = 0;
 	getLobbyMsg.send("menu getLobbies");
-	if (getLobbyMsg.get("info", "lobbies")){
+	if (getLobbyMsg.get("info", "lobbies")) {
 		isLobbyListStateLoaded = true;
-		//console.log(getLobbyMsg.content);
+		// console.log(getLobbyMsg.content);
 		var jsonLobbies = JSON.parse(getLobbyMsg.content);
 		for (var i = 0; i < Object.keys(jsonLobbies.lobbies).length; i++) {
 			var lobbyInfo = jsonLobbies.lobbies[i].name;
@@ -125,11 +122,11 @@ var curMap = 0;
 var getMapNamesMsg = new Message();
 function loadCreateLobby() {
 	getMapNamesMsg.send("lobby getMapNames");
-	if (getMapNamesMsg.get("info", "mapNames")){
+	if (getMapNamesMsg.get("info", "mapNames")) {
 		mapsObject = JSON.parse(getMapNamesMsg.content);
-//		for (var i = 0; i < Object.keys(mapsObject.maps).length; i++) {
-//			console.log(mapsObject.maps[i]);
-//		}
+		// for (var i = 0; i < Object.keys(mapsObject.maps).length; i++) {
+		// console.log(mapsObject.maps[i]);
+		// }
 		createLobbyLoaded = true;
 	}
 }
@@ -141,7 +138,7 @@ function createLobbyState() {
 	} else {
 		if (!map.loaded) {
 			getMapMsg.send("lobby getMap " + mapsObject.maps[curMap]);
-			if (getMapMsg.get("info", "map")){
+			if (getMapMsg.get("info", "map")) {
 				map.jsonMap = getMapMsg.content;
 				map.parse();
 			}
@@ -182,39 +179,6 @@ function createLobbyState() {
 	createButton.draw(canvas.width - 200, 700, 150, 60);
 }
 
-var isPlayStateLoaded = false;
-function loadPlayState() {
-	isPlayStateLoaded = true;
-}
-
-function playState() {
-	if (!isPlayStateLoaded) {
-		loadPlayState();
-	} else {
-		// map.drawMini(100,100, 0.5);
-		map.draw();
-		hero.draw(player.x, player.y);
-		bombs.draw();
-	}
-
-	if (mouse.clicked) {
-		player.x = mouse.x;
-		player.y = mouse.y;
-		// var jsonString = JSON.stringify(player);
-		// sendMsg(jsonString);
-	}
-
-//	if (curMsg) {
-//		if (curMsg[0] == '{') {
-//			 var jsObject = JSON.parse(curMsg);
-//			 var jsonString = JSON.stringify(player);
-//			 otherPlayer.x = jsObject.x;
-//			 otherPlayer.y = jsObject.y;
-//		}
-//	}
-	// hero.draw(otherPlayer.x, otherPlayer.y);
-}
-
 var getPlayersMsg = new Message();
 function loadPreGameLobbyState() {
 	lobby.players.length = 0;
@@ -236,7 +200,7 @@ function preGameLobbyState() {
 			map.drawMini(50, 200, 0.5);
 		} else {
 			getMapMsg.send("lobby getLobbyMap");
-			if (getMapMsg.get("info", "map")){
+			if (getMapMsg.get("info", "map")) {
 				map.jsonMap = getMapMsg.content;
 				map.parse();
 			}
@@ -281,7 +245,7 @@ function preGameLobbyState() {
 		map.loaded = false;
 		preGameLobbyLoaded = false;
 	}
-	
+
 	if (lobby.leader == player.name) {
 		startGameButton.draw(300, 700, 240, 60);
 		if (startGameButton.isClicked()) {
@@ -313,3 +277,35 @@ var FPS = 60;
 setInterval(function() {
 	draw();
 }, 1000 / FPS);
+
+var isPlayStateLoaded = false;
+function loadPlayState() {
+	isPlayStateLoaded = true;
+}
+
+function playState() {
+	if (!isPlayStateLoaded) {
+		loadPlayState();
+	} else {
+		// map.drawMini(100,100, 0.5);
+		map.draw();
+		player.draw();
+		bombs.draw();
+	}
+
+	if (mouse.clicked) {
+		// player.x = mouse.x;
+		// player.y = mouse.y;
+		// var jsonString = JSON.stringify(player);
+		// sendMsg(jsonString);
+	}
+
+	// if (curMsg) {
+	// if (curMsg[0] == '{') {
+	// var jsObject = JSON.parse(curMsg);
+	// var jsonString = JSON.stringify(player);
+	// otherPlayer.x = jsObject.x;
+	// otherPlayer.y = jsObject.y;
+	// }
+	// }
+}

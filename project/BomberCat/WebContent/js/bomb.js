@@ -26,6 +26,7 @@ function Bombs() {
 	this.timer = 100;
 	this.bombSprite = new Sprite();
 	this.explosionSprite = new Sprite();
+	this.bombMsg = new Message();
 
 	this.load = function(bombSrc, explosionSrc) {
 		this.bombSprite.load(bombSrc);
@@ -46,23 +47,17 @@ function Bombs() {
 				this.explosionSprite.draw(this.explosions[i].x, this.explosions[i].y);
 			}
 		}
-		
 		for (var i = 0; i < this.bombs.length; i++) {
 			if (this.bombs[i].timer > 0) {
 				this.bombs[i].timer -= 1;
 				this.bombSprite.draw(this.bombs[i].x, this.bombs[i].y);
 			} else {
+				this.bombMsg.send("ingame explodeBomb " + (this.bombs[i].x/32.0) + ";" + (this.bombs[i].y/32.0));
+				this.bombMsg.gotSent = false;
 				var explosion = new Explosion();
 				explosion.set(this.bombs[i].x, this.bombs[i].y);
 				this.explosions.push(explosion);
-				explosion.set(this.bombs[i].x+32, this.bombs[i].y);
-				this.explosions.push(explosion);
-				explosion.set(this.bombs[i].x-32, this.bombs[i].y);
-				this.explosions.push(explosion);
-				explosion.set(this.bombs[i].x, this.bombs[i].y+32);
-				this.explosions.push(explosion);
-				explosion.set(this.bombs[i].x, this.bombs[i].y-32);
-				this.explosions.push(explosion);
+				sendMsg("")
 				this.bombs.splice(i,1);
 			}
 		}

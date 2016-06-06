@@ -13,39 +13,36 @@ function Player() {
 	}
 	
 	this.goLeft = function() {
-		this.x = parseInt(this.x)- parseInt(this.speed);
-		this.sendPosition();
+		this.sendPosition(parseInt(this.x) - parseInt(this.speed), this.y);
 	}
 
 	this.goRight = function() {
-		this.x = parseInt(this.x) + parseInt(this.speed);
-		this.sendPosition();
+		this.sendPosition(parseInt(this.x) + parseInt(this.speed), this.y);
 	}
 
 	this.goUp = function() {
-		this.y = parseInt(this.y)- parseInt(this.speed);
-		this.sendPosition();
+		this.sendPosition(this.x, parseInt(this.y)- parseInt(this.speed));
 	}
 
 	this.goDown = function() {
-		this.y = parseInt(this.y) + parseInt(this.speed);
-		this.sendPosition();
+		this.sendPosition(this.x, parseInt(this.y) + parseInt(this.speed));
 	}
 	
-	this.sendPosition = function() {
-		this.sendPosMsg.send("ingame moveToPosition " + this.x + ";" + this.y);
+	this.sendPosition = function(x, y) {
+		this.sendPosMsg.send("ingame moveToPosition " + (x/32.0) + ";" + (y/32.0));
 	}
 	
 	this.draw = function() {
 		this.sprite.draw(this.x, this.y);
-		if (this.sendPosMsg.get("info", "moveToPosition")) {
+		if (this.sendPosMsg.get("info", "setPosition")) {
 			console.log("pos: " + this.sendPosMsg.content);
-			var position = this.sendPosMsg.content.split(" ");
+			var position = this.sendPosMsg.content.split(";");
 			var username = position[0];
-			if (username != name) {
-				this.x = position[1];
-				this.y = position[2];
-			}
+			this.x = position[1]*32.0;
+			this.y = position[2]*32.0;
+		} else if (this.sendPosMsg.get("error", "6")) {
+			console.log("cant move to that position");
+			this.sendPosMsg.gotSent = false;
 		}
 	}
 

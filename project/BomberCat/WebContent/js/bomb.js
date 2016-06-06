@@ -9,13 +9,27 @@ function Bomb() {
 	}
 }
 
+function Explosion() {
+	this.x = 0;
+	this.y = 0;
+	this.timer = 50;
+
+	this.set = function(x, y) {
+		this.x = x;
+		this.y = y;
+	}
+}
+
 function Bombs() {
 	this.bombs = new Array();
+	this.explosions = new Array();
 	this.timer = 100;
-	this.sprite = new Sprite();
+	this.bombSprite = new Sprite();
+	this.explosionSprite = new Sprite();
 
-	this.load = function(imgSrc) {
-		this.sprite.load(imgSrc);
+	this.load = function(bombSrc, explosionSrc) {
+		this.bombSprite.load(bombSrc);
+		this.explosionSprite.load(explosionSrc);
 	}
 
 	this.add = function(x, y) {
@@ -26,10 +40,30 @@ function Bombs() {
 	}
 
 	this.draw = function() {
+		for (var i = 0; i < this.explosions.length; i++) {
+			if (this.explosions[i].timer > 0) {
+				this.explosions[i].timer -= 1;
+				this.explosionSprite.draw(this.explosions[i].x, this.explosions[i].y);
+			}
+		}
+		
 		for (var i = 0; i < this.bombs.length; i++) {
 			if (this.bombs[i].timer > 0) {
 				this.bombs[i].timer -= 1;
-				this.sprite.draw(this.bombs[i].x, this.bombs[i].y);
+				this.bombSprite.draw(this.bombs[i].x, this.bombs[i].y);
+			} else {
+				var explosion = new Explosion();
+				explosion.set(this.bombs[i].x, this.bombs[i].y);
+				this.explosions.push(explosion);
+				explosion.set(this.bombs[i].x+32, this.bombs[i].y);
+				this.explosions.push(explosion);
+				explosion.set(this.bombs[i].x-32, this.bombs[i].y);
+				this.explosions.push(explosion);
+				explosion.set(this.bombs[i].x, this.bombs[i].y+32);
+				this.explosions.push(explosion);
+				explosion.set(this.bombs[i].x, this.bombs[i].y-32);
+				this.explosions.push(explosion);
+				this.bombs.splice(i,1);
 			}
 		}
 	}

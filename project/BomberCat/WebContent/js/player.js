@@ -31,12 +31,12 @@ function Player() {
 	}
 	
 	this.sendPosition = function() {
-		this.sendPosMsg.send("lobby setPosition " + this.x + "," + this.y);
+		this.sendPosMsg.send("ingame moveToPosition " + this.x + ";" + this.y);
 	}
 	
 	this.draw = function() {
 		this.sprite.draw(this.x, this.y);
-		if (this.sendPosMsg.get("info", "setPosition")) {
+		if (this.sendPosMsg.get("info", "moveToPosition")) {
 			console.log("pos: " + this.sendPosMsg.content);
 			var position = this.sendPosMsg.content.split(" ");
 			var username = position[0];

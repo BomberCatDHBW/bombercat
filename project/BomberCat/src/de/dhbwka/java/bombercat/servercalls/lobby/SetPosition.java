@@ -17,5 +17,5 @@ public class SetPosition implements LobbyCall {
 		//client.sendInfo("setPosition", x + " " + y);
 		//TODO: unfinished, because tired
 	}
-
+	
 }

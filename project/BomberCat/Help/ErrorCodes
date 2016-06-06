@@ -4,3 +4,4 @@
 3 -> no such command
 4 -> could not leave lobby
 5 -> lobby is full
+6 -> move not valid

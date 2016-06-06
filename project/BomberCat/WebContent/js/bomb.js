@@ -34,7 +34,6 @@ function Bombs() {
 	}
 
 	this.add = function(x, y) {
-		console.log("added bomb");
 		var bomb = new Bomb();
 		bomb.set(x, y);
 		this.bombs.push(bomb);

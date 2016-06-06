@@ -10,6 +10,8 @@ function Map() {
 	this.parentBlocks = new Array();
 	this.blocks = new Array();
 	this.loaded = false;
+	this.explodeMsg = new Message();
+	this.defaultEmptyBock = 0;
 
 	this.getMap = function(name) {
 		this.loaded = false;
@@ -68,6 +70,18 @@ function Map() {
 		for (var i = 0; i < this.blocks.length; i++) {
 			this.parentBlocks[this.blocks[i].type].draw(this.blocks[i].x,
 					this.blocks[i].y);
+		}
+		if (this.explodeMsg.get("info", "clearFields")) {
+			var object = JSON.parse(this.explodeMsg.content);
+			for (var i = 0; i < Object.keys(object).length; i++) {
+				var x = object[i][0];
+				var y = object[i][1];
+				for (var j = 0; j < this.blocks.length; j++) {
+					if (this.blocks[j].x/32 == x && this.blocks[j].y/32 == y) {
+						this.blocks[j].type = this.defaultEmptyBock;
+					}
+				}
+			}
 		}
 	}
 }

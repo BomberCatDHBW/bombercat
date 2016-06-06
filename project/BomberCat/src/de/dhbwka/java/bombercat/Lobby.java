@@ -9,6 +9,9 @@ import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.dhbwka.java.bombercat.game.GameMain;
+import de.dhbwka.java.bombercat.servercalls.Server;
+
 public class Lobby {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(Lobby.class);
@@ -90,10 +93,13 @@ public class Lobby {
 		lobbies.remove(getLobbyName());
 	}
 
-	public void startGame() {
+	public void startGame(Server server) {
+		GameMain game = new GameMain(map, clients, this);
 		if (map != null && clients.size() > 1) {
 			for (Client client : clients) {
 				client.sendInfo("gameStarted", "Game started");
+				server.getGames().put(client, game);
+
 			}
 		} else {
 			lobbyLeader.sendError("2", "Can't start game");

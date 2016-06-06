@@ -44,13 +44,12 @@ public class GameMain {
 	public void explodeBomb(int x, int y, int size) {
 		List<Point> points = map.explode(x, y, size);
 		JSONObject obj = new JSONObject();
-		int n = 0;
-		for (Point point : points) {
-			JSONObject pointJSON = new JSONObject();
+		System.out.println(points.size());
+		for (int i = 0; i < points.size(); i++) {
 			JSONArray array = new JSONArray();
-			array.add((int) point.getX());
-			array.add((int) point.getY());
-			pointJSON.put(n + "", array);
+			array.add((int) points.get(i).getX());
+			array.add((int) points.get(i).getY());
+			obj.put(i + "", array);
 		}
 		sendToAllPlayers("clearFields", obj.toJSONString());
 	}

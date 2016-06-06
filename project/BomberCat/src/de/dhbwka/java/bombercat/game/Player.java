@@ -8,7 +8,7 @@ import de.dhbwka.java.bombercat.FieldType;
 public class Player {
 	private Point position;
 	private Client client;
-	private int explosionSize = 2;
+	private int explosionSize = 1;
 
 	public Player(Point point, Client client) {
 		this.position = point;

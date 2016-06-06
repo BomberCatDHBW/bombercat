@@ -32,27 +32,34 @@ public class IngameMap {
 	}
 
 	public boolean clearField(int x, int y) {
+		System.out.println(x + " " + y + " " + getField(x, y));
 		boolean result = false;
-		if (map[x][y] != FieldType.Indestructible) {
-			map[x][y] = FieldType.Empty;
+		if (x > 0 && y > 0) {
+			if (getField(x, y) == FieldType.Destructible) {
+				setField(x, y, FieldType.Empty);
+				result = true;
+			}
 		}
 		return result;
 	}
 
 	public List<Point> explode(int x, int y, int size) {
 		List<Point> points = new ArrayList<>();
-		int i = 0;
-		if (x - size > 0) {
-			i = x - size;
-		}
-		for (; i < size * 2 + 1; i++) {
-			if (clearField(i, y)) {
-				points.add(new Point(i, y));
+		for (int i = 1; i <= size; i++) {
+			if (clearField(x + size, y)) {
+				points.add(new Point(x + size, y));
 			}
-			if (clearField(x, i)) {
-				points.add(new Point(x, i));
+			if (clearField(x - size, y)) {
+				points.add(new Point(x - size, y));
+			}
+			if (clearField(x, y + size)) {
+				points.add(new Point(x, y + size));
+			}
+			if (clearField(x, y - size)) {
+				points.add(new Point(x, y - size));
 			}
 		}
 		return points;
 	}
+
 }

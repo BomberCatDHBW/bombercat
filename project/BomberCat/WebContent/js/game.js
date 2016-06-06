@@ -23,7 +23,6 @@ var player = new Player();
 setup();
 
 function setup() {
-	player.load("img/player.png");
 	bombs.load("img/bomb.png", "img/explosion.png");
 	playButton.setText("Play Game!", 50);
 	nameField.setLabelText("Name: ", 30);
@@ -280,6 +279,7 @@ setInterval(function() {
 
 var isPlayStateLoaded = false;
 function loadPlayState() {
+	player.load("img/player.png");
 	isPlayStateLoaded = true;
 }
 

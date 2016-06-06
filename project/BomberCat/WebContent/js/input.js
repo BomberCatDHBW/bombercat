@@ -28,25 +28,27 @@ window.addEventListener('keydown', this.check, false);
 
 function check(e) {
 	var code = e.keyCode;
-	if (code == 37 || code == 65) {
-		// Left key
-		player.goLeft();
-	}
-	if (code == 38 || code == 87) {
-		// Up key
-		player.goUp();
-	}
-	if (code == 39 || code == 68) {
-		// Right key
-		player.goRight();
-	}
-	if (code == 40 || code == 83) {
-		// Down key
-		player.goDown();
-	}
-	if (code ==  32) {
-		// Spacebar
-		player.dropBomb();
+	if (player.ready) {		
+		if (code == 37 || code == 65) {
+			// Left key
+			player.goLeft();
+		}
+		if (code == 38 || code == 87) {
+			// Up key
+			player.goUp();
+		}
+		if (code == 39 || code == 68) {
+			// Right key
+			player.goRight();
+		}
+		if (code == 40 || code == 83) {
+			// Down key
+			player.goDown();
+		}
+		if (code ==  32) {
+			// Spacebar
+			player.dropBomb();
+		}
 	}
 }
 

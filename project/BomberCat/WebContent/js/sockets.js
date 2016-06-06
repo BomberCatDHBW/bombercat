@@ -46,6 +46,7 @@ function send() {
 }
 
 function sendMsg(msg) {
+	console.log(msg);
 	webSocket.send(msg);
 }
 

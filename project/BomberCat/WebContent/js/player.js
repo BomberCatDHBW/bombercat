@@ -5,9 +5,11 @@ function Player() {
 	this.name = "";
 	this.sprite = new Sprite();
 	this.sendPosMsg = new Message();
+	this.ready = false;
 
 	this.load = function(imgSrc) {
 		this.sprite.load(imgSrc);
+		this.ready = true;
 	}
 	
 	this.goLeft = function() {

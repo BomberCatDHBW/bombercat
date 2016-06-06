@@ -24,7 +24,7 @@ setup();
 
 function setup() {
 	player.load("img/player.png");
-	bombs.load("img/bomb.png");
+	bombs.load("img/bomb.png", "img/explosion.png");
 	playButton.setText("Play Game!", 50);
 	nameField.setLabelText("Name: ", 30);
 	backButton.setText("Back", 40);

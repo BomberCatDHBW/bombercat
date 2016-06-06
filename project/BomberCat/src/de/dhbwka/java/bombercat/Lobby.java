@@ -99,7 +99,6 @@ public class Lobby {
 			for (Client client : clients) {
 				client.sendInfo("gameStarted", "Game started");
 				server.getGames().put(client, game);
-
 			}
 		} else {
 			lobbyLeader.sendError("2", "Can't start game");

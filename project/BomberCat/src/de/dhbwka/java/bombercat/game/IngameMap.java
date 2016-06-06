@@ -1,5 +1,9 @@
 package de.dhbwka.java.bombercat.game;
 
+import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
+
 import de.dhbwka.java.bombercat.BomberCatMap;
 import de.dhbwka.java.bombercat.FieldType;
 
@@ -35,14 +39,20 @@ public class IngameMap {
 		return result;
 	}
 
-	public void explode(int x, int y, int size) {
+	public List<Point> explode(int x, int y, int size) {
+		List<Point> points = new ArrayList<>();
 		int i = 0;
 		if (x - size > 0) {
 			i = x - size;
 		}
 		for (; i < size * 2 + 1; i++) {
-			clearField(i, y);
-			clearField(x, i);
+			if (clearField(i, y)) {
+				points.add(new Point(i, y));
+			}
+			if (clearField(x, i)) {
+				points.add(new Point(x, i));
+			}
 		}
+		return points;
 	}
 }

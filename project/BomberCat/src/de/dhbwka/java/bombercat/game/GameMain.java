@@ -33,7 +33,7 @@ public class GameMain {
 		return map;
 	}
 
-	public void sendToAllPlayers(String message) {
-		lobby.sendMessageToAll("setPosition", message);
+	public void sendToAllPlayers(String prefix, String message) {
+		lobby.sendMessageToAll(prefix, message);
 	}
 }

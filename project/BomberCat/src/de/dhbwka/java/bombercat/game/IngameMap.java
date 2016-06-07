@@ -32,7 +32,6 @@ public class IngameMap {
 	}
 
 	public boolean clearField(int x, int y) {
-		System.out.println(x + " " + y + " " + getField(x, y));
 		boolean result = false;
 		if (x > 0 && y > 0) {
 			if (getField(x, y) == FieldType.Destructible) {

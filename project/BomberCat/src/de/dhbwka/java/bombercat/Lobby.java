@@ -122,8 +122,10 @@ public class Lobby {
 		JSONObject obj = new JSONObject();
 		JSONArray array = new JSONArray();
 		for (Client player : getClients()) {
-			if (!player.getLobby().getLobbyLeader().equals(player)) {
-				array.add(player.getUsername());
+			if (player.getLobby() != null) {
+				if (!player.getLobby().getLobbyLeader().equals(player)) {
+					array.add(player.getUsername());
+				}
 			}
 		}
 		obj.put("players", array);

@@ -73,9 +73,9 @@ function Map() {
 		}
 		if (this.explodeMsg.get("info", "clearFields")) {
 			var object = JSON.parse(this.explodeMsg.content);
-			for (var i = 0; i < Object.keys(object).length; i++) {
-				var x = object[i][0];
-				var y = object[i][1];
+			for (var i = 0; i < Object.keys(object.clearedFields).length; i++) {
+				var x = object.clearedFields[i][0];
+				var y = object.clearedFields[i][1];
 				for (var j = 0; j < this.blocks.length; j++) {
 					if (this.blocks[j].x/32 == x && this.blocks[j].y/32 == y) {
 						this.blocks[j].type = this.defaultEmptyBock;

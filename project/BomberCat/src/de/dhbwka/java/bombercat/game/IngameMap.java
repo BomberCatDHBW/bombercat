@@ -1,14 +1,19 @@
 package de.dhbwka.java.bombercat.game;
 
 import java.awt.Point;
+import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import de.dhbwka.java.bombercat.BomberCatMap;
 import de.dhbwka.java.bombercat.FieldType;
 
 public class IngameMap {
 	private FieldType[][] map;
+
+	private Map<Point, BonusField> bonusFields = new HashMap<>();
 
 	public IngameMap(BomberCatMap bomberCatMap) {
 		map = new FieldType[25][25];
@@ -36,6 +41,7 @@ public class IngameMap {
 		if (x > 0 && y > 0) {
 			if (getField(x, y) == FieldType.Destructible) {
 				setField(x, y, FieldType.Empty);
+				addRandomBonusField(x, y);
 				result = true;
 			}
 		}
@@ -61,4 +67,24 @@ public class IngameMap {
 		return points;
 	}
 
+	public Map<Point, BonusField> getBonusFields() {
+		return bonusFields;
+	}
+
+	public void setBonusFields(Map<Point, BonusField> bonusFields) {
+		this.bonusFields = bonusFields;
+	}
+
+	public void addRandomBonusField(int x, int y) {
+		SecureRandom random = new SecureRandom();
+		if (random.nextInt(100) < 50) { // probability of 50%
+			bonusFields.put(new Point(x, y), randomEnum(BonusField.class));
+		}
+	}
+
+	private <T extends Enum<?>> T randomEnum(Class<T> clazz) {
+		SecureRandom random = new SecureRandom();
+		int x = random.nextInt(clazz.getEnumConstants().length);
+		return clazz.getEnumConstants()[x];
+	}
 }

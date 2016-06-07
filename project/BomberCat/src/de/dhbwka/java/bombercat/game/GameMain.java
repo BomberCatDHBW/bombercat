@@ -43,14 +43,26 @@ public class GameMain {
 
 	public void explodeBomb(int x, int y, int size) {
 		List<Point> points = map.explode(x, y, size);
-		JSONObject obj = new JSONObject();
-		System.out.println(points.size());
+		JSONObject objJSON = new JSONObject();
+		JSONObject pointsJSON = new JSONObject();
+		JSONObject bonusFieldsJSON = new JSONObject();
+		int n = 0;
 		for (int i = 0; i < points.size(); i++) {
 			JSONArray array = new JSONArray();
 			array.add((int) points.get(i).getX());
 			array.add((int) points.get(i).getY());
-			obj.put(i + "", array);
+			pointsJSON.put(i + "", array);
+			if (map.getBonusFields().containsKey(points.get(i))) {
+				JSONArray arrayBonusField = new JSONArray();
+				arrayBonusField.add((int) points.get(i).getX());
+				arrayBonusField.add((int) points.get(i).getY());
+				arrayBonusField.add(map.getBonusFields().get(points.get(i)).toString());
+				bonusFieldsJSON.put((n++) + "", arrayBonusField);
+			}
 		}
-		sendToAllPlayers("clearFields", obj.toJSONString());
+		objJSON.put("clearedFields", pointsJSON);
+		objJSON.put("bonusFields", bonusFieldsJSON);
+		sendToAllPlayers("clearFields", objJSON.toJSONString());
+		System.out.println(objJSON.toJSONString());
 	}
 }

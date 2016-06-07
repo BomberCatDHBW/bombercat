@@ -36,7 +36,6 @@ public class BomberCatMap {
 	}
 
 	public static String getJSON(String mapName) throws IOException {
-		BomberCatMap map = new BomberCatMap();
 		URL url = new URL(
 				"https://raw.githubusercontent.com/BomberCatDHBW/bombercat/master/project/BomberCat/Maps/" + mapName);
 		Scanner scanner = new Scanner(url.openStream());
@@ -44,6 +43,7 @@ public class BomberCatMap {
 		while (scanner.hasNextLine()) {
 			jsonString += scanner.nextLine();
 		}
+		scanner.close();
 		return jsonString;
 	}
 
@@ -101,6 +101,7 @@ public class BomberCatMap {
 			}
 		}
 		map.setFieldTypes(fieldTypesTmp);
+		scanner.close();
 		return map;
 	}
 

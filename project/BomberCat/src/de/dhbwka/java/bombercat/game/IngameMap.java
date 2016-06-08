@@ -13,7 +13,7 @@ import de.dhbwka.java.bombercat.FieldType;
 public class IngameMap {
 	private FieldType[][] map;
 
-	private Map<Point, BonusField> bonusFields = new HashMap<>();
+	private Map<Point, BonusType> bonusFields = new HashMap<>();
 
 	public IngameMap(BomberCatMap bomberCatMap) {
 		map = new FieldType[25][25];
@@ -29,21 +29,26 @@ public class IngameMap {
 	}
 
 	public FieldType getField(int x, int y) {
-		return map[x][y];
+		try {
+			return map[x][y];
+		} catch (ArrayIndexOutOfBoundsException ex) {
+			return null;
+		}
 	}
 
 	public void setField(int x, int y, FieldType fieldType) {
-		map[x][y] = fieldType;
+		try {
+			map[x][y] = fieldType;
+		} catch (ArrayIndexOutOfBoundsException ex) {
+		}
 	}
 
 	public boolean clearField(int x, int y) {
 		boolean result = false;
-		if (x > 0 && y > 0) {
-			if (getField(x, y) == FieldType.Destructible) {
-				setField(x, y, FieldType.Empty);
-				addRandomBonusField(x, y);
-				result = true;
-			}
+		if (getField(x, y) == FieldType.Destructible) {
+			setField(x, y, FieldType.Empty);
+			addRandomBonusField(x, y);
+			result = true;
 		}
 		return result;
 	}
@@ -51,34 +56,32 @@ public class IngameMap {
 	public List<Point> explode(int x, int y, int size) {
 		List<Point> points = new ArrayList<>();
 		for (int i = 1; i <= size; i++) {
-			if (clearField(x + size, y)) {
-				points.add(new Point(x + size, y));
-			}
-			if (clearField(x - size, y)) {
-				points.add(new Point(x - size, y));
-			}
-			if (clearField(x, y + size)) {
-				points.add(new Point(x, y + size));
-			}
-			if (clearField(x, y - size)) {
-				points.add(new Point(x, y - size));
-			}
+			clearAndAddPoint(x + i, y, points);
+			clearAndAddPoint(x - i, y, points);
+			clearAndAddPoint(x, y + i, points);
+			clearAndAddPoint(x, y - i, points);
 		}
 		return points;
 	}
 
-	public Map<Point, BonusField> getBonusFields() {
+	public void clearAndAddPoint(int x, int y, List<Point> points) {
+		if (clearField(x, y)) {
+			points.add(new Point(x, y));
+		}
+	}
+
+	public Map<Point, BonusType> getBonusFields() {
 		return bonusFields;
 	}
 
-	public void setBonusFields(Map<Point, BonusField> bonusFields) {
+	public void setBonusFields(Map<Point, BonusType> bonusFields) {
 		this.bonusFields = bonusFields;
 	}
 
 	public void addRandomBonusField(int x, int y) {
 		SecureRandom random = new SecureRandom();
 		if (random.nextInt(100) < 50) { // probability of 50%
-			bonusFields.put(new Point(x, y), randomEnum(BonusField.class));
+			bonusFields.put(new Point(x, y), randomEnum(BonusType.class));
 		}
 	}
 

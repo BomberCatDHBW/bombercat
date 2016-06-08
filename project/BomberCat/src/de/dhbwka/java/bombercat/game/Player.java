@@ -43,7 +43,7 @@ public class Player {
 				explosionSize++;
 				LOGGER.info("explosionSize: " + explosionSize);
 				break;
-			case Speed:
+			case SpeedUp:
 				speed += 10;
 				break;
 			}

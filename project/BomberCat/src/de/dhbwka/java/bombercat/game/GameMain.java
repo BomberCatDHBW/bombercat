@@ -63,6 +63,5 @@ public class GameMain {
 		objJSON.put("clearedFields", pointsJSON);
 		objJSON.put("bonusFields", bonusFieldsJSON);
 		sendToAllPlayers("clearFields", objJSON.toJSONString());
-		System.out.println(objJSON.toJSONString());
 	}
 }

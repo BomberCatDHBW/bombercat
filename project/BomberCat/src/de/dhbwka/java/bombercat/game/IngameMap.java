@@ -4,16 +4,18 @@ import java.awt.Point;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import de.dhbwka.java.bombercat.BomberCatMap;
 import de.dhbwka.java.bombercat.FieldType;
 
 public class IngameMap {
 	private FieldType[][] map;
-
 	private Map<Point, BonusType> bonusFields = new HashMap<>();
+	private Set<Point> bombs = new HashSet<>();
 
 	public IngameMap(BomberCatMap bomberCatMap) {
 		map = new FieldType[25][25];
@@ -55,19 +57,29 @@ public class IngameMap {
 
 	public List<Point> explode(int x, int y, int size) {
 		List<Point> points = new ArrayList<>();
+		boolean left = true;
+		boolean right = true;
+		boolean up = true;
+		boolean down = true;
 		for (int i = 1; i <= size; i++) {
-			clearAndAddPoint(x + i, y, points);
-			clearAndAddPoint(x - i, y, points);
-			clearAndAddPoint(x, y + i, points);
-			clearAndAddPoint(x, y - i, points);
+			down = clearAndAddPoint(x + i, y, points, down);
+			up = clearAndAddPoint(x - i, y, points, up);
+			right = clearAndAddPoint(x, y + i, points, right);
+			left = clearAndAddPoint(x, y - i, points, left);
 		}
 		return points;
 	}
 
-	public void clearAndAddPoint(int x, int y, List<Point> points) {
-		if (clearField(x, y)) {
-			points.add(new Point(x, y));
+	public boolean clearAndAddPoint(int x, int y, List<Point> points, boolean b) {
+		if (b) {
+			if (getField(x, y) == FieldType.Indestructible) {
+				b = false;
+			}
+			if (clearField(x, y)) {
+				points.add(new Point(x, y));
+			}
 		}
+		return b;
 	}
 
 	public Map<Point, BonusType> getBonusFields() {
@@ -80,7 +92,7 @@ public class IngameMap {
 
 	public void addRandomBonusField(int x, int y) {
 		SecureRandom random = new SecureRandom();
-		if (random.nextInt(100) < 50) { // probability of 50%
+		if (random.nextInt(100) < 50) {
 			bonusFields.put(new Point(x, y), randomEnum(BonusType.class));
 		}
 	}
@@ -89,5 +101,21 @@ public class IngameMap {
 		SecureRandom random = new SecureRandom();
 		int x = random.nextInt(clazz.getEnumConstants().length);
 		return clazz.getEnumConstants()[x];
+	}
+
+	public Set<Point> getBombs() {
+		return bombs;
+	}
+
+	public void setBombs(Set<Point> bombs) {
+		this.bombs = bombs;
+	}
+
+	public void addBomb(int x, int y) {
+		bombs.add(new Point(x, y));
+	}
+
+	public void removeBomb(int x, int y) {
+		bombs.remove(new Point(x, y));
 	}
 }

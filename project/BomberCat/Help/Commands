@@ -12,3 +12,7 @@ Calls:
 		lobby getLobbyPlayers null
 		lobby getLobbyMap null
 		lobby setLobbyMap mapName
+	ingame:
+		moveToPosition x;y
+		placeBomb x;y
+		explodeBomb x;y

@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Set;
 
 import de.dhbwka.java.bombercat.BomberCatMap;
+import de.dhbwka.java.bombercat.Client;
 import de.dhbwka.java.bombercat.FieldType;
 
 public class IngameMap {
@@ -49,34 +50,40 @@ public class IngameMap {
 		boolean result = false;
 		if (getField(x, y) == FieldType.Destructible) {
 			setField(x, y, FieldType.Empty);
-			addRandomBonusField(x, y);
 			result = true;
 		}
 		return result;
 	}
 
-	public List<Point> explode(int x, int y, int size) {
+	private void explodePossibleOtherBombs(int x, int y, GameMain game, Client client) {
+		if (bombs.contains(new Point(x, y))) {
+			// game.sendToAllPlayers("b", message);
+		}
+	}
+
+	public List<Point> explode(int x, int y, int size, GameMain game, Client client) {
 		List<Point> points = new ArrayList<>();
 		boolean left = true;
 		boolean right = true;
 		boolean up = true;
 		boolean down = true;
 		for (int i = 1; i <= size; i++) {
-			down = clearAndAddPoint(x + i, y, points, down);
-			up = clearAndAddPoint(x - i, y, points, up);
-			right = clearAndAddPoint(x, y + i, points, right);
-			left = clearAndAddPoint(x, y - i, points, left);
+			down = clearAndAddPoint(x + i, y, points, down, game, client);
+			up = clearAndAddPoint(x - i, y, points, up, game, client);
+			right = clearAndAddPoint(x, y + i, points, right, game, client);
+			left = clearAndAddPoint(x, y - i, points, left, game, client);
 		}
 		return points;
 	}
 
-	public boolean clearAndAddPoint(int x, int y, List<Point> points, boolean b) {
+	public boolean clearAndAddPoint(int x, int y, List<Point> points, boolean b, GameMain game, Client client) {
 		if (b) {
-			if (getField(x, y) == FieldType.Indestructible) {
+			if (getField(x, y) == FieldType.Destructible) {
+				setField(x, y, FieldType.Empty);
+				addRandomBonusField(x, y);
+				explodePossibleOtherBombs(x, y, game, client);
+			} else if (getField(x, y) == FieldType.Indestructible) {
 				b = false;
-			}
-			if (clearField(x, y)) {
-				points.add(new Point(x, y));
 			}
 		}
 		return b;

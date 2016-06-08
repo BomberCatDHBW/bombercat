@@ -41,8 +41,8 @@ public class GameMain {
 		lobby.sendMessageToAll(prefix, message);
 	}
 
-	public void explodeBomb(int x, int y, int size) {
-		List<Point> points = map.explode(x, y, size);
+	public void explodeBomb(int x, int y, int size, GameMain game, Client client) {
+		List<Point> points = map.explode(x, y, size, game, client);
 		JSONObject objJSON = new JSONObject();
 		JSONObject pointsJSON = new JSONObject();
 		JSONObject bonusFieldsJSON = new JSONObject();

@@ -13,6 +13,7 @@ import de.dhbwka.java.bombercat.game.GameMain;
 import de.dhbwka.java.bombercat.servercalls.ingame.ExplodeBomb;
 import de.dhbwka.java.bombercat.servercalls.ingame.IngameCall;
 import de.dhbwka.java.bombercat.servercalls.ingame.MoveToPosition;
+import de.dhbwka.java.bombercat.servercalls.ingame.PlaceBomb;
 import de.dhbwka.java.bombercat.servercalls.lobby.GetLobbyMap;
 import de.dhbwka.java.bombercat.servercalls.lobby.GetLobbyPlayers;
 import de.dhbwka.java.bombercat.servercalls.lobby.GetMap;
@@ -53,6 +54,7 @@ public class Server {
 		lobbyCalls.put("startGame", new StartGame(this));
 		ingameCalls.put("moveToPosition", new MoveToPosition());
 		ingameCalls.put("explodeBomb", new ExplodeBomb());
+		ingameCalls.put("placeBomb", new PlaceBomb());
 	}
 
 	public void call(String message, Client client) {

@@ -82,6 +82,16 @@ function Map() {
 					}
 				}
 			}
+			for (var i = 0; i < Object.keys(object.bonusFields).length; i++) {
+				var x = object.bonusFields[i][0];
+				var y = object.bonusFields[i][1];
+				var type = object.bonusFields[i][2];
+				for (var j = 0; j < this.blocks.length; j++) {
+					if (type == "ExplosionSize") {
+						powerups.add(x*32, y*32);
+					}
+				}
+			}
 		}
 	}
 }

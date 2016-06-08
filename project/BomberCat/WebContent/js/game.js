@@ -4,7 +4,8 @@ var context = canvas.getContext("2d");
 // var soundtrack = new
 // Audio('https://raw.githubusercontent.com/BomberCatDHBW/bombercat/master/Soundtrack/BomberCatSoundtrackPrototype001.mp3');
 
-bombs = new Bombs();
+var bombs = new Bombs();
+var powerups = new Powerups();
 
 var gameState = "mainMenuState";// mainMenuState, playState, preGameLobbyState
 // createLobbyState
@@ -23,6 +24,7 @@ var player = new Player();
 setup();
 
 function setup() {
+	powerups.load("img/rangeup.png");
 	bombs.load("img/bomb.png", "img/explosion.png");
 	playButton.setText("Play Game!", 50);
 	nameField.setLabelText("Name: ", 30);
@@ -291,6 +293,7 @@ function playState() {
 		map.draw();
 		player.draw();
 		bombs.draw();
+		powerups.draw();
 	}
 
 	if (mouse.clicked) {

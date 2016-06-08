@@ -5,6 +5,7 @@ function Player() {
 	this.name = "";
 	this.sprite = new Sprite();
 	this.sendPosMsg = new Message();
+	this.sendBombDropMsg = new Message();
 	this.ready = false;
 
 	this.load = function(imgSrc) {
@@ -48,5 +49,7 @@ function Player() {
 
 	this.dropBomb = function() {
 		bombs.add(this.x, this.y);
+		this.sendBombDropMsg.send("placeBomb " + this.x + ";" + this.y);
+		this.sendBombDropMsg.gotSent = false;
 	}
 }

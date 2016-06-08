@@ -25,6 +25,7 @@ function Powerups() {
 	}
 
 	this.draw = function() {
+		console.log(this.powerups.length);
 		for (var i = 0; i < this.powerups.length; i++) {
 			if (this.powerups[i].x == player.x && this.powerups[i].y == player.y) {
 				this.powerups[i].picked = true;

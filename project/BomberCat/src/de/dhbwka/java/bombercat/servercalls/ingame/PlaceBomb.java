@@ -1,5 +1,7 @@
 package de.dhbwka.java.bombercat.servercalls.ingame;
 
+import java.awt.Point;
+
 import de.dhbwka.java.bombercat.Client;
 import de.dhbwka.java.bombercat.game.GameMain;
 import de.dhbwka.java.bombercat.game.Player;
@@ -23,7 +25,9 @@ public class PlaceBomb implements IngameCall {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					game.explodeBomb(x, y, game.getPlayer(client).getExplosionSize(), game, client);
+					if (game.getMap().getBombs().containsKey(new Point(x, y))) {
+						game.explodeBomb(x, y, game.getPlayer(client).getExplosionSize(), game, client);
+					}
 					player.setAmountPlacedBombs(player.getAmountPlacedBombs() - 1);
 				}
 			}

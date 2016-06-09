@@ -23,17 +23,11 @@ public class GameMain {
 		this.lobby = lobby;
 		List<Point> spawns = field.getSpawns();
 		int i = 0;
-		JSONObject obj = new JSONObject();
 		for (Client client : clients) {
-			JSONArray spawn = new JSONArray();
 			Point spawnPoint = spawns.get(i++);
 			players.put(client, new Player(spawnPoint, client));
-			spawn.add(spawnPoint.getX());
-			spawn.add(spawnPoint.getY());
-			obj.put(client.getUsername(), spawn);
 		}
 		map = new IngameMap(field, players);
-		sendToAllPlayers("spawns", obj.toJSONString());
 	}
 
 	public Player getPlayer(Client client) {

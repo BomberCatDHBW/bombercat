@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import de.dhbwka.java.bombercat.Client;
 import de.dhbwka.java.bombercat.Lobby;
 import de.dhbwka.java.bombercat.game.GameMain;
+import de.dhbwka.java.bombercat.servercalls.ingame.GetPlayerPositions;
 import de.dhbwka.java.bombercat.servercalls.ingame.IngameCall;
 import de.dhbwka.java.bombercat.servercalls.ingame.MoveToPosition;
 import de.dhbwka.java.bombercat.servercalls.ingame.PlaceBomb;
@@ -53,6 +54,7 @@ public class Server {
 		lobbyCalls.put("startGame", new StartGame(this));
 		ingameCalls.put("moveToPosition", new MoveToPosition());
 		ingameCalls.put("placeBomb", new PlaceBomb());
+		ingameCalls.put("getPlayerPositions", new GetPlayerPositions());
 	}
 
 	public void call(String message, Client client) {

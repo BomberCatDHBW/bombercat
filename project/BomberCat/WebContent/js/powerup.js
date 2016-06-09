@@ -32,8 +32,10 @@ function Powerups() {
 
 	this.draw = function() {
 		for (var i = 0; i < this.powerups.length; i++) {
-			if (this.powerups[i].x == players.players[0].x && this.powerups[i].y == players.players[0].y) {
-				this.powerups[i].picked = true;
+			for (var j = 0; j < players.players.length; j++) {
+				if (this.powerups[i].x == players.players[j].x && this.powerups[i].y == players.players[j].y) {
+					this.powerups[i].picked = true;
+				}
 			}
 			if (!this.powerups[i].picked) {
 				if (this.powerups[i].type == "SpeedUp") {

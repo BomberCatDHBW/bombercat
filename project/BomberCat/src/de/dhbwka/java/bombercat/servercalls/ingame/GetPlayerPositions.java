@@ -3,7 +3,6 @@ package de.dhbwka.java.bombercat.servercalls.ingame;
 import java.awt.Point;
 import java.util.Map.Entry;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import de.dhbwka.java.bombercat.Client;
@@ -16,9 +15,9 @@ public class GetPlayerPositions implements IngameCall {
 	public void run(String[] parameter, GameMain game, Client client) {
 		JSONObject obj = new JSONObject();
 		for (Entry<Point, Player> entry : game.getMap().getPlayers().entrySet()) {
-			JSONArray spawn = new JSONArray();
-			spawn.add(entry.getKey().getX());
-			spawn.add(entry.getKey().getY());
+			JSONObject spawn = new JSONObject();
+			spawn.put("x", entry.getKey().getX());
+			spawn.put("y", entry.getKey().getY());
 			obj.put(entry.getValue().getClient().getUsername(), spawn);
 		}
 		game.sendToAllPlayers("positions", obj.toJSONString());

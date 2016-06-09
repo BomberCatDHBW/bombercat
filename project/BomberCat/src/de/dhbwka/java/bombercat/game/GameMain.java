@@ -1,6 +1,7 @@
 package de.dhbwka.java.bombercat.game;
 
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,7 +43,8 @@ public class GameMain {
 	}
 
 	public void explodeBomb(int x, int y, int size, GameMain game, Client client) {
-		List<Point> points = map.explode(x, y, size, game, client);
+		List<Point> points = new ArrayList<Point>();
+		map.explode(x, y, size, points);
 		JSONObject objJSON = new JSONObject();
 		JSONObject pointsJSON = new JSONObject();
 		JSONObject bonusFieldsJSON = new JSONObject();

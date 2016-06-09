@@ -2,21 +2,17 @@ package de.dhbwka.java.bombercat.game;
 
 import java.awt.Point;
 import java.security.SecureRandom;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import de.dhbwka.java.bombercat.BomberCatMap;
-import de.dhbwka.java.bombercat.Client;
 import de.dhbwka.java.bombercat.FieldType;
 
 public class IngameMap {
 	private FieldType[][] map;
 	private Map<Point, BonusType> bonusFields = new HashMap<>();
-	private Set<Point> bombs = new HashSet<>();
+	private Map<Point, Player> bombs = new HashMap<>();
 
 	public IngameMap(BomberCatMap bomberCatMap) {
 		map = new FieldType[25][25];
@@ -55,39 +51,39 @@ public class IngameMap {
 		return result;
 	}
 
-	private void explodePossibleOtherBombs(int x, int y, GameMain game, Client client) {
-		if (bombs.contains(new Point(x, y))) {
-			// game.sendToAllPlayers("b", message);
+	private void explodePossibleOtherBombs(int x, int y, List<Point> points) {
+		if (bombs.containsKey(new Point(x, y))) {
+			explode(x, y, bombs.get(new Point(x, y)).getExplosionSize(), points);
 		}
 	}
 
-	public List<Point> explode(int x, int y, int size, GameMain game, Client client) {
-		List<Point> points = new ArrayList<>();
+	public void explode(int x, int y, int size, List<Point> points) {
 		boolean left = true;
 		boolean right = true;
 		boolean up = true;
 		boolean down = true;
 		for (int i = 1; i <= size; i++) {
-			down = clearAndAddPoint(x + i, y, points, down, game, client);
-			up = clearAndAddPoint(x - i, y, points, up, game, client);
-			right = clearAndAddPoint(x, y + i, points, right, game, client);
-			left = clearAndAddPoint(x, y - i, points, left, game, client);
+			down = clearAndAddPoint(x + i, y, points, down);
+			up = clearAndAddPoint(x - i, y, points, up);
+			right = clearAndAddPoint(x, y + i, points, right);
+			left = clearAndAddPoint(x, y - i, points, left);
 		}
-		return points;
 	}
 
-	public boolean clearAndAddPoint(int x, int y, List<Point> points, boolean b, GameMain game, Client client) {
+	public boolean clearAndAddPoint(int x, int y, List<Point> points, boolean b) {
 		if (b) {
 			if (getField(x, y) == FieldType.Destructible) {
 				setField(x, y, FieldType.Empty);
 				addRandomBonusField(x, y);
-				explodePossibleOtherBombs(x, y, game, client);
+			} else if (getField(x, y) != FieldType.Indestructible) {
+				explodePossibleOtherBombs(x, y, points);
 				points.add(new Point(x, y));
 			} else if (getField(x, y) == FieldType.Indestructible) {
 				b = false;
 			}
 		}
 		return b;
+
 	}
 
 	public Map<Point, BonusType> getBonusFields() {
@@ -100,7 +96,7 @@ public class IngameMap {
 
 	public void addRandomBonusField(int x, int y) {
 		SecureRandom random = new SecureRandom();
-		if (random.nextInt(100) < 50) {
+		if (random.nextInt(100) < 10) {
 			bonusFields.put(new Point(x, y), randomEnum(BonusType.class));
 		}
 	}
@@ -111,16 +107,16 @@ public class IngameMap {
 		return clazz.getEnumConstants()[x];
 	}
 
-	public Set<Point> getBombs() {
+	public Map<Point, Player> getBombs() {
 		return bombs;
 	}
 
-	public void setBombs(Set<Point> bombs) {
+	public void setBombs(Map<Point, Player> bombs) {
 		this.bombs = bombs;
 	}
 
-	public void addBomb(int x, int y) {
-		bombs.add(new Point(x, y));
+	public void addBomb(int x, int y, Player player) {
+		bombs.put(new Point(x, y), player);
 	}
 
 	public void removeBomb(int x, int y) {

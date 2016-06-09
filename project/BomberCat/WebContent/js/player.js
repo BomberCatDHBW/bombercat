@@ -36,13 +36,11 @@ function Player() {
 	this.draw = function() {
 		this.sprite.draw(this.x, this.y);
 		if (this.sendPosMsg.get("info", "setPosition")) {
-			console.log("pos: " + this.sendPosMsg.content);
 			var position = this.sendPosMsg.content.split(";");
 			var username = position[0];
 			this.x = position[1]*32.0;
 			this.y = position[2]*32.0;
 		} else if (this.sendPosMsg.get("error", "6")) {
-			console.log("cant move to that position");
 			this.sendPosMsg.gotSent = false;
 		}
 	}

@@ -1,7 +1,6 @@
 function Bomb() {
 	this.x = 0;
 	this.y = 0;
-	this.timer = 100;
 	this.range = 1;
 
 	this.set = function(x, y) {
@@ -13,7 +12,7 @@ function Bomb() {
 function Explosion() {
 	this.x = 0;
 	this.y = 0;
-	this.timer = 100;
+	this.timer = 50;
 
 	this.set = function(x, y) {
 		this.x = x;
@@ -41,6 +40,17 @@ function Bombs() {
 		bomb.range = range;
 		this.bombs.push(bomb);
 	}
+	
+	this.addExplosion = function(x, y) {
+		var explosion = new Explosion();
+		explosion.set(x, y);
+		this.explosions.push(explosion);
+		for (var i = 0; i < this.bombs.length; i++) {
+			if (this.bombs[i].x == x && this.bombs[i].y == y) {
+				this.bombs.splice(i,1);
+			}
+		}
+	}
 
 	this.draw = function() {
 		for (var i = 0; i < this.explosions.length; i++) {
@@ -50,38 +60,18 @@ function Bombs() {
 			}
 		}
 		for (var i = 0; i < this.bombs.length; i++) {
-			if (this.bombs[i].timer > 0) {
-				this.bombs[i].timer -= 1;
-				this.bombSprite.draw(this.bombs[i].x, this.bombs[i].y);
-			} else {
-				this.bombMsg.send("ingame explodeBomb " + (this.bombs[i].x/32.0) + ";" + (this.bombs[i].y/32.0));
-				this.bombMsg.gotSent = false;
-				var explosion = new Explosion();
-				explosion.set(this.bombs[i].x, this.bombs[i].y);
-				this.explosions.push(explosion);
-				for (var j = 1; j <= this.bombs[i].range; j++) {
-					var explosion = new Explosion();
-					explosion.set(this.bombs[i].x+j*32, this.bombs[i].y);
-					this.explosions.push(explosion);
-					var explosion = new Explosion();
-					explosion.set(this.bombs[i].x-j*32, this.bombs[i].y);
-					this.explosions.push(explosion);
-					var explosion = new Explosion();
-					explosion.set(this.bombs[i].x, this.bombs[i].y-j*32);
-					this.explosions.push(explosion);
-					var explosion = new Explosion();
-					explosion.set(this.bombs[i].x, this.bombs[i].y+j*32);
-					this.explosions.push(explosion);
-				}
-				this.bombs.splice(i,1);
-			}
+			this.bombSprite.draw(this.bombs[i].x, this.bombs[i].y);
+//			if (this.bombs[i].timer > 0) {
+//				this.bombs[i].timer -= 1;
+//			} else {
+//				this.bombs.splice(i,1);
+//			}
 		}
 		if (this.getBombMsg.get("info", "bombPlaced")) {
 			var info = this.getBombMsg.content.split(";");
 			var x = info[0]*32.0;
 			var y = info[1]*32.0;
 			var range = info[2];
-			console.log("RADIUS: " + range);
 			this.add(x,y, range);
 		}
 	}

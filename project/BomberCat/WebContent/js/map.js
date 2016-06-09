@@ -76,6 +76,7 @@ function Map() {
 			for (var i = 0; i < Object.keys(object.clearedFields).length; i++) {
 				var x = object.clearedFields[i][0];
 				var y = object.clearedFields[i][1];
+				bombs.addExplosion(x * 32, y * 32);
 				for (var j = 0; j < this.blocks.length; j++) {
 					if (this.blocks[j].x / 32 == x
 							&& this.blocks[j].y / 32 == y) {
@@ -87,6 +88,7 @@ function Map() {
 				var x = object.bonusFields[i][0];
 				var y = object.bonusFields[i][1];
 				var type = object.bonusFields[i][2];
+				console.log("spawned: " + type);
 				powerups.add(x * 32, y * 32, type);
 			}
 		}

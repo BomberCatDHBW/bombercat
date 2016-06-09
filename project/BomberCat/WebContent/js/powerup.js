@@ -36,11 +36,11 @@ function Powerups() {
 				this.powerups[i].picked = true;
 			}
 			if (!this.powerups[i].picked) {
-				if (type = "SpeedUp") {
+				if (this.powerups[i].type == "SpeedUp") {
 					this.speedupSprite.draw(this.powerups[i].x, this.powerups[i].y);
-				} else if (type = "ExplosionSize") {
+				} else if (this.powerups[i].type == "ExplosionSize") {
 					this.rangeupSprite.draw(this.powerups[i].x, this.powerups[i].y);
-				} else if (type = "BombAmount") {
+				} else if (this.powerups[i].type == "BombAmount") {
 					this.plusbombSprite.draw(this.powerups[i].x, this.powerups[i].y);
 				}
 			} else {

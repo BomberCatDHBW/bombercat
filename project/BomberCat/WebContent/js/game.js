@@ -292,8 +292,8 @@ function playState() {
 		// map.drawMini(100,100, 0.5);
 		map.draw();
 		player.draw();
-		bombs.draw();
 		powerups.draw();
+		bombs.draw();
 	}
 
 	if (mouse.clicked) {

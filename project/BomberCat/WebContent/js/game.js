@@ -292,13 +292,16 @@ function loadPlayState() {
 		var object = JSON.parse(playerLoadMsg.content);
 		for (var i = 0; i < object.length; i++) {
 			if (object[i].username != players.players[0].name) {
-				players.add();
-				players.players[players.players.length-1].name = object[i].username;
+				var player = new Player();
+				player.name = object[i].username;
+				player.ready = true;
+				player.x = object[i].x*32;
+				player.y = object[i].y*32;
+				players.players.push(player);
+			} else {
+				players.players[0].x = object[i].x*32;
+				players.players[0].y = object[i].y*32;
 			}
-			players.players[players.players.length-1].ready = true;
-			players.players[players.players.length-1].x = object[i].x*32;
-			players.players[players.players.length-1].y = object[i].y*32;
-			console.log(object[i].username);
 		}
 		isPlayStateLoaded = true;
 		//{"1412341234":{"x":1.0,"y":1.0},"123412341234":{"x":1.0,"y":23.0}}

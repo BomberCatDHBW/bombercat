@@ -1,30 +1,39 @@
 package de.dhbwka.java.bombercat.game;
 
 import java.awt.Point;
-import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import de.dhbwka.java.bombercat.BomberCatMap;
+import de.dhbwka.java.bombercat.Client;
 import de.dhbwka.java.bombercat.FieldType;
 
 public class IngameMap {
 	private FieldType[][] map;
 	private Map<Point, BonusType> bonusFields = new HashMap<>();
 	private Map<Point, Player> bombs = new HashMap<>();
+	private Map<Point, Player> players = new HashMap<>();
 
-	public IngameMap(BomberCatMap bomberCatMap) {
+	public IngameMap(BomberCatMap bomberCatMap, Map<Client, Player> players) {
 		map = new FieldType[25][25];
 		for (int x = 0; x < map.length; x++) {
 			for (int y = 0; y < map.length; y++) {
 				map[x][y] = bomberCatMap.getFieldTypes().get(bomberCatMap.getField()[x][y]);
 			}
 		}
+		for (Player player : players.values()) {
+			this.players.put(player.getPosition(), player);
+		}
 	}
 
 	public FieldType[][] getMap() {
 		return map;
+	}
+
+	public Map<Point, Player> getPlayers() {
+		return players;
 	}
 
 	public FieldType getField(int x, int y) {
@@ -59,6 +68,7 @@ public class IngameMap {
 
 	public void explode(int x, int y, int size, List<Point> points) {
 		bombs.remove(new Point(x, y));
+		checkIfSomeoneDies(x, y);
 		boolean left = true;
 		boolean right = true;
 		boolean up = true;
@@ -79,6 +89,7 @@ public class IngameMap {
 			}
 			if (getField(x, y) != FieldType.Indestructible) {
 				explodePossibleOtherBombs(x, y, points);
+				checkIfSomeoneDies(x, y);
 				points.add(new Point(x, y));
 			} else if (getField(x, y) == FieldType.Indestructible) {
 				b = false;
@@ -86,6 +97,13 @@ public class IngameMap {
 		}
 		return b;
 
+	}
+
+	private void checkIfSomeoneDies(int x, int y) {
+		if (players.containsKey(new Point(x, y)) && players.get(new Point(x, y)).isAlive()) {
+			System.out.println("Player died");
+			players.get(new Point(x, y)).setAlive(false);
+		}
 	}
 
 	public Map<Point, BonusType> getBonusFields() {
@@ -97,14 +115,14 @@ public class IngameMap {
 	}
 
 	public void addRandomBonusField(int x, int y) {
-		SecureRandom random = new SecureRandom();
+		Random random = new Random();
 		if (random.nextInt(100) < 10) {
 			bonusFields.put(new Point(x, y), randomEnum(BonusType.class));
 		}
 	}
 
 	private <T extends Enum<?>> T randomEnum(Class<T> clazz) {
-		SecureRandom random = new SecureRandom();
+		Random random = new Random();
 		int x = random.nextInt(clazz.getEnumConstants().length);
 		return clazz.getEnumConstants()[x];
 	}

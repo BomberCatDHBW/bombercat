@@ -20,7 +20,6 @@ public class GameMain {
 	private Lobby lobby;
 
 	public GameMain(BomberCatMap field, Set<Client> clients, Lobby lobby) {
-		map = new IngameMap(field);
 		this.lobby = lobby;
 		List<Point> spawns = field.getSpawns();
 		int i = 0;
@@ -28,6 +27,7 @@ public class GameMain {
 			Point spawnPoint = spawns.get(i++);
 			players.put(client, new Player(spawnPoint, client));
 		}
+		map = new IngameMap(field, players);
 	}
 
 	public Player getPlayer(Client client) {

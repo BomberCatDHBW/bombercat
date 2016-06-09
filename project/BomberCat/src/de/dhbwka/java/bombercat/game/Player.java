@@ -10,6 +10,7 @@ import de.dhbwka.java.bombercat.FieldType;
 
 public class Player {
 	private static final Logger LOGGER = LoggerFactory.getLogger(Player.class);
+	private boolean alive;
 	private Point position;
 	private Client client;
 	private int explosionSize = 1;
@@ -18,7 +19,7 @@ public class Player {
 
 	public Player(Point point, Client client) {
 		this.position = point;
-		this.client = client;
+		this.setClient(client);
 	}
 
 	public boolean moveToPosition(Point p, IngameMap map) {
@@ -26,6 +27,9 @@ public class Player {
 		if (position.distance(p) == 1) {
 			if (map.getField((int) p.getX(), (int) p.getY()) == FieldType.Empty) {
 				if (!map.getBombs().containsKey(p)) {
+					Player player = map.getPlayers().get(position);
+					map.getPlayers().remove(position);
+					map.getPlayers().put(p, player);
 					position = p;
 					result = true;
 					addBonusToPlayer(p, map);
@@ -74,5 +78,25 @@ public class Player {
 
 	public void setBombAmount(int bombAmount) {
 		this.bombAmount = bombAmount;
+	}
+
+	public Point getPosition() {
+		return position;
+	}
+
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+	public boolean isAlive() {
+		return alive;
+	}
+
+	public void setAlive(boolean alive) {
+		this.alive = alive;
 	}
 }

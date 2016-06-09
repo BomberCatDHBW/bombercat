@@ -28,26 +28,26 @@ window.addEventListener('keydown', this.check, false);
 
 function check(e) {
 	var code = e.keyCode;
-	if (player.ready) {		
+	if (players.players[0].ready) {		
 		if (code == 37 || code == 65) {
 			// Left key
-			player.goLeft();
+			players.players[0].goLeft();
 		}
 		if (code == 38 || code == 87) {
 			// Up key
-			player.goUp();
+			players.players[0].goUp();
 		}
 		if (code == 39 || code == 68) {
 			// Right key
-			player.goRight();
+			players.players[0].goRight();
 		}
 		if (code == 40 || code == 83) {
 			// Down key
-			player.goDown();
+			players.players[0].goDown();
 		}
 		if (code ==  32) {
 			// Spacebar
-			player.dropBomb();
+			players.players[0].dropBomb();
 		}
 	}
 }

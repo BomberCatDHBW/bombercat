@@ -1,5 +1,5 @@
-var logServerMessages = true;
-var logSendMessages = true;
+var logServerMessages = false;
+var logSendMessages = false;
 
 var mainColorR = 204;
 var mainColorG = 0;

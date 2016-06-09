@@ -53,8 +53,8 @@ function Map() {
 				this.blocks.push(block);
 			}
 		}
-		player.x = this.spawns[0].x * 32;
-		player.y = this.spawns[0].y * 32;
+		players.players[0].x = this.spawns[0].x * 32;
+		players.players[0].y = this.spawns[0].y * 32;
 		this.loaded = true;
 	}
 

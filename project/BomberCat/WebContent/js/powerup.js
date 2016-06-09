@@ -32,7 +32,7 @@ function Powerups() {
 
 	this.draw = function() {
 		for (var i = 0; i < this.powerups.length; i++) {
-			if (this.powerups[i].x == player.x && this.powerups[i].y == player.y) {
+			if (this.powerups[i].x == players.players[0].x && this.powerups[i].y == players.players[0].y) {
 				this.powerups[i].picked = true;
 			}
 			if (!this.powerups[i].picked) {

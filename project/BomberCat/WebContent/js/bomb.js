@@ -12,7 +12,7 @@ function Bomb() {
 function Explosion() {
 	this.x = 0;
 	this.y = 0;
-	this.timer = 50;
+	this.timer = 20;
 
 	this.set = function(x, y) {
 		this.x = x;

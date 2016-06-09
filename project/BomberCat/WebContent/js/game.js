@@ -20,10 +20,11 @@ var nextButton = new Button();
 var previousButton = new Button();
 var startGameButton = new Button();
 var map = new Map();
-var player = new Player();
+var players = new Players();
 setup();
 
 function setup() {
+	players.load("img/player.png");
 	powerups.load("img/speedup.png", "img/rangeup.png", "img/plusbomb.png");
 	bombs.load("img/bomb.png", "img/explosion.png");
 	playButton.setText("Play Game!", 50);
@@ -36,6 +37,7 @@ function setup() {
 	nextButton.setText(">", 30);
 	previousButton.setText("<", 30);
 	startGameButton.setText("Start Game", 40);
+	players.add();
 }
 
 function drawStroked(text, fontSize, x, y) {
@@ -55,7 +57,7 @@ function mainMenuState() {
 		if (connected) {
 			gameState = "preLobbyState";
 			sendMsg("menu setName " + nameField.text);
-			player.name = nameField.text;
+			players.players[0].name = nameField.text;
 			// soundtrack.play();
 		} else {
 			playButton.setText("No Connection to Server", 50)
@@ -247,7 +249,7 @@ function preGameLobbyState() {
 		preGameLobbyLoaded = false;
 	}
 
-	if (lobby.leader == player.name) {
+	if (lobby.leader == players.players[0].name) {
 		startGameButton.draw(300, 700, 240, 60);
 		if (startGameButton.isClicked()) {
 			gameState = "playState";
@@ -279,10 +281,28 @@ setInterval(function() {
 	draw();
 }, 1000 / FPS);
 
+var playerLoadMsg = new Message();
 var isPlayStateLoaded = false;
 function loadPlayState() {
-	player.load("img/player.png");
-	isPlayStateLoaded = true;
+	console.log("this.playerName = " + players.players[0].name);
+	players.players[0].ready = true;
+	playerLoadMsg.send("ingame getPlayerPositions");
+	if (playerLoadMsg.get("info", "positions")) {
+		console.log(playerLoadMsg.content);
+		var object = JSON.parse(playerLoadMsg.content);
+		for (var i = 0; i < object.length; i++) {
+			if (object[i].username != players.players[0].name) {
+				players.add();
+				players.players[players.players.length-1].name = object[i].username;
+			}
+			players.players[players.players.length-1].ready = true;
+			players.players[players.players.length-1].x = object[i].x*32;
+			players.players[players.players.length-1].y = object[i].y*32;
+			console.log(object[i].username);
+		}
+		isPlayStateLoaded = true;
+		//{"1412341234":{"x":1.0,"y":1.0},"123412341234":{"x":1.0,"y":23.0}}
+	}
 }
 
 function playState() {
@@ -291,9 +311,9 @@ function playState() {
 	} else {
 		// map.drawMini(100,100, 0.5);
 		map.draw();
-		player.draw();
 		powerups.draw();
 		bombs.draw();
+		players.draw();
 	}
 
 	if (mouse.clicked) {

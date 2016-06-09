@@ -21,7 +21,7 @@ public class GetPlayerPositions implements IngameCall {
 			spawn.add(entry.getKey().getY());
 			obj.put(entry.getValue().getClient().getUsername(), spawn);
 		}
-		game.sendToAllPlayers("spawns", obj.toJSONString());
+		game.sendToAllPlayers("positions", obj.toJSONString());
 	}
 
 }

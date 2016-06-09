@@ -1,4 +1,4 @@
-var logServerMessages = true;
+var logServerMessages = false;
 
 var mainColorR = 204;
 var mainColorG = 0;

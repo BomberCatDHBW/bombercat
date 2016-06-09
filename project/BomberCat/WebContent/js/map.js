@@ -20,7 +20,7 @@ function Map() {
 			this.jsonMap = curMsg;
 		}
 	}
-	
+
 	this.getLobbyMap = function() {
 		this.loaded = false;
 		sendAndGetResponse("lobby getLobbyMap");
@@ -77,7 +77,8 @@ function Map() {
 				var x = object.clearedFields[i][0];
 				var y = object.clearedFields[i][1];
 				for (var j = 0; j < this.blocks.length; j++) {
-					if (this.blocks[j].x/32 == x && this.blocks[j].y/32 == y) {
+					if (this.blocks[j].x / 32 == x
+							&& this.blocks[j].y / 32 == y) {
 						this.blocks[j].type = this.defaultEmptyBock;
 					}
 				}
@@ -86,11 +87,7 @@ function Map() {
 				var x = object.bonusFields[i][0];
 				var y = object.bonusFields[i][1];
 				var type = object.bonusFields[i][2];
-				for (var j = 0; j < this.blocks.length; j++) {
-					if (type == "ExplosionSize") {
-						powerups.add(x*32, y*32);
-					}
-				}
+				powerups.add(x * 32, y * 32, type);
 			}
 		}
 	}

@@ -48,8 +48,8 @@ function Player() {
 	}
 
 	this.dropBomb = function() {
-		bombs.add(this.x, this.y);
-		this.sendBombDropMsg.send("placeBomb " + this.x + ";" + this.y);
+		//bombs.add(this.x, this.y);
+		this.sendBombDropMsg.send("ingame placeBomb " + (this.x/32.0) + ";" + (this.y/32.0));
 		this.sendBombDropMsg.gotSent = false;
 	}
 }

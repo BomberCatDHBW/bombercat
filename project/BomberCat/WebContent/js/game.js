@@ -24,7 +24,7 @@ var player = new Player();
 setup();
 
 function setup() {
-	powerups.load("img/rangeup.png");
+	powerups.load("img/speedup.png", "img/rangeup.png", "img/plusbomb.png");
 	bombs.load("img/bomb.png", "img/explosion.png");
 	playButton.setText("Play Game!", 50);
 	nameField.setLabelText("Name: ", 30);

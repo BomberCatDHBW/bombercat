@@ -23,7 +23,7 @@ function openSocket() {
 
 	webSocket.onmessage = function(event) {
 		if (logServerMessages) {
-			console.log(event.data);
+			console.log("RECV: " + event.data);
 		}
 		messages.push(event.data);
 		curMsg = event.data;
@@ -46,7 +46,7 @@ function send() {
 }
 
 function sendMsg(msg) {
-	//console.log(msg);
+	//console.log("SEND: " + msg);
 	webSocket.send(msg);
 }
 

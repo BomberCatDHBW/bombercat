@@ -6,11 +6,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import de.dhbwka.java.bombercat.BomberCatMap;
 import de.dhbwka.java.bombercat.Client;
 import de.dhbwka.java.bombercat.FieldType;
 
 public class IngameMap {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(IngameMap.class);
 	private FieldType[][] map;
 	private Map<Point, BonusType> bonusFields = new HashMap<>();
 	private Map<Point, Player> bombs = new HashMap<>();
@@ -101,8 +106,9 @@ public class IngameMap {
 
 	private void checkIfSomeoneDies(int x, int y) {
 		if (players.containsKey(new Point(x, y)) && players.get(new Point(x, y)).isAlive()) {
-			System.out.println("Player died");
+			players.get(new Point(x, y)).sendMessage("playerDied", "You died");
 			players.get(new Point(x, y)).setAlive(false);
+			LOGGER.info("Player {} died", players.get(new Point(x, y)).getClient().getUsername());
 		}
 	}
 

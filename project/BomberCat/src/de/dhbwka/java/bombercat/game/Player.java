@@ -10,7 +10,7 @@ import de.dhbwka.java.bombercat.FieldType;
 
 public class Player {
 	private static final Logger LOGGER = LoggerFactory.getLogger(Player.class);
-	private boolean alive;
+	private boolean alive = true;
 	private Point position;
 	private Client client;
 	private int explosionSize = 1;
@@ -54,6 +54,12 @@ public class Player {
 				break;
 			}
 			map.getBonusFields().remove(p);
+		}
+	}
+
+	public void sendMessage(String prefix, String infoMessage) {
+		if (client != null) {
+			client.sendInfo(prefix, infoMessage);
 		}
 	}
 

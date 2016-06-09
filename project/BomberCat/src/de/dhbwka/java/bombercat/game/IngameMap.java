@@ -91,11 +91,14 @@ public class IngameMap {
 			if (getField(x, y) == FieldType.Destructible) {
 				setField(x, y, FieldType.Empty);
 				addRandomBonusField(x, y);
+				b = false;
 			}
 			if (getField(x, y) != FieldType.Indestructible) {
 				explodePossibleOtherBombs(x, y, points);
 				checkIfSomeoneDies(x, y);
-				points.add(new Point(x, y));
+				if (!points.contains(new Point(x, y))) {
+					points.add(new Point(x, y));
+				}
 			} else if (getField(x, y) == FieldType.Indestructible) {
 				b = false;
 			}

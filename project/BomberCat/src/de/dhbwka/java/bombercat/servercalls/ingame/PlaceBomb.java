@@ -2,6 +2,7 @@ package de.dhbwka.java.bombercat.servercalls.ingame;
 
 import de.dhbwka.java.bombercat.Client;
 import de.dhbwka.java.bombercat.game.GameMain;
+import de.dhbwka.java.bombercat.game.Player;
 
 public class PlaceBomb implements IngameCall {
 
@@ -12,14 +13,17 @@ public class PlaceBomb implements IngameCall {
 			public void run() {
 				int x = Integer.parseInt(parameter[0]);
 				int y = Integer.parseInt(parameter[1]);
-				game.getMap().addBomb(x, y, game.getPlayer(client));
-				game.sendToAllPlayers("bombPlaced", x + ";" + y + ";" + game.getPlayer(client).getExplosionSize());
-				try {
-					Thread.sleep(2000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
+				Player player = game.getPlayer(client);
+				if (player.getAmountPlacedBombs() <= player.getBombAmount()) {
+					game.getMap().addBomb(x, y, game.getPlayer(client));
+					game.sendToAllPlayers("bombPlaced", x + ";" + y + ";" + game.getPlayer(client).getExplosionSize());
+					try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					game.explodeBomb(x, y, game.getPlayer(client).getExplosionSize(), game, client);
 				}
-				new ExplodeBomb().run(new String[] { x + "", y + "" }, game, client);
 			}
 		}.start();
 

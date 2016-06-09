@@ -75,7 +75,8 @@ public class IngameMap {
 			if (getField(x, y) == FieldType.Destructible) {
 				setField(x, y, FieldType.Empty);
 				addRandomBonusField(x, y);
-			} else if (getField(x, y) != FieldType.Indestructible) {
+			}
+			if (getField(x, y) != FieldType.Indestructible) {
 				explodePossibleOtherBombs(x, y, points);
 				points.add(new Point(x, y));
 			} else if (getField(x, y) == FieldType.Indestructible) {

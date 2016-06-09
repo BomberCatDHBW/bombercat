@@ -68,6 +68,8 @@ function Players() {
 				}
 			}
 			if (this.players[i].alive) {
+				context.font = "30px Arial";
+				context.fillText(this.players[i].name, this.players[i].x+5, this.players[i].y+5);
 				this.playerSprite.draw(this.players[i].x, this.players[i].y);
 			}
 		}

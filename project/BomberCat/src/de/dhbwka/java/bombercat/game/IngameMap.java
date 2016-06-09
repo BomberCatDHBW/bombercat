@@ -58,6 +58,7 @@ public class IngameMap {
 	}
 
 	public void explode(int x, int y, int size, List<Point> points) {
+		bombs.remove(new Point(x, y));
 		boolean left = true;
 		boolean right = true;
 		boolean up = true;

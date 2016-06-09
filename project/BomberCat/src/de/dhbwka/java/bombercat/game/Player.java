@@ -25,9 +25,11 @@ public class Player {
 		boolean result = false;
 		if (position.distance(p) == 1) {
 			if (map.getField((int) p.getX(), (int) p.getY()) == FieldType.Empty) {
-				position = p;
-				result = true;
-				addBonusToPlayer(p, map);
+				if (!map.getBombs().containsKey(p)) {
+					position = p;
+					result = true;
+					addBonusToPlayer(p, map);
+				}
 			}
 		}
 		return result;

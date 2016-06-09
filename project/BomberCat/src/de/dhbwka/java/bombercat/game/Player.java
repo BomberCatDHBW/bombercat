@@ -14,6 +14,7 @@ public class Player {
 	private Point position;
 	private Client client;
 	private int explosionSize = 1;
+	private int amountPlacedBombs = 0;
 	private int speed = 32;
 	private int bombAmount = 1;
 
@@ -98,5 +99,13 @@ public class Player {
 
 	public void setAlive(boolean alive) {
 		this.alive = alive;
+	}
+
+	public int getAmountPlacedBombs() {
+		return amountPlacedBombs;
+	}
+
+	public void setAmountPlacedBombs(int amountPlacedBombs) {
+		this.amountPlacedBombs = amountPlacedBombs;
 	}
 }

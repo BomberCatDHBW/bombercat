@@ -14,7 +14,8 @@ public class PlaceBomb implements IngameCall {
 				int x = Integer.parseInt(parameter[0]);
 				int y = Integer.parseInt(parameter[1]);
 				Player player = game.getPlayer(client);
-				if (player.getAmountPlacedBombs() <= player.getBombAmount()) {
+				if (player.getAmountPlacedBombs() < player.getBombAmount()) {
+					player.setAmountPlacedBombs(player.getAmountPlacedBombs() + 1);
 					game.getMap().addBomb(x, y, game.getPlayer(client));
 					game.sendToAllPlayers("bombPlaced", x + ";" + y + ";" + game.getPlayer(client).getExplosionSize());
 					try {
@@ -23,6 +24,7 @@ public class PlaceBomb implements IngameCall {
 						e.printStackTrace();
 					}
 					game.explodeBomb(x, y, game.getPlayer(client).getExplosionSize(), game, client);
+					player.setAmountPlacedBombs(player.getAmountPlacedBombs() - 1);
 				}
 			}
 		}.start();

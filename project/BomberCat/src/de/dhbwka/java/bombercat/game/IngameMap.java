@@ -68,11 +68,11 @@ public class IngameMap {
 
 	public void explode(int x, int y, int size, List<Point> points) {
 		bombs.remove(new Point(x, y));
-		checkIfSomeoneDies(x, y);
 		boolean left = true;
 		boolean right = true;
 		boolean up = true;
 		boolean down = true;
+		clearAndAddPoint(x, y, points, true);
 		for (int i = 1; i <= size; i++) {
 			down = clearAndAddPoint(x + i, y, points, down);
 			up = clearAndAddPoint(x - i, y, points, up);

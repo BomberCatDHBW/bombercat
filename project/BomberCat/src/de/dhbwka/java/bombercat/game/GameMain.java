@@ -9,12 +9,15 @@ import java.util.Set;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import de.dhbwka.java.bombercat.BomberCatMap;
 import de.dhbwka.java.bombercat.Client;
 import de.dhbwka.java.bombercat.Lobby;
 
 public class GameMain {
+	private static final Logger LOGGER = LoggerFactory.getLogger(GameMain.class);
 	private IngameMap map;
 	private Map<Client, Player> players = new HashMap<>();
 	private Lobby lobby;
@@ -65,5 +68,23 @@ public class GameMain {
 		objJSON.put("clearedFields", pointsJSON);
 		objJSON.put("bonusFields", bonusFieldsJSON);
 		sendToAllPlayers("clearFields", objJSON.toJSONString());
+		isGameEnded();
+	}
+
+	private void isGameEnded() {
+		int alivePlayers = players.size();
+		for (Player player : players.values()) {
+			if (player.isAlive()) {
+				alivePlayers++;
+			}
+		}
+		if (alivePlayers <= 1) {
+			for (Player player : players.values()) {
+				if (player.isAlive()) {
+					sendToAllPlayers("playerWon", player.getClient().getUsername());
+					LOGGER.info("Player {} won the lobby {}", player.getClient().getUsername(), lobby.getLobbyName());
+				}
+			}
+		}
 	}
 }

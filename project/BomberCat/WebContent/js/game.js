@@ -308,6 +308,9 @@ function loadPlayState() {
 	}
 }
 
+var winMsg = new Message();
+var gameWon = false;
+
 function playState() {
 	if (!isPlayStateLoaded) {
 		loadPlayState();
@@ -317,6 +320,21 @@ function playState() {
 		powerups.draw();
 		bombs.draw();
 		players.draw();
+		if (winMsg.get("info", "playerWon")) {
+			gameWon = true;
+		}
+		if (gameWon) {
+			backButton.draw(50, 700, 100, 60);
+			players.players[0].ready = false;
+			drawStroked(winMsg.content + " wins the game!", 60, 60, 300);
+			if (backButton.isClicked()) {
+				players.players.length = 0;
+				bombs.bombs.length = 0;
+				powerups.powerups.length = 0;
+				gameState = "preLobbyState";
+				sendMsg("lobby leaveLobby");
+			}
+		}
 	}
 
 	if (mouse.clicked) {

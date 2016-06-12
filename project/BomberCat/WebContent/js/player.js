@@ -41,6 +41,7 @@ function Players() {
 	this.players = new Array();
 	this.playerSprite = new Sprite();
 	this.getPosMsg = new Message();
+	this.dieMsg = new Message();
 
 	this.load = function(playerImgSrc) {
 		this.playerSprite.load(playerImgSrc);
@@ -66,6 +67,9 @@ function Players() {
 						break;
 					}
 				}
+			}
+			if (this.dieMsg.get("info", "playerDied")) {
+				this.players[0].alive = false;
 			}
 			if (this.players[i].alive) {
 				context.font = "16px Arial";

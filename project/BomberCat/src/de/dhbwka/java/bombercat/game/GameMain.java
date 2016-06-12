@@ -72,7 +72,7 @@ public class GameMain {
 	}
 
 	private void isGameEnded() {
-		int alivePlayers = players.size();
+		int alivePlayers = 0;
 		for (Player player : players.values()) {
 			if (player.isAlive()) {
 				alivePlayers++;

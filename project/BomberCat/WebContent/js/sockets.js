@@ -50,7 +50,7 @@ function sendMsg(msg) {
 	if (logSendMessages) {		
 		console.log("SEND: " + msg);
 	}
-	webSocket.send(encodeURI(msg));
+	webSocket.send(msg);
 }
 
 var hasSent = false;

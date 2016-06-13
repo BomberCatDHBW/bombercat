@@ -32,7 +32,7 @@ function Map() {
 	this.parse = function() {
 		this.parentBlocks.length = 0;
 		this.blocks.length = 0;
-		var object = JSON.parse(this.jsonMap);
+		var object = JSON.parse(decodeURIComponent(this.jsonMap));
 		this.name = object.name;
 		this.width = Object.keys(object.field[0]).length;
 		this.height = Object.keys(object.field).length;

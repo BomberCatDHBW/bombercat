@@ -1,6 +1,5 @@
 package de.dhbwka.java.bombercat;
 
-import java.nio.charset.Charset;
 import java.util.Set;
 
 import javax.websocket.Session;
@@ -45,7 +44,7 @@ public class Client {
 		String string = type + " " + prefix + " " + message;
 		try {
 			if (session.isOpen()) {
-				session.getBasicRemote().sendBinary(Charset.forName("UTF-8").encode(string));
+				session.getBasicRemote().sendText(new String(string.getBytes("UTF-8"), "UTF-8"));
 			} else {
 				LOGGER.info("Session is not open");
 				throw new Exception();

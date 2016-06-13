@@ -28,12 +28,14 @@ public class Player {
 		if (position.distance(p) == 1) {
 			if (map.getField((int) p.getX(), (int) p.getY()) == FieldType.Empty) {
 				if (!map.getBombs().containsKey(p)) {
-					Player player = map.getPlayers().get(position);
-					map.getPlayers().remove(position);
-					map.getPlayers().put(p, player);
-					position = p;
-					result = true;
-					addBonusToPlayer(p, map);
+					if (map.getPlayers().get(p).isAlive()) {
+						Player player = map.getPlayers().get(position);
+						map.getPlayers().remove(position);
+						map.getPlayers().put(p, player);
+						position = p;
+						result = true;
+						addBonusToPlayer(p, map);
+					}
 				}
 			}
 		}

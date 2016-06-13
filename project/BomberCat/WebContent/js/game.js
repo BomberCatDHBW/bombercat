@@ -89,7 +89,7 @@ function loadLobbyListState() {
 	if (getLobbyMsg.get("info", "lobbies")) {
 		isLobbyListStateLoaded = true;
 		// console.log(getLobbyMsg.content);
-		var jsonLobbies = JSON.parse(decodeURIComponent(getLobbyMsg.content));
+		var jsonLobbies = JSON.parse(getLobbyMsg.content);
 		for (var i = 0; i < Object.keys(jsonLobbies.lobbies).length; i++) {
 			var lobbyInfo = jsonLobbies.lobbies[i].name;
 			var tmpButton = new Button();
@@ -126,7 +126,7 @@ var getMapNamesMsg = new Message();
 function loadCreateLobby() {
 	getMapNamesMsg.send("lobby getMapNames");
 	if (getMapNamesMsg.get("info", "mapNames")) {
-		mapsObject = JSON.parse(decodeURIComponent(getMapNamesMsg.content));
+		mapsObject = JSON.parse(getMapNamesMsg.content);
 		// for (var i = 0; i < Object.keys(mapsObject.maps).length; i++) {
 		// console.log(mapsObject.maps[i]);
 		// }
@@ -210,7 +210,7 @@ function preGameLobbyState() {
 		}
 		if (getPlayersMsg.get("info", "players")) {
 			lobby.players.length = 0;
-			var playersObject = JSON.parse(decodeURIComponent(getPlayersMsg.content));
+			var playersObject = JSON.parse(getPlayersMsg.content);
 			lobby.leader = playersObject.leader;
 			for (var i = 0; i < Object.keys(playersObject.players).length; i++) {
 				lobby.players.push(playersObject.players[i]);
@@ -289,7 +289,7 @@ function loadPlayState() {
 	playerLoadMsg.send("ingame getPlayerPositions");
 	if (playerLoadMsg.get("info", "positions")) {
 		console.log(playerLoadMsg.content);
-		var object = JSON.parse(decodeURIComponent(playerLoadMsg.content));
+		var object = JSON.parse(playerLoadMsg.content);
 		for (var i = 0; i < object.length; i++) {
 			if (object[i].username != players.players[0].name) {
 				var player = new Player();

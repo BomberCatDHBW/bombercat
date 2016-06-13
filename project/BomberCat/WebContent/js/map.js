@@ -32,7 +32,7 @@ function Map() {
 	this.parse = function() {
 		this.parentBlocks.length = 0;
 		this.blocks.length = 0;
-		var object = JSON.parse(decodeURIComponent(this.jsonMap));
+		var object = JSON.parse(this.jsonMap);
 		this.name = object.name;
 		this.width = Object.keys(object.field[0]).length;
 		this.height = Object.keys(object.field).length;
@@ -72,7 +72,7 @@ function Map() {
 					this.blocks[i].y);
 		}
 		if (this.explodeMsg.get("info", "clearFields")) {
-			var object = JSON.parse(decodeURIComponent(this.explodeMsg.content));
+			var object = JSON.parse(this.explodeMsg.content);
 			for (var i = 0; i < Object.keys(object.clearedFields).length; i++) {
 				var x = object.clearedFields[i][0];
 				var y = object.clearedFields[i][1];

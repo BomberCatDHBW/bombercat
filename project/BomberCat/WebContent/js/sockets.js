@@ -22,11 +22,12 @@ function openSocket() {
 	};
 
 	webSocket.onmessage = function(event) {
+		var decodedMsg = decodeURIComponent(event.data);
 		if (logServerMessages) {
-			console.log("RECV: " + event.data);
+			console.log("RECV: " + decodedMsg);
 		}
-		messages.push(event.data);
-		curMsg = event.data;
+		messages.push(decodedMsg);
+		curMsg = decodedMsg;
 		var msg = new Message();
 		if (msg.get("info", "connection")){
 			connected = true;

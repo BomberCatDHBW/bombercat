@@ -108,10 +108,13 @@ public class IngameMap {
 	}
 
 	private void checkIfSomeoneDies(int x, int y) {
-		if (players.containsKey(new Point(x, y)) && players.get(new Point(x, y)).isAlive()) {
-			players.get(new Point(x, y)).sendMessage("playerDied", "You died");
-			players.get(new Point(x, y)).setAlive(false);
-			LOGGER.info("Player {} died", players.get(new Point(x, y)).getClient().getUsername());
+		Point p = new Point(x, y);
+		if (players.containsKey(p) && players.get(p).isAlive()) {
+			players.get(p).getClient().getLobby().sendMessageToAll("playerDied",
+					players.get(p).getClient().getUsername());
+			players.get(p).sendMessage("playerDied", "You died");
+			players.get(p).setAlive(false);
+			LOGGER.info("Player {} died", players.get(p).getClient().getUsername());
 		}
 	}
 

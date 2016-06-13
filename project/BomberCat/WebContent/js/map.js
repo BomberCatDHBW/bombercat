@@ -72,7 +72,7 @@ function Map() {
 					this.blocks[i].y);
 		}
 		if (this.explodeMsg.get("info", "clearFields")) {
-			var object = JSON.parse(this.explodeMsg.content);
+			var object = JSON.parse(decodeURIComponent(this.explodeMsg.content));
 			for (var i = 0; i < Object.keys(object.clearedFields).length; i++) {
 				var x = object.clearedFields[i][0];
 				var y = object.clearedFields[i][1];

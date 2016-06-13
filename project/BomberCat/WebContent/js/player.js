@@ -69,7 +69,12 @@ function Players() {
 				}
 			}
 			if (this.dieMsg.get("info", "playerDied")) {
-				this.players[0].alive = false;
+				for (var j = 0; j < this.players.length; j++) {
+					if (this.dieMsg.content == this.players[j].name) {
+						this.players[j].alive = false;
+						break;
+					}
+				}
 			}
 			if (this.players[i].alive) {
 				context.font = "16px Arial";

@@ -28,6 +28,7 @@ function Bombs() {
 	this.explosionSprite = new Sprite();
 	this.bombMsg = new Message();
 	this.getBombMsg = new Message();
+	this.boomSound = new Audio("sound/pickup.wav");
 
 	this.load = function(bombSrc, explosionSrc) {
 		this.bombSprite.load(bombSrc);
@@ -48,6 +49,10 @@ function Bombs() {
 		for (var i = 0; i < this.bombs.length; i++) {
 			if (this.bombs[i].x == x && this.bombs[i].y == y) {
 				this.bombs.splice(i,1);
+				if (this.boomSound.paused) {
+					console.log("boom");
+					this.boomSound.play();
+				}
 			}
 		}
 	}

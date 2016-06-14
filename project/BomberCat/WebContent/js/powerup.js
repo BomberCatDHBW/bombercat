@@ -16,6 +16,7 @@ function Powerups() {
 	this.rangeupSprite = new Sprite();
 	this.plusbombSprite = new Sprite();
 	this.powerupMsg = new Message();
+	this.pickupSound = new Audio("sound/powerup.wav");
 
 	this.load = function(speedupSpriteSrc, rangeupSpriteSrc, plusbombSpriteSrc) {
 		this.speedupSprite.load(speedupSpriteSrc);
@@ -35,6 +36,7 @@ function Powerups() {
 			for (var j = 0; j < players.players.length; j++) {
 				if (this.powerups[i].x == players.players[j].x && this.powerups[i].y == players.players[j].y) {
 					this.powerups[i].picked = true;
+					this.pickupSound.play();
 				}
 			}
 			if (!this.powerups[i].picked) {

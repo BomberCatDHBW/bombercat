@@ -1,6 +1,7 @@
 package de.dhbwka.java.bombercat;
 
 import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.util.Set;
 
 import javax.websocket.Session;
@@ -46,11 +47,7 @@ public class Client {
 		try {
 			if (session.isOpen()) {
 				String tmpString = new String(string.getBytes("UTF-8"), "UTF-8");
-				try {
-					session.getBasicRemote().sendText(tmpString);
-				} catch (IOException ex) {
-					LOGGER.error(ex.getMessage());
-				}
+				session.getAsyncRemote().sendText(tmpString);
 			} else {
 				LOGGER.info("Session is not open");
 				throw new Exception();

@@ -19,6 +19,10 @@ function openSocket() {
 			return;
 		}
 	};
+	
+	webSocket.onerror = function (event) {
+        console.log("-> ! ERROR ! <- " + event.data);
+    };
 
 	webSocket.onmessage = function(event) {
 		var decodedMsg = decodeURIComponent(event.data);

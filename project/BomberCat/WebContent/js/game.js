@@ -331,7 +331,7 @@ function playState() {
 				isPlayStateLoaded = false;
 				preGameLobbyLoaded = false;
 				createLobbyLoaded = false;
-				players.players.length = 0;
+				players.players.length = 1;
 				bombs.bombs.length = 0;
 				powerups.powerups.length = 0;
 				gameState = "preLobbyState";

@@ -25,30 +25,56 @@ function onMove(e) {
 }
 
 window.addEventListener('keydown', this.check, false);
+window.addEventListener('keyup', this.keyup, false);
+
+var keyAllowed = {};
+for (var i = 0; i < 256; i++) {
+	keyAllowed[i] = true;
+}
+
+function keyup(e) {
+	keyAllowed[e.keyCode] = true;
+}
 
 function check(e) {
 	var code = e.keyCode;
 	if (players.players[0].ready) {		
 		if (code == 37 || code == 65) {
 			// Left key
-			players.players[0].goLeft();
+			if (keyAllowed[37] && keyAllowed[65])
+			{
+				players.players[0].goLeft();
+			}
 		}
 		if (code == 38 || code == 87) {
 			// Up key
-			players.players[0].goUp();
+			if (keyAllowed[38] && keyAllowed[87])
+			{
+				players.players[0].goUp();
+			}
 		}
 		if (code == 39 || code == 68) {
 			// Right key
-			players.players[0].goRight();
+			if (keyAllowed[39] && keyAllowed[68])
+			{
+				players.players[0].goRight();
+			}
 		}
 		if (code == 40 || code == 83) {
 			// Down key
-			players.players[0].goDown();
+			if (keyAllowed[40] && keyAllowed[83])
+			{
+				players.players[0].goDown();
+			}
 		}
 		if (code ==  32) {
 			// Spacebar
-			players.players[0].dropBomb();
+			if (keyAllowed[32])
+			{
+				players.players[0].dropBomb();
+			}
 		}
+		keyAllowed[code] = false;
 	}
 }
 

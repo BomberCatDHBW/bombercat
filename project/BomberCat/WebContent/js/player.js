@@ -1,27 +1,30 @@
 function Player() {
 	this.x = -32;
 	this.y = -32;
-	this.speed = 32;
+	this.speed = 2;
 	this.name = "";
 	this.sendPosMsg = new Message();
 	this.sendBombDropMsg = new Message();
 	this.ready = false;
 	this.alive = true;
+	this.canMove = true;
+	this.velX = 0;
+	this.velY = 0;
 	
 	this.goLeft = function() {
-		this.sendPosition(parseInt(this.x) - parseInt(this.speed), this.y);
+		this.sendPosition(parseInt(this.x) - parseInt(32), this.y);
 	}
 
 	this.goRight = function() {
-		this.sendPosition(parseInt(this.x) + parseInt(this.speed), this.y);
+		this.sendPosition(parseInt(this.x) + parseInt(32), this.y);
 	}
 
 	this.goUp = function() {
-		this.sendPosition(this.x, parseInt(this.y)- parseInt(this.speed));
+		this.sendPosition(this.x, parseInt(this.y)- parseInt(32));
 	}
 
 	this.goDown = function() {
-		this.sendPosition(this.x, parseInt(this.y) + parseInt(this.speed));
+		this.sendPosition(this.x, parseInt(this.y) + parseInt(32));
 	}
 	
 	this.sendPosition = function(x, y) {
@@ -34,6 +37,28 @@ function Player() {
 		this.sendBombDropMsg.send("ingame placeBomb " + (this.x/32.0) + ";" + (this.y/32.0));
 		this.sendBombDropMsg.gotSent = false;
 	}
+	
+	this.move = function() {
+		if (this.velX > 0) {
+			this.x += this.speed;
+			this.velX -= 2;
+		}
+		if (this.velX < 0) {
+			this.x -= this.speed;
+			this.velX += this.speed;
+		}
+		if (this.velY > 0) {
+			this.y += this.speed;
+			this.velY -= this.speed;
+		}
+		if (this.velY < 0) {
+			this.y -= this.speed;
+			this.velY += this.speed;
+		}
+		if (this.velX == 0 && this.velY == 0) {
+			this.canMove = true;
+		}
+	};
 }
 
 
@@ -62,8 +87,9 @@ function Players() {
 				var y = position[2]*32.0;
 				for (var j = 0; j < this.players.length; j++) {
 					if (username == this.players[j].name) {
-						this.players[j].x = x;
-						this.players[j].y = y;
+						this.players[j].velX = x-this.players[j].x;
+						this.players[j].velY = y-this.players[j].y;
+						this.players[j].canMove = false;
 						break;
 					}
 				}
@@ -79,6 +105,7 @@ function Players() {
 			if (this.players[i].alive) {
 				context.font = "16px Arial";
 				context.fillText(this.players[i].name, this.players[i].x+5, this.players[i].y+5);
+				this.players[i].move();
 				this.playerSprite.draw(this.players[i].x, this.players[i].y);
 			}
 		}

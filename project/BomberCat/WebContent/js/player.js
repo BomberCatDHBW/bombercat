@@ -40,24 +40,23 @@ function Player() {
 	
 	this.move = function() {
 		if (this.velX > 0) {
-			this.x += this.speed;
-			this.velX -= 2;
+			this.x += parseInt(this.speed);
+			this.velX -= parseInt(this.speed);
 		}
 		if (this.velX < 0) {
-			this.x -= this.speed;
-			this.velX += this.speed;
+			this.x -= parseInt(this.speed);
+			this.velX += parseInt(this.speed);
 		}
 		if (this.velY > 0) {
-			this.y += this.speed;
-			this.velY -= this.speed;
+			this.y += parseInt(this.speed);
+			this.velY -= parseInt(this.speed);
 		}
 		if (this.velY < 0) {
-			this.y -= this.speed;
-			this.velY += this.speed;
+			this.y -= parseInt(this.speed);
+			this.velY += parseInt(this.speed);
 		}
 		if (this.velX == 0 && this.velY == 0) {
 			this.canMove = true;
-			resetKeys();
 		}
 	};
 }
@@ -81,6 +80,30 @@ function Players() {
 
 	this.draw = function() {
 		for (var i = 0; i < this.players.length; i++) {
+			if (i == 0) {
+				if (players.players[0].ready) {		
+					if (65 in keysDown) {
+						// Left key
+						players.players[0].goLeft();
+					}
+					if (87 in keysDown) {
+						// Up key
+						players.players[0].goUp();
+					}
+					if (68 in keysDown) {
+						// Right key
+						players.players[0].goRight();
+					}
+					if (83 in keysDown) {
+						// Down key
+						players.players[0].goDown();
+					}
+					if (32 in keysDown) {
+						// Spacebar
+						players.players[0].dropBomb();
+					}
+				}
+			}
 			if (this.getPosMsg.get("info", "setPosition")) {
 				var position = this.getPosMsg.content.split(";");
 				var username = position[0];

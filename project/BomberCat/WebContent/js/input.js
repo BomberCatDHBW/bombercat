@@ -24,62 +24,17 @@ function onMove(e) {
 	mouse.y = e.clientY - rect.top;
 }
 
-window.addEventListener('keydown', this.check, false);
+window.addEventListener('keydown', this.keydown, false);
 window.addEventListener('keyup', this.keyup, false);
 
-var keyAllowed = {};
-resetKeys();
-
-function resetKeys() {
-	for (var i = 0; i < 256; i++) {
-		keyAllowed[i] = true;
-	}
-}
+var keysDown = {};
 
 function keyup(e) {
-	keyAllowed[e.keyCode] = true;
+	delete keysDown[e.keyCode];
 }
 
-function check(e) {
-	var code = e.keyCode;
-	if (players.players[0].ready) {		
-		if (code == 37 || code == 65) {
-			// Left key
-			if (keyAllowed[37] && keyAllowed[65])
-			{
-				players.players[0].goLeft();
-			}
-		}
-		if (code == 38 || code == 87) {
-			// Up key
-			if (keyAllowed[38] && keyAllowed[87])
-			{
-				players.players[0].goUp();
-			}
-		}
-		if (code == 39 || code == 68) {
-			// Right key
-			if (keyAllowed[39] && keyAllowed[68])
-			{
-				players.players[0].goRight();
-			}
-		}
-		if (code == 40 || code == 83) {
-			// Down key
-			if (keyAllowed[40] && keyAllowed[83])
-			{
-				players.players[0].goDown();
-			}
-		}
-		if (code ==  32) {
-			// Spacebar
-			if (keyAllowed[32])
-			{
-				players.players[0].dropBomb();
-			}
-		}
-		keyAllowed[code] = false;
-	}
+function keydown(e) {
+	keysDown[e.keyCode] = true;
 }
 
 window.addEventListener('keypress', this.keyPress, false);

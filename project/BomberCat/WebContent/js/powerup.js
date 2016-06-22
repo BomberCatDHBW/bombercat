@@ -37,6 +37,10 @@ function Powerups() {
 				if (this.powerups[i].x == players.players[j].x && this.powerups[i].y == players.players[j].y) {
 					this.powerups[i].picked = true;
 					this.pickupSound.play();
+					if (this.powerups[i].type == "SpeedUp")
+					{
+						//players.players[j].speed += 2;
+					}
 				}
 			}
 			if (!this.powerups[i].picked) {

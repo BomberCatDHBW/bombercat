@@ -57,6 +57,7 @@ function Player() {
 		}
 		if (this.velX == 0 && this.velY == 0) {
 			this.canMove = true;
+			resetKeys();
 		}
 	};
 }

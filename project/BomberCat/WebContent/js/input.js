@@ -28,8 +28,12 @@ window.addEventListener('keydown', this.check, false);
 window.addEventListener('keyup', this.keyup, false);
 
 var keyAllowed = {};
-for (var i = 0; i < 256; i++) {
-	keyAllowed[i] = true;
+resetKeys();
+
+function resetKeys() {
+	for (var i = 0; i < 256; i++) {
+		keyAllowed[i] = true;
+	}
 }
 
 function keyup(e) {

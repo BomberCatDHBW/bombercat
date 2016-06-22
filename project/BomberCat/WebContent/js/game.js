@@ -334,6 +334,8 @@ function playState() {
 				players.players.length = 1;
 				bombs.bombs.length = 0;
 				powerups.powerups.length = 0;
+				gameWon = false;
+				map.loaded = false;
 				gameState = "preLobbyState";
 				sendMsg("lobby leaveLobby");
 			}

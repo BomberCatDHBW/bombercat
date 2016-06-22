@@ -1,7 +1,5 @@
 package de.dhbwka.java.bombercat;
 
-import java.io.IOException;
-import java.nio.ByteBuffer;
 import java.util.Set;
 
 import javax.websocket.Session;
@@ -42,18 +40,17 @@ public class Client {
 		this.lobby = lobby;
 	}
 
-	private void sendMessage(String type, String prefix, String message) {
+	private synchronized void sendMessage(String type, String prefix, String message) {
 		String string = type + " " + prefix + " " + message;
 		try {
 			if (session.isOpen()) {
-				String tmpString = new String(string.getBytes("UTF-8"), "UTF-8");
-				session.getAsyncRemote().sendText(tmpString);
+				session.getAsyncRemote().sendText(string);
 			} else {
 				LOGGER.info("Session is not open");
 				throw new Exception();
 			}
 		} catch (Exception e) {
-			LOGGER.info("Could not send message: {}", message);
+			session.getAsyncRemote().sendText(string);
 		}
 	}
 

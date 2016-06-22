@@ -327,6 +327,7 @@ function playState() {
 			players.players[0].ready = false;
 			drawStroked(winMsg.content + " wins the game!", 60, 60, 300);
 			if (backButton.isClicked()) {
+				players.players[0].ready = false;
 				isLobbyListStateLoaded = false;
 				isPlayStateLoaded = false;
 				preGameLobbyLoaded = false;

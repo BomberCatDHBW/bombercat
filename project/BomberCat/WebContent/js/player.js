@@ -28,8 +28,10 @@ function Player() {
 	}
 	
 	this.sendPosition = function(x, y) {
-		this.sendPosMsg.send("ingame moveToPosition " + (x/32.0) + ";" + (y/32.0));
-		this.sendPosMsg.gotSent = false;
+		if (this.canMove) {	
+			this.sendPosMsg.send("ingame moveToPosition " + (x/32.0) + ";" + (y/32.0));
+			this.sendPosMsg.gotSent = false;
+		}
 	}
 
 	this.dropBomb = function() {

@@ -36,8 +36,10 @@ function Player() {
 
 	this.dropBomb = function() {
 		//bombs.add(this.x, this.y);
-		this.sendBombDropMsg.send("ingame placeBomb " + (this.x/32.0) + ";" + (this.y/32.0));
-		this.sendBombDropMsg.gotSent = false;
+		if (this.canMove) {
+			this.sendBombDropMsg.send("ingame placeBomb " + (this.x/32.0) + ";" + (this.y/32.0));
+			this.sendBombDropMsg.gotSent = false;
+		}
 	}
 	
 	this.move = function() {

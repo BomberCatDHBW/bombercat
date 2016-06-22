@@ -39,7 +39,7 @@ function Powerups() {
 					this.pickupSound.play();
 					if (this.powerups[i].type == "SpeedUp")
 					{
-						players.players[j].speed ++;
+						players.players[j].speed += 2;
 					}
 				}
 			}

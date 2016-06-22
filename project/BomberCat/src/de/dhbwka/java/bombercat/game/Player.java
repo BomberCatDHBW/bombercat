@@ -15,7 +15,6 @@ public class Player {
 	private Client client;
 	private int explosionSize = 1;
 	private int amountPlacedBombs = 0;
-	private int speed = 32;
 	private int bombAmount = 1;
 
 	public Player(Point point, Client client) {
@@ -23,7 +22,7 @@ public class Player {
 		this.setClient(client);
 	}
 
-	public boolean moveToPosition(Point p, IngameMap map) {
+	public synchronized boolean moveToPosition(Point p, IngameMap map) {
 		boolean result = false;
 		if (position.distance(p) == 1) {
 			if (map.getField((int) p.getX(), (int) p.getY()) == FieldType.Empty) {
@@ -50,7 +49,7 @@ public class Player {
 				explosionSize++;
 				break;
 			case SpeedUp:
-				speed += 10;
+				client.sendInfo("speedUp", "");
 				break;
 			}
 			map.getBonusFields().remove(p);
@@ -69,14 +68,6 @@ public class Player {
 
 	public void setExplosionSize(int explosionSize) {
 		this.explosionSize = explosionSize;
-	}
-
-	public int getSpeed() {
-		return speed;
-	}
-
-	public void setSpeed(int speed) {
-		this.speed = speed;
 	}
 
 	public int getBombAmount() {

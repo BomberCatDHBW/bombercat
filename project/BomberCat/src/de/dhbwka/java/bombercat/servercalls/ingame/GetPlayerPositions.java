@@ -16,11 +16,11 @@ public class GetPlayerPositions implements IngameCall {
 	public void run(String[] parameter, GameMain game, Client client) {
 		JSONArray obj = new JSONArray();
 		for (Entry<Point, Player> entry : game.getMap().getPlayers().entrySet()) {
-			JSONObject spawn = new JSONObject();
-			spawn.put("x", entry.getKey().getX());
-			spawn.put("y", entry.getKey().getY());
-			spawn.put("username", entry.getValue().getClient().getUsername());
-			obj.add(spawn);
+			JSONObject position = new JSONObject();
+			position.put("x", entry.getKey().getX());
+			position.put("y", entry.getKey().getY());
+			position.put("username", entry.getValue().getClient().getUsername());
+			obj.add(position);
 		}
 		game.sendToAllPlayers("positions", obj.toJSONString());
 	}

@@ -12,8 +12,8 @@ public class MoveToPosition implements IngameCall {
 		new Thread() {
 			@Override
 			public void run() {
-				int x = Integer.parseInt(parameter[0]);
-				int y = Integer.parseInt(parameter[1]);
+				int x = (int) Math.round(Double.parseDouble(parameter[0]));
+				int y = (int) Math.round(Double.parseDouble(parameter[1]));
 				if (game.getPlayer(client).moveToPosition(new Point(x, y), game.getMap())) {
 					game.sendToAllPlayers("setPosition", client.getUsername() + ";" + x + ";" + y);
 				} else {

@@ -41,16 +41,16 @@ public class Client {
 	}
 
 	private synchronized void sendMessage(String type, String prefix, String message) {
-		String string = type + " " + prefix + " " + message;
+		String compositeMessage = type + " " + prefix + " " + message;
 		try {
 			if (session.isOpen()) {
-				session.getAsyncRemote().sendText(string);
+				session.getBasicRemote().sendText(compositeMessage);
 			} else {
 				LOGGER.info("Session is not open");
-				throw new Exception();
+				throw new Exception("Session is not open");
 			}
 		} catch (Exception e) {
-			session.getAsyncRemote().sendText(string);
+			LOGGER.error("{} Could not send message: {}", e.getMessage(), compositeMessage);
 		}
 	}
 

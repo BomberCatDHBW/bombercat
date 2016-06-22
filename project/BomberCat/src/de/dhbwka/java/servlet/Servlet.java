@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.websocket.OnClose;
+import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
@@ -69,5 +70,10 @@ public class Servlet extends HttpServlet {
 				clients.get(session.getId()).getUsername());
 		server.removeClient(clients.get(session.getId()));
 		clients.remove(session.getId());
+	}
+
+	@OnError
+	public void onError(Throwable t) {
+
 	}
 }

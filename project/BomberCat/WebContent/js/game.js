@@ -252,7 +252,6 @@ function preGameLobbyState() {
 	if (lobby.leader == players.players[0].name) {
 		startGameButton.draw(300, 700, 240, 60);
 		if (startGameButton.isClicked()) {
-			gameState = "playState";
 			sendMsg("lobby startGame");
 		}
 	}
@@ -318,8 +317,8 @@ function playState() {
 		// map.drawMini(100,100, 0.5);
 		map.draw();
 		powerups.draw();
-		bombs.draw();
 		players.draw();
+		bombs.draw();
 		if (winMsg.get("info", "playerWon")) {
 			gameWon = true;
 		}
@@ -328,6 +327,10 @@ function playState() {
 			players.players[0].ready = false;
 			drawStroked(winMsg.content + " wins the game!", 60, 60, 300);
 			if (backButton.isClicked()) {
+				isLobbyListStateLoaded = false;
+				isPlayStateLoaded = false;
+				preGameLobbyLoaded = false;
+				createLobbyLoaded = false;
 				players.players.length = 0;
 				bombs.bombs.length = 0;
 				powerups.powerups.length = 0;

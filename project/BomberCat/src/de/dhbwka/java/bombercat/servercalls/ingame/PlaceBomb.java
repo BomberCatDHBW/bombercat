@@ -23,19 +23,22 @@ public class PlaceBomb implements IngameCall {
 					int y = (int) Math.round(Double.parseDouble(parameter[1]));
 					Player player = game.getPlayer(client);
 					if (player.getAmountPlacedBombs() < player.getBombAmount()) {
-						player.setAmountPlacedBombs(player.getAmountPlacedBombs() + 1);
-						game.getMap().addBomb(x, y, game.getPlayer(client));
-						game.sendToAllPlayers("bombPlaced",
-								x + ";" + y + ";" + game.getPlayer(client).getExplosionSize());
-						try {
-							Thread.sleep(2000);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
+						if (!game.getMap().getBombs().containsKey(new Point(x, y))) {
+							player.setAmountPlacedBombs(player.getAmountPlacedBombs() + 1);
+							game.getMap().addBomb(x, y, game.getPlayer(client));
+							LOGGER.info("bombPlaced", x + ";" + y + ";" + game.getPlayer(client).getExplosionSize());
+							game.sendToAllPlayers("bombPlaced",
+									x + ";" + y + ";" + game.getPlayer(client).getExplosionSize());
+							try {
+								Thread.sleep(2000);
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
+							if (game.getMap().getBombs().containsKey(new Point(x, y))) {
+								game.explodeBomb(x, y, game.getPlayer(client).getExplosionSize(), game, client);
+							}
+							player.setAmountPlacedBombs(player.getAmountPlacedBombs() - 1);
 						}
-						if (game.getMap().getBombs().containsKey(new Point(x, y))) {
-							game.explodeBomb(x, y, game.getPlayer(client).getExplosionSize(), game, client);
-						}
-						player.setAmountPlacedBombs(player.getAmountPlacedBombs() - 1);
 					}
 				} catch (Exception ex) {
 					LOGGER.error("Could not place bomb");

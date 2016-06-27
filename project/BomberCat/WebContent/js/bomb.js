@@ -41,14 +41,14 @@ function Bombs() {
 		bomb.range = range;
 		this.bombs.push(bomb);
 	}
-	
+
 	this.addExplosion = function(x, y) {
 		var explosion = new Explosion();
 		explosion.set(x, y);
 		this.explosions.push(explosion);
 		for (var i = 0; i < this.bombs.length; i++) {
 			if (this.bombs[i].x == x && this.bombs[i].y == y) {
-				this.bombs.splice(i,1);
+				this.bombs.splice(i, 1);
 				if (this.boomSound.paused) {
 					console.log("boom");
 					this.boomSound.play();
@@ -61,23 +61,24 @@ function Bombs() {
 		for (var i = 0; i < this.explosions.length; i++) {
 			if (this.explosions[i].timer > 0) {
 				this.explosions[i].timer -= 1;
-				this.explosionSprite.draw(this.explosions[i].x, this.explosions[i].y);
+				this.explosionSprite.draw(this.explosions[i].x,
+						this.explosions[i].y);
 			}
 		}
 		for (var i = 0; i < this.bombs.length; i++) {
 			this.bombSprite.draw(this.bombs[i].x, this.bombs[i].y);
-//			if (this.bombs[i].timer > 0) {
-//				this.bombs[i].timer -= 1;
-//			} else {
-//				this.bombs.splice(i,1);
-//			}
+			// if (this.bombs[i].timer > 0) {
+			// this.bombs[i].timer -= 1;
+			// } else {
+			// this.bombs.splice(i,1);
+			// }
 		}
 		if (this.getBombMsg.get("info", "bombPlaced")) {
 			var info = this.getBombMsg.content.split(";");
-			var x = info[0]*32.0;
-			var y = info[1]*32.0;
+			var x = info[0] * 32.0;
+			var y = info[1] * 32.0;
 			var range = info[2];
-			this.add(x,y, range);
+			this.add(x, y, range);
 		}
 	}
 }

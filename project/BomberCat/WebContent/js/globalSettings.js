@@ -1,5 +1,5 @@
-var logServerMessages = true;
-var logSendMessages = true;
+var logServerMessages = false;
+var logSendMessages = false;
 
 //var serverIP = "localhost";
 var serverIP = "172.16.53.248";

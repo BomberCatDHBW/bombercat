@@ -1,7 +1,7 @@
 function Player() {
 	this.x = -32;
 	this.y = -32;
-	this.speed = 2;
+	this.speed = 16;
 	this.name = "";
 	this.sendPosMsg = new Message();
 	this.sendBombDropMsg = new Message();
@@ -37,28 +37,47 @@ function Player() {
 	this.dropBomb = function() {
 		//bombs.add(this.x, this.y);
 		if (this.canMove) {
-			this.sendBombDropMsg.send("ingame placeBomb " + (this.x/32.0) + ";" + (this.y/32.0));
-			this.sendBombDropMsg.gotSent = false;
+			var canPlace = true;
+			for (var i = 0; i < bombs.bombs.length; i++) {
+				if (bombs.bombs[i].x == this.x && bombs.bombs[i].y == this.y) {
+					canPlace = false;
+					break;
+				}
+			}
+			if (canPlace) {
+				console.log("canPlace");
+				this.sendBombDropMsg.send("ingame placeBomb " + (this.x/32.0) + ";" + (this.y/32.0));
+				this.sendBombDropMsg.gotSent = false;
+			} else {
+				console.log("nooo !!! cantPlace");
+			}
 		}
 	}
 	
 	this.move = function() {
+		//console.log(this.x + " " + this.y + " | speed: " + this.speed);
 		if (this.velX > 0) {
-			this.x += parseInt(this.speed);
-			this.velX -= parseInt(this.speed);
+			this.x += 32/parseInt(this.speed);
+			this.velX -= 32/parseFloat(this.speed);
 		}
 		if (this.velX < 0) {
-			this.x -= parseInt(this.speed);
-			this.velX += parseInt(this.speed);
+			this.x -= 32/parseInt(this.speed);
+			this.velX += 32/parseFloat(this.speed);
 		}
 		if (this.velY > 0) {
-			this.y += parseInt(this.speed);
-			this.velY -= parseInt(this.speed);
+			this.y += 32/parseInt(this.speed);
+			this.velY -= 32/parseFloat(this.speed);
 		}
 		if (this.velY < 0) {
-			this.y -= parseInt(this.speed);
-			this.velY += parseInt(this.speed);
+			this.y -= 32/parseInt(this.speed);
+			this.velY += 32/parseFloat(this.speed);
 		}
+//		if (Math.abs(this.destY-this.y) < this.speed) {
+//			this.y = this.destY;
+//		}
+//		if (Math.abs(this.destX-this.x) < this.speed) {
+//			this.x = this.destX;
+//		}
 		if (this.velX == 0 && this.velY == 0) {
 			this.canMove = true;
 		}

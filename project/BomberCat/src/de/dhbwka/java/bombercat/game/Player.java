@@ -98,11 +98,11 @@ public class Player {
 		this.alive = alive;
 	}
 
-	public int getAmountPlacedBombs() {
+	public synchronized int getAmountPlacedBombs() {
 		return amountPlacedBombs;
 	}
 
-	public void setAmountPlacedBombs(int amountPlacedBombs) {
+	public synchronized void setAmountPlacedBombs(int amountPlacedBombs) {
 		this.amountPlacedBombs = amountPlacedBombs;
 	}
 }

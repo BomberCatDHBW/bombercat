@@ -12,15 +12,12 @@ import de.dhbwka.java.bombercat.Client;
 import de.dhbwka.java.bombercat.Lobby;
 
 public class GetLobbies implements MenuCall {
-
 	private static final Logger LOGGER = LoggerFactory.getLogger(GetLobbies.class);
 
 	@Override
 	public void run(String[] parameter, Map<String, Lobby> lobbies, Client client, Set<Client> clients) {
-
 		JSONObject obj = new JSONObject();
 		JSONArray array = new JSONArray();
-		System.out.println(lobbies.values().size());
 		for (Lobby lobby : lobbies.values()) {
 			JSONObject tmp = new JSONObject();
 			tmp.put("name", lobby.getLobbyName());

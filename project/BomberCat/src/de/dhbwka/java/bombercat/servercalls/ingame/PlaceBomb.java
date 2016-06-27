@@ -25,6 +25,7 @@ public class PlaceBomb implements IngameCall {
 					if (player.getAmountPlacedBombs() < player.getBombAmount()) {
 						player.setAmountPlacedBombs(player.getAmountPlacedBombs() + 1);
 						game.getMap().addBomb(x, y, game.getPlayer(client));
+						LOGGER.info("bombPlaced", x + ";" + y + ";" + game.getPlayer(client).getExplosionSize());
 						game.sendToAllPlayers("bombPlaced",
 								x + ";" + y + ";" + game.getPlayer(client).getExplosionSize());
 						try {

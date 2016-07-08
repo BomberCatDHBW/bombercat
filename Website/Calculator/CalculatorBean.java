@@ -1,93 +1,52 @@
-package beans;
+public class CalculatorBean
 
-import java.io.Serializable;
-
-public class CalculatorBean implements Serializable
 {
-	private static final long serialVersionUID = -5791792312968360315L;
-	private int op1 = 0;
-	private int op2 = 0;
-	private String berechnung = "";
-	private String errorMsg = "";
-
-	public CalculatorBean()
-	{
-	}
-
-	  
-    public void setOp1(String op1)
+    
+    public String getRandomSlogan()
     {
-        if (!op1.isEmpty())
+        int random =  (int)(Math.random()*10);
+        if (random==1)
         {
-            try
-            {
-                this.op1 = Integer.parseInt(op1);
-                
-            }
-            catch (Exception e)
-            {
-                errorMsg += e.getMessage() + ";";
-            }
+            return "BE Fast Be Clever";
         }
-    }
-
-    public void setOp2(String op2)
-    {
-        if (!op2.isEmpty())
+        if (random==2)
         {
-            try
-            {
-                this.op2 = Integer.parseInt(op2);
-            }
-            catch (Exception e)
-            {
-                errorMsg += e.getMessage() + ";";
-            }
+            return "In 2016 123.000 cats died";
         }
-    }
-
-    public void setBerechnung(String berechnung)
-    {
-        if (!berechnung.isEmpty())
+        if (random==3)
         {
-            if (berechnung.equals("plus") || berechnung.equals("minus") || berechnung.equals("geteilt") || berechnung.equals("mal"))
-            {
-                this.berechnung = berechnung;
-            }
-            else
-            {
-                errorMsg += "\"" + berechnung + "\" is not valid";
-            }
+            return "Whiskass is the best for cats";
         }
+        if (random==4)
+        {
+            return "You might love Perisan Pussys";
+        }
+        if (random==5)
+        {
+            return "Cats are made to rule";
+        }
+        if (random==6)
+        {
+            return "Cats should coup the government";
+        }
+        if (random==7)
+        {
+            return "My cat is the BEST!";
+        }
+        else {
+            return "Hello World!!";
+            
+        }
+       
+     
     }
-
-	public int getErgebnis()
-	{
-		if (!errorMsg.isEmpty())
-			return 0;
-
-		if (berechnung.equals("plus"))
-		{
-			return op1 + op2;
-		}
-		else if (berechnung.equals("minus"))
-		{
-			return op1 - op2;
-		}
-		else if (berechnung.equals("geteilt"))
-		{
-			return op1 / op2;
-		}
-		else if (berechnung.equals("mal"))
-		{
-			return op1 * op2;
-		}
-
-		return 0;
-	}
-
-	public String getErrorMsg()
-	{
-		return errorMsg;
-	}
+    private String myProperty = null;
+    
+    public String getMyProperty() {
+      return myProperty;
+    }
+   
+    public void setMyProperty(String myProperty) {
+      this.myProperty = myProperty;
+    }
 }

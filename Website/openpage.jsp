@@ -1,4 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -27,7 +30,14 @@
 	position: absolute;
 	left: 1300px;
 	top: 500px;
-	cursor: pointer;
+	cursor: pointer;	
+}
+#Changedtext{
+	position: absolute;
+	left: 40%;
+	top: 0px ;
+	font-size: 100px;
+	color: olive;
 	
 }
 </style>
@@ -57,13 +67,25 @@ function MM_swapImage() { //v3.0
 </head>
 
 <body onload="MM_preloadImages('Medien/Button.jpg','Medien/Button_Wechsel_Play.jpg')">
-
+<jsp:useBean id="Bean" class="bombercat/Website/Calculator/CalculatorBean" />
+<jsp:setProperty property="op1" name="calculator" param="op1"/>
 
 
 <div  id="startseite" >
+
+
+<jsp:expression> Bean.myProperty </jsp:expression>
+<div id="Changedtext">Hier	
+ 
+<jsp:getRandomSlogan name="Bean"/>	
+<jsp:getRandomSlogan name="Bean" />
+<jsp:getProperty name="Bean" property="myProperty" />
+
+
+	</div>
 <div id="Buttonlinks" onmouseover="MM_swapImage('play','','Medien/Button_Wechsel_Play.jpg',1)" onmouseout="MM_swapImage('play','','Medien/Button.jpg',1)"> <a href="index.html #game"><img src="Medien/Button.jpg" width="227" height="51" alt="play" id="play" /></a></div>
 <div id="Buttonrechts" onmouseover="MM_swapImage('website','','Medien/Button_Wechsel.jpg',1)" onmouseout="MM_swapImage('website','','Medien/Button_Web.jpg',1)">><a href="index.html"><img src="Medien/Button_Web.jpg" width="227" height="51" alt="Website" id="website" /></a> </div>
 
-DD</div>
+
 </body>
 </html>

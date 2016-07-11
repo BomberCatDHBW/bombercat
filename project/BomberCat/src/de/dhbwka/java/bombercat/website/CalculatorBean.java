@@ -1,6 +1,10 @@
 package de.dhbwka.java.bombercat.website;
 
-public class CalculatorBean {
+import java.io.Serializable;
+
+public class CalculatorBean implements Serializable{
+	private static final long serialVersionUID = 2192698649129904738L;
+
 	public CalculatorBean(){
 	}
 	

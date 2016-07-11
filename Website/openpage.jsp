@@ -67,21 +67,19 @@ function MM_swapImage() { //v3.0
 </head>
 
 <body onload="MM_preloadImages('Medien/Button.jpg','Medien/Button_Wechsel_Play.jpg')">
-<jsp:useBean id="Bean" class="bombercat/Website/Calculator/CalculatorBean" />
+<jsp:useBean id="Bean" class="CalculatorBean" />
 <jsp:setProperty property="op1" name="calculator" param="op1"/>
 
 
 <div  id="startseite" >
 
 
-<jsp:expression> Bean.myProperty </jsp:expression>
+
 <div id="Changedtext">Hier	
  
 <jsp:getRandomSlogan name="Bean"/>	
 <jsp:getRandomSlogan name="Bean" />
 <jsp:getProperty name="Bean" property="myProperty" />
-
-
 	</div>
 <div id="Buttonlinks" onmouseover="MM_swapImage('play','','Medien/Button_Wechsel_Play.jpg',1)" onmouseout="MM_swapImage('play','','Medien/Button.jpg',1)"> <a href="index.html #game"><img src="Medien/Button.jpg" width="227" height="51" alt="play" id="play" /></a></div>
 <div id="Buttonrechts" onmouseover="MM_swapImage('website','','Medien/Button_Wechsel.jpg',1)" onmouseout="MM_swapImage('website','','Medien/Button_Web.jpg',1)">><a href="index.html"><img src="Medien/Button_Web.jpg" width="227" height="51" alt="Website" id="website" /></a> </div>

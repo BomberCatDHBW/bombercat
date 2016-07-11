@@ -100,17 +100,12 @@
 	onload="MM_preloadImages('Medien/Button.jpg','Medien/Button_Wechsel_Play.jpg')">
 	<jsp:useBean id="Bean"
 		class="de.dhbwka.java.bombercat.website.CalculatorBean" />
-	<jsp:setProperty property="op1" name="calculator" param="op1" />
-
-
 	<div id="startseite">
 
 
 
 		<div id="Changedtext">
 			<jsp:getProperty property="randomSlogan" name="Bean"/>
-			<jsp:getRandomSlogan name="Bean" />
-			<jsp:getRandomSlogan name="Bean" />
 		</div>
 		<div id="Buttonlinks"
 			onmouseover="MM_swapImage('play','','Medien/Button_Wechsel_Play.jpg',1)"

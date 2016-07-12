@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
-
+<link rel="stylesheet" href="css/creative.css" type="text/css">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -36,11 +36,13 @@
 }
 
 #Changedtext {
+	font-family:Merriweather,'Helvetica Neue',Arial,sans-serif;
 	position: absolute;
-	left: 40%;
+	left: 25%;
 	top: 0px;
 	font-size: 100px;
-	color: olive;
+	color: #C0F;
+	text-align: center;
 }
 </style>
 <script type="text/javascript">
@@ -98,8 +100,7 @@
 
 <body
 	onload="MM_preloadImages('Medien/Button.jpg','Medien/Button_Wechsel_Play.jpg')">
-	<jsp:useBean id="Bean"
-		class="de.dhbwka.java.bombercat.website.CalculatorBean" />
+	<jsp:useBean id="Bean" class="de.dhbwka.java.bombercat.website.CalculatorBean" />
 	<div id="startseite">
 
 
@@ -112,7 +113,7 @@
 			onmouseout="MM_swapImage('play','','Medien/button.jpg',1)">
 			<a href="index.html#game"><img src="Medien/button.jpg"
 				width="227" height="51" alt="play" id="play" /></a>
-		</div>
+		</div></div>
 		<div id="Buttonrechts"
 			onmouseover="MM_swapImage('website','','Medien/Button_Wechsel.jpg',1)"
 			onmouseout="MM_swapImage('website','','Medien/Button_Web.jpg',1)">

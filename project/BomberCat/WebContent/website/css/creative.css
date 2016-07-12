@@ -127,7 +127,7 @@ aside {
 }
 .impressum {
 	
-	font-family::"Comic Sans MS", cursive;
+	font-family::Merriweather,'Helvetica Neue',Arial,sans-serif;
 	text-align: center;
 	font-weight:bolder;
 

@@ -79,9 +79,9 @@
 		<div class="header-content">
 			<div class="header-content-inner">
 				<h1>
-				
-    
-					BE <i>FAST</i> BE <i>ClEVER</i>
+					<jsp:useBean id="Bean" class="de.dhbwka.java.bombercat.website.CalculatorBean" />
+    				<jsp:getProperty property="randomSlogan" name="Bean"/>
+    				
 					<input type='button' Value="Press ME" onclick="location.reload()"  class="btn btn-primary btn-xl page-scroll"  />
 					
 

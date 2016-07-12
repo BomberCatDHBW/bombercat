@@ -35,7 +35,7 @@ public class CalculatorBean
             return "My cat is the BEST!";
         }
         else {
-            return "Hello World!!";
+            return "Cats are Ninjas";
             
         }
        

@@ -26,7 +26,7 @@ public class CalculatorBean implements Serializable{
 			return "Whiskass is the best for cats";
 		}
 		if (random == 4) {
-			return "You might love Perisan Pussys";
+			return "You might love Perisan Cats";
 		}
 		if (random == 5) {
 			return "Cats are made to rule";
@@ -37,7 +37,7 @@ public class CalculatorBean implements Serializable{
 		if (random == 7) {
 			return "My cat is the BEST!";
 		} else {
-			return "Hello World!!";
+			return "Cats are Ninjas";
 		}
 	}
 }

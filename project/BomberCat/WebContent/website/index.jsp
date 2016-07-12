@@ -81,7 +81,7 @@
 				<h1>
 					<jsp:useBean id="Bean" class="de.dhbwka.java.bombercat.website.CalculatorBean" />
     				<jsp:getProperty property="randomSlogan" name="Bean"/>
-    				
+    				<br>
 					<input type='button' Value="Press ME" onclick="location.reload()"  class="btn btn-primary btn-xl page-scroll"  />
 					
 

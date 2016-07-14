@@ -63,6 +63,7 @@
 					<li><a class="page-scroll" href="impresssum.html">Impressum</a>
 					</li>
 					<li><a class="page-scroll" href="#game">Game</a></li>
+					<li><a class="page-scroll" href="#instructions">Instruction</a></li>
 					<li><a class="page-scroll" href="#about">About</a></li>
 					<li><a class="page-scroll" href="#features">Features</a></li>
 					<li><a class="page-scroll" href="#pictures">Pictures</a></li>
@@ -79,16 +80,17 @@
 		<div class="header-content">
 			<div class="header-content-inner">
 				<h1>
-					<jsp:useBean id="Bean" class="de.dhbwka.java.bombercat.website.CalculatorBean" />
-    				<jsp:getProperty property="randomSlogan" name="Bean"/>
-    				<br>
-					<input type='button' Value="Press ME" onclick="location.reload()"  class="btn btn-primary btn-xl page-scroll"  />
-					
+					<jsp:useBean id="Bean"
+						class="de.dhbwka.java.bombercat.website.CalculatorBean" />
+					<jsp:getProperty property="randomSlogan" name="Bean" />
+					<br> <input type='button' Value="Press ME"
+						onclick="location.reload()"
+						class="btn btn-primary btn-xl page-scroll" />
+
 
 				</h1>
 				<hr>
-				<a href="#game" class="btn btn-primary btn-xl page-scroll" >TO
-					THE CAT</a>
+				<a href="openpage.html" class="btn btn-primary btn-xl page-scroll">SEE THE BIG CAT</a>
 			</div>
 		</div>
 	</header>
@@ -97,12 +99,12 @@
 		<div>
 
 			<div align="center">
-				<img src="Medien/Bombercatsymbol.jpg">
+				<div class="cat-text">	BOMBERCAT	</div>
 				<div class="header-game">
 
 					<iframe class="frame" border="0" frameborder="0"
-						src="../client.html" width="800"
-						height="800" name="Frame" scrolling="no">
+						src="../client.html" width="800" height="800" name="Frame"
+						scrolling="no">
 						<!-- IFrame einbettung von der Client.HTML -->
 						<p>Your Browser Doesn't Support This Frame</p>
 
@@ -112,6 +114,36 @@
 			</div>
 		</div>
 	</section>
+
+	<section id="instructions" id="about">
+		<div  class="container">
+			<img src="Medien/keybindingsfun.jpg" align="middle" style="margin-left: 6em">
+			<br>
+			<div class="textarea"  align="center" style="font-size:25px">
+			The Game begins! Like Batman begins! <br>
+			And you can <b>MOVE</b> your own cat with pressing the Buttons W,A,S,D <br>
+			W move up, S move down, A move left,D move right. <br>
+			You can place bombs with space... <br>
+			Some <b>POWERUPS</b> will drop during the game. <br>
+			Power ups like Fireup,Bombup and Speedup...<br>
+			With Fireup you gain more Firepower and so fire range <br>
+			Bombup will give you a every time you get a drop an extra bomb <br>
+			The Speedup drop will increase you Speed everytime you get one <br>
+			<br>
+			But now to the game <br>
+			you have to destroy with your bombs the walls and get to your <b>ENEMIES</b><br>
+			then you have to catch them<br>
+			
+			
+			
+			
+			</div>
+		</div>
+
+
+
+	</section>
+
 	<section class="bg-primary" id="about">
 		<div class="container">
 			<div class="row">
@@ -136,6 +168,8 @@
 			</div>
 		</div>
 	</section>
+
+
 
 	<section id="features">
 		<div class="container">
@@ -240,8 +274,7 @@
 				<div class="col-lg-8 col-lg-offset-2 text-center">
 					<h2 class="section-heading">Contact</h2>
 					<hr class="primary">
-					<p>You can also contact us Per mail or phone ! If you have any
-						suggestions please let us know !</p>
+					<p>Please! Join our Steam Group or send us any suggestion if you have one ! </p>
 				</div>
 				<div class="col-lg-4 col-lg-offset-2 text-center">
 					<img src="Medien/steam.png" class="center" alt=""

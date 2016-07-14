@@ -58,6 +58,7 @@ p {
     background-color: #C0F;
 }
 
+
 .bg-dark {
 	font-family:'Open Sans','Helvetica Neue',Arial,sans-serif;
 	font-weight:bold;
@@ -135,6 +136,30 @@ aside {
 	
 	
 	}
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.cat-text{
+	font-family:Comic Sans MS, cursive;
+	font-weight:bolder;
+	font-size:62px;
+	text-align:center;
+	color: #C0F;
+	
+	
+	
+	
+}
+
+
+
+
+
+
+
 
 .header-game <h1>
 .navbar-default .nav > li>a,

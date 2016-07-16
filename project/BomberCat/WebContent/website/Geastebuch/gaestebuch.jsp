@@ -21,7 +21,7 @@
 
 	<div id="kopf">
 		<a href="../index.jsp"><img src="../Medien/Catlogo.jpg"
-			width="444" height="167" id="logo" /></a>
+			width="444" height="167" id="logo" style="margin-left:30%" style="margin-right:30%" /></a>
 			
 
 	</div>

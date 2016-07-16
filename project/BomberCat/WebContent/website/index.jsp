@@ -68,6 +68,7 @@
 					<li><a class="page-scroll" href="#features">Features</a></li>
 					<li><a class="page-scroll" href="#pictures">Pictures</a></li>
 					<li><a class="page-scroll" href="#contact">Contact</a></li>
+						<li><a class="page-scroll" href="Gaestebuch/geastebuch.jsp">Gästebuch</a></li>
 
 				</ul>
 			</div>
@@ -102,7 +103,7 @@
 
 					<iframe class="frame" border="0" frameborder="0"
 						src="../client.html" width="800" height="800" name="Frame"
-						scrolling="no">
+						scrolling="no" >
 						<!-- IFrame einbettung von der Client.HTML -->
 						<p>Your Browser Doesn't Support This Frame</p>
 
@@ -113,7 +114,7 @@
 		</div>
 	</section>
 
-	<section id="instructions" id="about">
+	<section id="instructions" >
 		<div  class="container">
 			<img src="Medien/keybindingsfun.jpg" align="middle" style="margin-left: 6em">
 			<br>

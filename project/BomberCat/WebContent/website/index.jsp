@@ -86,8 +86,6 @@
 					<br> <input type='button' Value="Press ME"
 						onclick="location.reload()"
 						class="btn btn-primary btn-xl page-scroll" />
-
-
 				</h1>
 				<hr>
 				<a href="openpage.html" class="btn btn-primary btn-xl page-scroll">SEE THE BIG CAT</a>

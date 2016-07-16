@@ -16,10 +16,11 @@ ul.MenuBarHorizontal
 	list-style-type: none;
 	font-size: 200%;
 	cursor: default;
-	height: 100%;
-	width: 1950px;
+	height: 50%;
+	width: 100%;
 	margin: 10px;
 	padding: 5px;
+	
 }
 /* Set the active Menu Bar with this class, currently setting z-index to accomodate IE rendering bug: http://therealcrisp.xs4all.nl/meuk/IE-zindexbug.html */
 ul.MenuBarActive
@@ -36,7 +37,7 @@ ul.MenuBarHorizontal li
 	position: relative;
 	text-align: center;
 	cursor: pointer;
-	width: 8em;
+	width: 12em;
 	float: left;
 	font-family: "Courier New", Courier, monospace;
 	font-weight: bolder;

@@ -50,8 +50,40 @@
 	</script>
 <div>
 	<div class="header-content" >
-		Here you can write a text and it will be safed <br></br>
-		Schreib hier dein Shit hin LE' Alex!
+		
+		    <center>
+		    	<h1> Welcome to the Bombercat Guestbook, leave a comment!</h1>
+		    	<p> No time, take me to the <a href="guestbookEntries.jsp">guestbook!</a></p>
+				<form method="get" action="guestbookEntries.jsp">
+
+				<b>Name: </b>
+				<input type="text" name="username" size="30" />
+				</br>
+				<p><b>What do you think of Bombercat?</b></p>
+
+				<input type="radio" name=opinion value="great" />
+					Bombercat is Great!
+				<input type="radio" name=opinion value="stinks" />
+					Bombercat stinks!
+				<input type="radio" name=opinion value="youStink" />
+					You stink!
+				</br>
+				<input type="radio" name=opinion value="iStink" />
+					I stink!
+				<input type="radio" name=opinion value="allStink">
+					We all stink!
+			
+				<h1>Make any comment you like:</h1>
+			
+				<textarea name="comment" rows=6 cols=60></textarea>
+				<br><b>Bombercat thanks you for your input! Meow!</b></br>
+				<br>
+				<input type=submit value="Send it!">
+				<input type=reset value="Start over">
+				</br>
+				</form>
+			</center>
+			
 		</div>
 	</div>
 	

@@ -7,6 +7,40 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div id="kopf">
+		<a href="../index.jsp"><img src="../Medien/Catlogo.jpg"
+			width="444" height="167" id="logo" style="margin-left:30%" style="margin-right:30%" /></a>
+			
+
+	</div>
+
+
+	<div id="index">
+		<ul id="MenuBar1" class="MenuBarHorizontal">
+			<li><a href="../index.jsp" >Back to Main</a></li>
+			<li><a href="../openpage.html">Openpage</a></li>
+			<li><a href="../refresh.html">Refresh</a></li>
+		
+
+
+		</ul>
+	</div>
+
+
+
+
+	
+	<br></br> <br></br> <br></br>
+	<script type="text/javascript">
+		var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {
+			imgDown : "../SpryAssets/SpryMenuBarDownHover.gif",
+			imgRight : "../SpryAssets/SpryMenuBarRightHover.gif"});
+	</script>
+	
+<div>
+	<div class="header-content" >
+
+	<h1><b> Bombercat Guestbook</b></h1>
 	<jsp:useBean id="GuestBook" class="de.dhbwka.java.bombercat.website.GuestBook" />
 	
 	<jsp:getProperty property="entry" name="GuestBook" />
@@ -16,6 +50,9 @@
 	<hr>
 	Fappi commented: To the Fapmobile! You stink</br>
 	<hr>
+	
+	</div>
+</div>
 	
 </body>
 </html>

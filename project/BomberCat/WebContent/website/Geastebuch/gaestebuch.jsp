@@ -21,7 +21,7 @@
 
 	<div id="kopf">
 		<a href="../index.jsp"><img src="../Medien/Catlogo.jpg"
-			width="444" height="167" id="logo" style="margin-left:30%" style="margin-right:30%" /></a>
+			width="444" height="167"class="displayed"  /></a>
 			
 
 	</div>
@@ -43,7 +43,7 @@
 
 	
 	<br></br> <br></br> <br></br>
-	<script type="text/javascript">
+	<script type="text/javascript" >
 		var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {
 			imgDown : "../SpryAssets/SpryMenuBarDownHover.gif",
 			imgRight : "../SpryAssets/SpryMenuBarRightHover.gif"});

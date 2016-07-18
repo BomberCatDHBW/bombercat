@@ -21,6 +21,9 @@ ul.MenuBarHorizontal
 	margin: 10px;
 	padding: 5px;
 	
+    margin-left: 10%%;
+   
+	
 }
 /* Set the active Menu Bar with this class, currently setting z-index to accomodate IE rendering bug: http://therealcrisp.xs4all.nl/meuk/IE-zindexbug.html */
 ul.MenuBarActive
@@ -159,6 +162,7 @@ ul.MenuBarHorizontal iframe
 	position: absolute;
 	z-index: 1010;
 	filter:alpha(opacity:0.1);
+
 }
 /* HACK FOR IE: to stabilize appearance of menu items; the slash in float is to keep IE 5.0 from parsing */
 @media screen, projection

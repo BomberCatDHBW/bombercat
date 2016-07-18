@@ -27,11 +27,12 @@
 	</div>
 
 
-	<div id="index">
-		<ul id="MenuBar1" class="MenuBarHorizontal">
+	<div  >
+		<ul id="MenuBar1" class="MenuBarHorizontal" >
 			<li><a href="../index.jsp" >Back to Main</a></li>
 			<li><a href="../openpage.html">Openpage</a></li>
 			<li><a href="../refresh.html">Refresh</a></li>
+				
 		
 
 
@@ -61,26 +62,27 @@
 				</br>
 				<p><b>What do you think of Bombercat?</b></p>
 
-				<input type="radio" name=opinion value="great" />
+				<input type="radio" name="opinion" value="great" /> 
 					Bombercat is Great!
-				<input type="radio" name=opinion value="stinks" />
+				<input type="radio" name="opinion" value="stinks" />
 					Bombercat stinks!
-				<input type="radio" name=opinion value="youStink" />
+				<input type="radio" name="opinion" value="youStink" />
 					You stink!
 				</br>
-				<input type="radio" name=opinion value="iStink" />
+				<input type="radio" name="opinion" value="iStink" />
 					I stink!
-				<input type="radio" name=opinion value="allStink">
+				<input type="radio" name="opinion" value="allStink"/> 
 					We all stink!
 			
 				<h1>Make any comment you like:</h1>
 			
-				<textarea name="comment" rows=6 cols=60></textarea>
-				<br><b>Bombercat thanks you for your input! Meow!</b></br>
-				<br>
-				<input type=submit value="Send it!">
-				<input type=reset value="Start over">
-				</br>
+				<textarea name="comment" rows="6" cols="60"></textarea>
+				<br></br>
+				Bombercat thanks you for your input! Meow!
+				<br></br>
+				<input type="submit" value="Send it!" > </input>
+			<input type="reset" value="Start over" > </input>
+				<br></br>
 				</form>
 			</center>
 			
@@ -89,5 +91,5 @@
 	
 
 </body>
-<!-- InstanceEnd -->
+
 </html>

@@ -21,19 +21,19 @@
 
 	<div id="kopf">
 		<a href="../index.jsp"><img src="../Medien/catlogo.jpg"
-			width="444" height="167"class="displayed"  /></a>
-			
+			width="444" height="167" class="displayed" /></a>
+
 
 	</div>
 
 
-	<div  >
-		<ul id="MenuBar1" class="MenuBarHorizontal" >
-			<li><a href="../index.jsp" >Back to Main</a></li>
+	<div>
+		<ul id="MenuBar1" class="MenuBarHorizontal">
+			<li><a href="../index.jsp">Back to Main</a></li>
 			<li><a href="../openpage.html">Openpage</a></li>
 			<li><a href="../refresh.html">Refresh</a></li>
-				
-		
+
+
 
 
 		</ul>
@@ -42,54 +42,54 @@
 
 
 
-	
-	<br></br> <br></br> <br></br>
-	<script type="text/javascript" >
+
+	<br></br>
+	<br></br>
+	<br></br>
+	<script type="text/javascript">
 		var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {
 			imgDown : "../SpryAssets/SpryMenuBarDownHover.gif",
-			imgRight : "../SpryAssets/SpryMenuBarRightHover.gif"});
+			imgRight : "../SpryAssets/SpryMenuBarRightHover.gif"
+		});
 	</script>
-<div>
-	<div class="header-content" >
-		
-		    <center>
-		    	<h1> Welcome to the Bombercat Guestbook, leave a comment!</h1>
-		    	<p> No time, take me to the <a href="guestbookEntries.jsp">guestbook!</a></p>
+	<div>
+		<div class="header-content">
+
+			<center>
+				<h1>Welcome to the Bombercat Guestbook, leave a comment!</h1>
+				<p>
+					No time, take me to the <a href="guestbookEntries.jsp">guestbook!</a>
+				</p>
 				<form method="get" action="guestbookEntries.jsp">
 
-				<b>Name: </b>
-				<input type="text" name="username" size="30" />
-				</br>
-				<p><b>What do you think of Bombercat?</b></p>
+					<b>Name: </b> <input type="text" name="username" size="30" /> </br>
+					<p>
+						<b>What do you think of Bombercat?</b>
+					</p>
 
-				<input type="radio" name="opinion" value="great" /> 
-					Bombercat is Great!
-				<input type="radio" name="opinion" value="stinks" />
-					Bombercat stinks!
-				<input type="radio" name="opinion" value="youStink" />
-					You stink!
-				</br>
-				<input type="radio" name="opinion" value="iStink" />
-					I stink!
-				<input type="radio" name="opinion" value="allStink"/> 
-					We all stink!
-			
-				<h1>Make any comment you like:</h1>
-			
-				<textarea name="comment" rows="6" cols="60"></textarea>
-				<br></br>
-				Bombercat thanks you for your input! Meow!
-				<br></br>
-				<input type="submit" value="Send it!" > </input>
-				<input type="reset" value="Start over" > </input>
-				<br></br>
+					<select id="opinion">
+						<option>Bombercat is Great!</option>
+						<option>Bombercat stinks!</option>
+						<option>You stink!</option>
+						<option>I stink!</option>
+						<option>We all stink!</option>
+					</select>
+
+					<h1>Make any comment you like:</h1>
+
+					<textarea name="comment" rows="6" cols="60"></textarea>
+
+					<jsp:useBean id="GuestBook"
+						class="de.dhbwka.java.bombercat.website.GuestBook" />
+					<jsp:setProperty property="comment" name="GuestBook"
+						value="${comment}" />
+
+					<br></br> Bombercat thanks you for your input! Meow! <br></br> <input
+						type="submit" value="Send it!"> </input> <input type="reset"
+						value="Start over"> </input> <br></br>
 				</form>
 			</center>
-			
 		</div>
 	</div>
-	
-
 </body>
-
 </html>

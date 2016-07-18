@@ -81,6 +81,7 @@ ul.MenuBarHorizontal ul.MenuBarSubmenuVisible ul.MenuBarSubmenuVisible {
 ul.MenuBarHorizontal ul {
 	border: 1px solid ;
 	border-color: black;
+	d
 }
 /* Menu items are a light gray block with padding and no text decoration */
 ul.MenuBarHorizontal a {

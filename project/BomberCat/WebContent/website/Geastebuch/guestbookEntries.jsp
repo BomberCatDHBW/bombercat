@@ -55,6 +55,8 @@
 	<jsp:useBean id="GuestBook" class="de.dhbwka.java.bombercat.website.GuestBook" />
 	<jsp:setProperty name="GuestBook" property="username" value="${param['username']}"></jsp:setProperty>
 	<jsp:setProperty name="GuestBook" property="comment" value="${param['comment']}"></jsp:setProperty>
+	<jsp:setProperty name="GuestBook" property="opinion" value="${param['opinion']}"></jsp:setProperty>
+	
 	<jsp:getProperty property="entry" name="GuestBook" />
 	
 	<hr>

@@ -1,6 +1,7 @@
 package de.dhbwka.java.bombercat.website;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class GuestBook implements Serializable {
 
@@ -8,32 +9,34 @@ public class GuestBook implements Serializable {
 	private String username;
 	private String opinion;
 	private String comment;
+	private ArrayList<String> comments = new ArrayList<>();
 
 	public GuestBook() {
-	}
-
-	public void setUsername(String name) {
-		username = name;
-	}
-
-	public void setOpinion(String opinion1) {
-		opinion = opinion1;
-	}
-
-	public void setComment(String input) {
-		comment = input;
 	}
 
 	public String getUsername() {
 		return username;
 	}
 
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	public String getOpinion() {
 		return opinion;
 	}
 
+	public void setOpinion(String opinion) {
+		this.opinion = opinion;
+	}
+
 	public String getComment() {
 		return comment;
+	}
+
+	public void setComment(String comment) {
+		comments.add(comment);
+		this.comment = comment;
 	}
 
 	public void setEntry(String entry) {

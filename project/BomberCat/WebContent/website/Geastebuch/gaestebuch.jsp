@@ -81,7 +81,7 @@
 				Bombercat thanks you for your input! Meow!
 				<br></br>
 				<input type="submit" value="Send it!" > </input>
-			<input type="reset" value="Start over" > </input>
+				<input type="reset" value="Start over" > </input>
 				<br></br>
 				</form>
 			</center>

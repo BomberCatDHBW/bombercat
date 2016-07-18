@@ -79,7 +79,9 @@ ul.MenuBarHorizontal ul.MenuBarSubmenuVisible ul.MenuBarSubmenuVisible {
 
 /* Submenu containers have borders on all sides */
 ul.MenuBarHorizontal ul {
-	border: 1px solid #CCC;
+	border: 1px solid ;
+	border-color: black;
+	d
 }
 /* Menu items are a light gray block with padding and no text decoration */
 ul.MenuBarHorizontal a {
@@ -87,7 +89,8 @@ ul.MenuBarHorizontal a {
 	cursor: pointer;
 	background-color: #EEE;
 	padding: 0.5em 0.75em;
-	color: #333;
+	color: #C0F; 
+	background-color: transparent;
 	text-decoration: none;
 }
 /* Menu items that have mouse over or focus have a blue background and white text */

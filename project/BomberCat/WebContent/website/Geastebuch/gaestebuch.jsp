@@ -20,7 +20,7 @@
 <body>
 
 	<div id="kopf">
-		<a href="../index.jsp"><img src="../Medien/Catlogo.jpg"
+		<a href="../index.jsp"><img src="../Medien/catlogo.jpg"
 			width="444" height="167"class="displayed"  /></a>
 			
 

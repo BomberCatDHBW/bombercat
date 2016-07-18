@@ -5,6 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <!-- InstanceBeginEditable name="doctitle" -->
 <title>Guestbook</title>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!-- InstanceEndEditable -->
 <!-- InstanceBeginEditable name="head" -->
 <!-- InstanceEndEditable -->
@@ -59,21 +60,17 @@
 				<b> Bombercat Guestbook</b>
 			</h1>
 			<jsp:useBean id="GuestBook"
-				class="de.dhbwka.java.bombercat.website.GuestBook" />
-<%-- 			<jsp:setProperty name="GuestBook" property="username" --%>
-<%-- 				value="${param['username']}"></jsp:setProperty> --%>
-<%-- 			<jsp:setProperty name="GuestBook" property="comment" --%>
-<%-- 				value="${param['comment']}"></jsp:setProperty> --%>
-<%-- 			<jsp:setProperty name="GuestBook" property="opinion" --%>
-<%-- 				value="${param['opinion']}"></jsp:setProperty> --%>
-
-			<jsp:getProperty property="entry" name="GuestBook" />
-
-			<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-			<c:forEach var="entries" items="${GuestBook.comments}">
-				<h1>
-					<c:out value="${entries.comment}" />
-				</h1>
+				class="de.dhbwka.java.bombercat.website.GuestBook" scope="application"/>
+			<jsp:setProperty property="username" name="GuestBook"
+				value="${param.username}" />
+			<jsp:setProperty property="opinion" name="GuestBook"
+				value="${param.opinion}" />
+			<jsp:setProperty property="comment" name="GuestBook"
+				value="${param.comment}" />
+			<c:forEach var="item" items="${GuestBook.comments}">
+				<p>
+					<c:out value="${item.username}" />[<c:out value="${item.opinion}" />]: <c:out value="${item.comment}" />
+				</p>
 				</br>
 			</c:forEach>
 			<hr>

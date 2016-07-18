@@ -67,7 +67,7 @@
 						<b>What do you think of Bombercat?</b>
 					</p>
 
-					<select id="opinion">
+					<select id="opinion" name="opinion">
 						<option>Bombercat is Great!</option>
 						<option>Bombercat stinks!</option>
 						<option>You stink!</option>
@@ -78,12 +78,6 @@
 					<h1>Make any comment you like:</h1>
 
 					<textarea name="comment" rows="6" cols="60"></textarea>
-
-					<jsp:useBean id="GuestBook"
-						class="de.dhbwka.java.bombercat.website.GuestBook" />
-					<jsp:setProperty property="comment" name="GuestBook"
-						value="${comment}" />
-
 					<br></br> Bombercat thanks you for your input! Meow! <br></br> <input
 						type="submit" value="Send it!"> </input> <input type="reset"
 						value="Start over"> </input> <br></br>

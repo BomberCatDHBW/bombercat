@@ -9,7 +9,7 @@ public class GuestBook implements Serializable {
 	private String username;
 	private String opinion;
 	private String comment;
-	private ArrayList<Comment> comments = new ArrayList<>();
+	private ArrayList<Comment> comments;
 
 	public ArrayList<Comment> getComments() {
 		System.out.println(comments.size());
@@ -21,6 +21,7 @@ public class GuestBook implements Serializable {
 	}
 
 	public GuestBook() {
+		comments = new ArrayList<>();
 	}
 
 	public String getUsername() {
@@ -44,17 +45,10 @@ public class GuestBook implements Serializable {
 	}
 
 	public void setComment(String comment) {
-		System.out.println(username + " " + opinion + " " + comment);
-		Comment tmpComment = new Comment("User", "very good!", comment);
-		comments.add(tmpComment);
 		this.comment = comment;
+		
+		System.out.println(username + " " + opinion + " " + comment);
+		Comment tmpComment = new Comment(username, opinion, comment);
+		comments.add(tmpComment);
 	}
-
-	public void setEntry(String entry) {
-	}
-
-	public String getEntry() {
-		return username + " commented: " + comment + " " + opinion;
-	}
-
 }

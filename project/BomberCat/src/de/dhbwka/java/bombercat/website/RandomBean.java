@@ -2,10 +2,10 @@ package de.dhbwka.java.bombercat.website;
 
 import java.io.Serializable;
 
-public class CalculatorBean implements Serializable{
+public class RandomBean implements Serializable{
 	private static final long serialVersionUID = 2192698649129904738L;
 
-	public CalculatorBean(){
+	public RandomBean(){
 	}
 	
 	private String randomSlogan = "emptyTest";

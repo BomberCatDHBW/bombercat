@@ -73,6 +73,7 @@
 				</br>
 			</c:forEach>
 			<hr>
+			<a href="guestbook.jsp" class="btn btn-primary btn-xl page-scroll">New Comment </a>
 			</center>
 		</div>
 	</div>

@@ -60,7 +60,7 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a class="page-scroll" href="impresssum.html">Impressum</a>
+					<li><a class="page-scroll" href="impresssum.html">Imprint</a>
 					</li>
 					<li><a class="page-scroll" href="#game">Game</a></li>
 					<li><a class="page-scroll" href="#instructions">Instruction</a></li>
@@ -68,7 +68,7 @@
 					<li><a class="page-scroll" href="#features">Features</a></li>
 					<li><a class="page-scroll" href="#pictures">Pictures</a></li>
 					<li><a class="page-scroll" href="#contact">Contact</a></li>
-						<li><a class="page-scroll" href="Geastebuch/gaestebuch.jsp">Gästebuch</a></li>
+						<li><a class="page-scroll" href="guestbook/guestbook.jsp">Guesstbook</a></li>
 
 				</ul>
 			</div>
@@ -82,7 +82,7 @@
 			<div class="header-content-inner">
 				<h1>
 					<jsp:useBean id="Bean"
-						class="de.dhbwka.java.bombercat.website.CalculatorBean" />
+						class="de.dhbwka.java.bombercat.website.RandomBean" />
 					<jsp:getProperty property="randomSlogan" name="Bean" />
 					<br> <input type='button' Value="Press ME"
 						onclick="location.reload()"

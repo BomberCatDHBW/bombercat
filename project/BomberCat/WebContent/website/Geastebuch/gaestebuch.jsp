@@ -18,72 +18,70 @@
 </head>
 
 <body>
-
-	<div id="kopf">
-		<a href="../index.jsp"><img src="../Medien/catlogo.jpg"
-			width="444" height="167" class="displayed" /></a>
-
-
-	</div>
+	<center>
+		<div id="kopf">
+			<a href="../index.jsp"><img src="../Medien/catlogo.jpg"
+				width="444" height="167" class="displayed" /></a>
 
 
-	<div>
-		<ul id="MenuBar1" class="MenuBarHorizontal">
-			<li><a href="../index.jsp">Back to Main</a></li>
-			<li><a href="../openpage.html">Openpage</a></li>
-			<li><a href="../refresh.html">Refresh</a></li>
-
-
-
-
-		</ul>
-	</div>
-
-
-
-
-
-	<br></br>
-	<br></br>
-	<br></br>
-	<script type="text/javascript">
-		var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {
-			imgDown : "../SpryAssets/SpryMenuBarDownHover.gif",
-			imgRight : "../SpryAssets/SpryMenuBarRightHover.gif"
-		});
-	</script>
-	<div>
-		<div class="header-content">
-
-			<center>
-				<h1>Welcome to the Bombercat Guestbook, leave a comment!</h1>
-				<p>
-					No time, take me to the <a href="guestbookEntries.jsp">guestbook!</a>
-				</p>
-				<form method="get" action="guestbookEntries.jsp">
-
-					<b>Name: </b> <input type="text" name="username" size="30" /> </br>
-					<p>
-						<b>What do you think of Bombercat?</b>
-					</p>
-
-					<select id="opinion" name="opinion">
-						<option>Bombercat is Great!</option>
-						<option>Bombercat stinks!</option>
-						<option>You stink!</option>
-						<option>I stink!</option>
-						<option>We all stink!</option>
-					</select>
-
-					<h1>Make any comment you like:</h1>
-
-					<textarea name="comment" rows="6" cols="60"></textarea>
-					<br></br> Bombercat thanks you for your input! Meow! <br></br> <input
-						type="submit" value="Send it!"> </input> <input type="reset"
-						value="Start over"> </input> <br></br>
-				</form>
-			</center>
 		</div>
+
+
+		<div>
+			<ul id="MenuBar1" class="MenuBarHorizontal" align="center">
+				<li><a href="../index.jsp">Back to Main</a></li>
+				<li><a href="../openpage.html">Openpage</a></li>
+				<li><a href="../refresh.html">Refresh</a></li>
+
+
+
+
+			</ul>
+		</div>
+
+
+
+
+
+		<br></br> <br></br> <br></br>
+		<script type="text/javascript">
+			var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {
+				imgDown : "../SpryAssets/SpryMenuBarDownHover.gif",
+				imgRight : "../SpryAssets/SpryMenuBarRightHover.gif"
+			});
+		</script>
+		<div>
+			<div class="header-content">
+	</center>
+	<center>
+		<h1>Welcome to the Bombercat Guestbook, leave a comment!</h1>
+		<p>
+			No time, take me to the <a href="guestbookEntries.jsp">guestbook!</a>
+		</p>
+		<form method="get" action="guestbookEntries.jsp">
+
+			<b>Name: </b> <input type="text" name="username" size="30" /> </br>
+			<p>
+				<b>What do you think of Bombercat?</b>
+			</p>
+
+			<select id="opinion" name="opinion">
+				<option>Bombercat is Great!</option>
+				<option>Bombercat stinks!</option>
+				<option>You stink!</option>
+				<option>I stink!</option>
+				<option>We all stink!</option>
+			</select>
+
+			<h1>Make any comment you like:</h1>
+
+			<textarea name="comment" rows="6" cols="60"></textarea>
+			<br></br> Bombercat thanks you for your input! Meow! <br></br> <input
+				type="submit" value="Send it!"> </input> <input type="reset"
+				value="Start over"> </input> <br></br>
+		</form>
+	</center>
+	</div>
 	</div>
 </body>
 </html>

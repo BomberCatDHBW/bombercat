@@ -19,9 +19,8 @@
 </head>
 <body>
 	<div id="kopf">
-		<a href="../index.jsp"><img src="../Medien/Catlogo.jpg"
-			width="444" height="167" id="logo" style="margin-left: 30%"
-			style="margin-right:30%" /></a>
+		<a href="../index.jsp"><img src="../Medien/catlogo.jpg"
+			width="444" height="167" class="displayed" /></a>
 
 
 	</div>
@@ -55,7 +54,7 @@
 
 	<div>
 		<div class="header-content">
-
+	<center>
 			<h1>
 				<b> Bombercat Guestbook</b>
 			</h1>
@@ -74,6 +73,7 @@
 				</br>
 			</c:forEach>
 			<hr>
+			</center>
 		</div>
 	</div>
 

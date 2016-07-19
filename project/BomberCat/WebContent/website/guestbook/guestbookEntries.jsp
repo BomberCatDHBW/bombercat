@@ -54,26 +54,32 @@
 
 	<div>
 		<div class="header-content">
-	<center>
-			<h1>
-				<b> Bombercat Guestbook</b>
-			</h1>
-			<jsp:useBean id="GuestBook"
-				class="de.dhbwka.java.bombercat.website.GuestBook" scope="application"/>
-			<jsp:setProperty property="username" name="GuestBook"
-				value="${param.username}" />
-			<jsp:setProperty property="opinion" name="GuestBook"
-				value="${param.opinion}" />
-			<jsp:setProperty property="comment" name="GuestBook"
-				value="${param.comment}" />
-			<c:forEach var="item" items="${GuestBook.comments}">
-				<p>
-					<c:out value="${item.username}" />[<c:out value="${item.opinion}" />]: <c:out value="${item.comment}" />
-				</p>
-				</br>
-			</c:forEach>
-			<hr>
-			<a href="guestbook.jsp" class="btn btn-primary btn-xl page-scroll">New Comment </a>
+			<center>
+				<h1>
+					<b> Bombercat Guestbook</b>
+				</h1>
+				<jsp:useBean id="GuestBook"
+					class="de.dhbwka.java.bombercat.website.GuestBook"
+					scope="application" />
+				<jsp:setProperty property="username" name="GuestBook"
+					value="${param.username}" />
+				<jsp:setProperty property="opinion" name="GuestBook"
+					value="${param.opinion}" />
+				<jsp:setProperty property="comment" name="GuestBook"
+					value="${param.comment}" />
+				<c:forEach var="item" items="${GuestBook.comments}">
+					<p>
+						<c:out value="${item.username}" />
+						[
+						<c:out value="${item.opinion}" />
+						]:
+						<c:out value="${item.comment}" />
+					</p>
+					</br>
+				</c:forEach>
+				<hr>
+					<a href="guestbook.jsp" class="btn btn-primary btn-xl page-scroll">New Comment </a>
+					
 			</center>
 		</div>
 	</div>

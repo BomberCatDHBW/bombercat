@@ -68,7 +68,7 @@
 					<li><a class="page-scroll" href="#features">Features</a></li>
 					<li><a class="page-scroll" href="#pictures">Pictures</a></li>
 					<li><a class="page-scroll" href="#contact">Contact</a></li>
-						<li><a class="page-scroll" href="guestbook/guestbook.jsp">Guesstbook</a></li>
+						<li><a class="page-scroll" href="guestbook/guestbook.jsp">Guestbook</a></li>
 
 				</ul>
 			</div>

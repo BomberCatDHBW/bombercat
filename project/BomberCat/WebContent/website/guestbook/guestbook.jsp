@@ -27,11 +27,11 @@
 		</div>
 
 
-		<div>
+		<div >
 			<ul id="MenuBar1" class="MenuBarHorizontal" align="center">
 				<li><a href="../index.jsp">Back to Main</a></li>
 				<li><a href="../openpage.html">Openpage</a></li>
-				<li><a href="../refresh.html">Refresh</a></li>
+				<li><a href="../guestbook.html">Refresh</a></li>
 
 
 
@@ -44,7 +44,7 @@
 
 
 		<br></br> <br></br> <br></br>
-		<script type="text/javascript">
+		<script type="text/javascript" >
 			var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {
 				imgDown : "../SpryAssets/SpryMenuBarDownHover.gif",
 				imgRight : "../SpryAssets/SpryMenuBarRightHover.gif"
@@ -76,9 +76,10 @@
 			<h1>Make any comment you like:</h1>
 
 			<textarea name="comment" rows="6" cols="60"></textarea>
-			<br></br> Bombercat thanks you for your input! Meow! <br></br> <input
-				type="submit" value="Send it!"> </input> <input type="reset"
-				value="Start over"> </input> <br></br>
+			<br></br> Bombercat thanks you for your input! Meow! <br></br>  <input
+				type="submit" value="Send it!" class="btn btn-primary btn-xl page-scroll"> </input> <input type="reset"
+				value="Start over" class="btn btn-primary btn-xl page-scroll"> </input> <br></br> 
+			
 		</form>
 	</center>
 	</div>

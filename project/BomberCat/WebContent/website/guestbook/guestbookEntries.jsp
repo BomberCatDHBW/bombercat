@@ -30,7 +30,7 @@
 		<ul id="MenuBar1" class="MenuBarHorizontal">
 			<li><a href="../index.jsp">Back to Main</a></li>
 			<li><a href="../openpage.html">Openpage</a></li>
-			<li><a href="../refresh.html">Refresh</a></li>
+			<li><a href="../guestbookEntries.html">Refresh</a></li>
 
 
 

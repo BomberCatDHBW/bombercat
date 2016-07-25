@@ -45,7 +45,6 @@ function Map() {
 		}
 		for (var x = 0; x < this.height; x++) {
 			for (var y = 0; y < this.width; y++) {
-				// console.log(object.field[y][x]);
 				var block = new Block();
 				block.x = x * 32;
 				block.y = y * 32;

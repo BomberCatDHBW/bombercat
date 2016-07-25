@@ -67,11 +67,6 @@ function Bombs() {
 		}
 		for (var i = 0; i < this.bombs.length; i++) {
 			this.bombSprite.draw(this.bombs[i].x, this.bombs[i].y);
-			// if (this.bombs[i].timer > 0) {
-			// this.bombs[i].timer -= 1;
-			// } else {
-			// this.bombs.splice(i,1);
-			// }
 		}
 		if (this.getBombMsg.get("info", "bombPlaced")) {
 			var info = this.getBombMsg.content.split(";");

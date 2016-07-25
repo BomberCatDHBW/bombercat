@@ -35,7 +35,6 @@ function Player() {
 	}
 
 	this.dropBomb = function() {
-		//bombs.add(this.x, this.y);
 		if (this.canMove) {
 			var canPlace = true;
 			for (var i = 0; i < bombs.bombs.length; i++) {
@@ -55,7 +54,6 @@ function Player() {
 	}
 	
 	this.move = function() {
-		//console.log(this.x + " " + this.y + " | speed: " + this.speed);
 		if (this.velX > 0) {
 			this.x += 32/parseInt(this.speed);
 			this.velX -= 32/parseFloat(this.speed);
@@ -72,12 +70,6 @@ function Player() {
 			this.y -= 32/parseInt(this.speed);
 			this.velY += 32/parseFloat(this.speed);
 		}
-//		if (Math.abs(this.destY-this.y) < this.speed) {
-//			this.y = this.destY;
-//		}
-//		if (Math.abs(this.destX-this.x) < this.speed) {
-//			this.x = this.destX;
-//		}
 		if (this.velX == 0 && this.velY == 0) {
 			this.canMove = true;
 		}

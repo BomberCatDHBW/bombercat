@@ -34,13 +34,7 @@ function openSocket() {
 		var msg = new Message();
 		if (msg.get("info", "connection")){
 			connected = true;
-			//console.log(msg.content);
 		}
-		//processMessage(event.data)
-	};
-
-	webSocket.onclose = function(event) {
-		//document.getElementById("info").innerHTML = "Connection closed!";
 	};
 }
 
@@ -67,7 +61,6 @@ function sendAndGetMessages(msg, endResponse) {
 	}
 	if (!gotResponse) {
 		if (messages[messages.length - 1] == endResponse) {
-			// console.log("gotEndResponse!");
 			gotResponse = true;
 			hasSent = false;
 		}
@@ -82,7 +75,6 @@ function sendAndGetResponse(msg) {
 	}
 	if (!gotResponse) {
 		if (curMsg != "") {
-			// console.log("gotResponse!");
 			gotResponse = true;
 			hasSent = false;
 		}

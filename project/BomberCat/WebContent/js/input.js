@@ -45,6 +45,7 @@ function keyPress(e) {
 }
 
 // Prevent page-back if backspace and send backspace to keyboard.curLetter
+// Prevent scroll down on spacebar-press
 function onBackspace(e, callback) {
 	var key;
 	if (typeof e.keyIdentifier !== "undefined") {

@@ -7,8 +7,7 @@ var context = canvas.getContext("2d");
 var bombs = new Bombs();
 var powerups = new Powerups();
 
-var gameState = "mainMenuState";// mainMenuState, playState, preGameLobbyState
-// createLobbyState
+var gameState = "mainMenuState";// mainMenuState, playState, preGameLobbyState, createLobbyState
 var playButton = new Button();
 var backButton = new Button();
 var nameField = new TextField();
@@ -127,9 +126,6 @@ function loadCreateLobby() {
 	getMapNamesMsg.send("lobby getMapNames");
 	if (getMapNamesMsg.get("info", "mapNames")) {
 		mapsObject = JSON.parse(getMapNamesMsg.content);
-		// for (var i = 0; i < Object.keys(mapsObject.maps).length; i++) {
-		// console.log(mapsObject.maps[i]);
-		// }
 		createLobbyLoaded = true;
 	}
 }
@@ -303,7 +299,6 @@ function loadPlayState() {
 			}
 		}
 		isPlayStateLoaded = true;
-		//{"1412341234":{"x":1.0,"y":1.0},"123412341234":{"x":1.0,"y":23.0}}
 	}
 }
 
@@ -314,7 +309,6 @@ function playState() {
 	if (!isPlayStateLoaded) {
 		loadPlayState();
 	} else {
-		// map.drawMini(100,100, 0.5);
 		map.draw();
 		powerups.draw();
 		players.draw();
@@ -342,20 +336,4 @@ function playState() {
 			}
 		}
 	}
-
-	if (mouse.clicked) {
-		// player.x = mouse.x;
-		// player.y = mouse.y;
-		// var jsonString = JSON.stringify(player);
-		// sendMsg(jsonString);
-	}
-
-	// if (curMsg) {
-	// if (curMsg[0] == '{') {
-	// var jsObject = JSON.parse(curMsg);
-	// var jsonString = JSON.stringify(player);
-	// otherPlayer.x = jsObject.x;
-	// otherPlayer.y = jsObject.y;
-	// }
-	// }
 }

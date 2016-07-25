@@ -44,7 +44,7 @@ function keyPress(e) {
 	keyboard.curLetter = String.fromCharCode(code);
 }
 
-//Prevent page-back if backspace and send backspace to keyboard.curLetter
+// Prevent page-back if backspace and send backspace to keyboard.curLetter
 function onBackspace(e, callback) {
 	var key;
 	if (typeof e.keyIdentifier !== "undefined") {
@@ -64,6 +64,9 @@ function onBackspace(e, callback) {
 }
 
 window.addEventListener('keydown', function(e) {
+	if (e.keyCode == 32 && e.target == document.body) {
+		e.preventDefault();
+	}
 	switch (e.target.tagName.toLowerCase()) {
 	case "input":
 	case "textarea":

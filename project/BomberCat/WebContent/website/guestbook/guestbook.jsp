@@ -31,7 +31,7 @@
 			<ul id="MenuBar1" class="MenuBarHorizontal" align="center">
 				<li><a href="../index.jsp">Back to Main</a></li>
 				<li><a href="../openpage.html">Openpage</a></li>
-				<li><a href="../guestbook.html">Refresh</a></li>
+				<li><a href="guestbook.jsp">Refresh</a></li>
 
 
 
@@ -50,17 +50,18 @@
 				imgRight : "../SpryAssets/SpryMenuBarRightHover.gif"
 			});
 		</script>
-		<div>
-			<div class="header-content">
+		
+			
 	</center>
 	<center>
+	<div class="header-content">
 		<h1>Welcome to the Bombercat Guestbook, leave a comment!</h1>
 		<p>
 			No time, take me to the <a href="guestbookEntries.jsp">guestbook!</a>
 		</p>
 		<form method="get" action="guestbookEntries.jsp">
 
-			<b>Name: </b> <input type="text" name="username" size="30" /> </br>
+			<b>Name: </b> <input type="text" name="username" size="30" /> 
 			<p>
 				<b>What do you think of Bombercat?</b>
 			</p>
@@ -81,8 +82,8 @@
 				value="Start over" class="btn btn-primary btn-xl page-scroll"> </input> <br></br> 
 			
 		</form>
+		</div>
 	</center>
-	</div>
-	</div>
+	
 </body>
 </html>

@@ -25,12 +25,11 @@
 
 	</div>
 
-
-	<div id="index">
-		<ul id="MenuBar1" class="MenuBarHorizontal">
+	<div>
+		<ul id="MenuBar1" class="MenuBarHorizontal" align="center">
 			<li><a href="../index.jsp">Back to Main</a></li>
 			<li><a href="../openpage.html">Openpage</a></li>
-			<li><a href="../guestbookEntries.html">Refresh</a></li>
+			<li><a href="guestbook.jsp">Refresh</a></li>
 
 
 
@@ -45,6 +44,7 @@
 	<br></br>
 	<br></br>
 	<br></br>
+
 	<script type="text/javascript">
 		var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {
 			imgDown : "../SpryAssets/SpryMenuBarDownHover.gif",
@@ -78,8 +78,8 @@
 					</br>
 				</c:forEach>
 				<hr>
-					<a href="guestbook.jsp" class="btn btn-primary btn-xl page-scroll">New Comment </a>
-					
+					<a href="guestbook.jsp" class="btn btn-primary btn-xl page-scroll">New
+						Comment </a>
 			</center>
 		</div>
 	</div>

@@ -16,12 +16,9 @@ ul.MenuBarHorizontal {
 	font-size: 200%;
 	cursor: default;
 	width: 1080px;
-	position: fixed;
+	position: absolut;
 	top: 0px;
-	margin-left: auto;
-	margin-right: auto;
-
-	/* left: 19%; */
+	left: 19%;
 }
 /* Set the active Menu Bar with this class, currently setting z-index to accomodate IE rendering bug: http://therealcrisp.xs4all.nl/meuk/IE-zindexbug.html */
 ul.MenuBarActive {
@@ -31,14 +28,16 @@ ul.MenuBarActive {
 ul.MenuBarHorizontal li {
 	list-style-type: none;
 	font-size: 100%;
-	position: relative;
 	text-align: center;
 	cursor: pointer;
 	width: 12em;
 	float: left;
+	margin-left: auto;
+	margin-right: auto;
 	font-family: "Courier New", Courier, monospace;
 	font-weight: bolder;
-
+	margin-right: auto;
+	margin-left: auto;
 }
 /* Submenus should appear below their parent (top: 0) with a higher z-index, but they are initially off the left side of the screen (-1000em) */
 ul.MenuBarHorizontal ul {

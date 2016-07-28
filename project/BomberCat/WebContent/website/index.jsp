@@ -131,7 +131,7 @@
 			<br>
 			But now to the game <br>
 			you have to destroy with your bombs the walls and get to your <b>ENEMIES</b><br>
-			then you have to catch them<br>
+			then you have to kill them<br>
 			
 			
 			

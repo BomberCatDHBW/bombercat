@@ -28,7 +28,7 @@
 
 
 		<div >
-			<ul id="MenuBar1" class="MenuBarHorizontal" align="center">
+			<ul id="MenuBar1" class="MenuBarHorizontal" >
 				<li><a href="../index.jsp">Back to Main</a></li>
 				<li><a href="../openpage.html">Openpage</a></li>
 				<li><a href="guestbook.jsp">Refresh</a></li>

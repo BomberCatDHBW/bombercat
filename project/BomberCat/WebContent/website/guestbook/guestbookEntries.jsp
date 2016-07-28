@@ -18,6 +18,7 @@
 <script src="../SpryAssets/SpryMenuBar.js" type="text/javascript"></script>
 </head>
 <body>
+<center>
 	<div id="kopf">
 		<a href="../index.jsp"><img src="../Medien/catlogo.jpg"
 			width="444" height="167" class="displayed" /></a>
@@ -25,18 +26,17 @@
 
 	</div>
 
-	<div>
-		<ul id="MenuBar1" class="MenuBarHorizontal" align="center">
-			<li><a href="../index.jsp">Back to Main</a></li>
-			<li><a href="../openpage.html">Openpage</a></li>
-			<li><a href="guestbook.jsp">Refresh</a></li>
+	<div >
+			<ul id="MenuBar1" class="MenuBarHorizontal" >
+				<li><a href="../index.jsp">Back to Main</a></li>
+				<li><a href="../openpage.html">Openpage</a></li>
+				<li><a href="guestbook.jsp">Refresh</a></li>
 
 
 
 
-		</ul>
-	</div>
-
+			</ul>
+		</div>
 
 
 
@@ -51,10 +51,11 @@
 			imgRight : "../SpryAssets/SpryMenuBarRightHover.gif"
 		});
 	</script>
-
+</center>
+<center>
 	<div>
 		<div class="header-content">
-			<center>
+		
 				<h1>
 					<b> Bombercat Guestbook</b>
 				</h1>
@@ -84,5 +85,12 @@
 		</div>
 	</div>
 
+</body>
+</html>
+	
+	
+	
+	
+	
 </body>
 </html>
